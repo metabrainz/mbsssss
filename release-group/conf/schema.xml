@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<schema name="release-group" version="1.1">
+  <types>
+    <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="mbid" class="solr.UUIDField"/>
+    <fieldType name="lowercasestring" class="solr.TextField" sortMissingLast="false">
+        <analyzer>
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+    </fieldType>
+    <!-- Solr only supports date types with a format of YYYY-MM-DDThh:mm:ssZ -->
+    <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
+    <fieldType name="int" class="solr.IntField" sortMissingLast="false"/>
+  </types>
+  <fields>
+    <!-- mbid needs to be indexed because it's the unique key -->
+    <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
+
+    <field name="release-group" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
+    <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
+
+
+    <field name="comment" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="credit-name" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
+
+    <!-- releases in this release group -->
+    <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
+    <!--<field name="releases" type="int" indexed="true" stored="true" multiValued="true" required="true"/> this is probably better done in the compatibility layer-->
+
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+  </fields>
+  <!-- field to use to determine and enforce document uniqueness. -->
+  <uniqueKey>mbid</uniqueKey>
+  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+  <defaultSearchField>release-group</defaultSearchField>
+  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+  <solrQueryParser defaultOperator="OR"/>
+</schema>

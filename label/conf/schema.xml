@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<schema name="artist" version="1.1">
+  <types>
+    <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
+    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+    <fieldType name="mbid" class="solr.UUIDField"/>
+    <fieldType name="lowercasestring" class="solr.TextField" sortMissingLast="false">
+        <analyzer>
+            <tokenizer class="solr.StandardTokenizerFactory"/>
+            <filter class="solr.LowerCaseFilterFactory"/>
+        </analyzer>
+    </fieldType>
+    <!-- Solr only supports date types with a format of YYYY-MM-DDThh:mm:ssZ -->
+    <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
+  </types>
+  <fields>
+    <!-- mbid needs to be indexed because it's the unique key -->
+    <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
+
+    <!-- search on all names, but provide the primary name and aliases separately in the response -->
+    <field name="label" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
+    <field name="names" type="lowercasestring" indexed="true" stored="false" multiValued="true" required="false"/>
+    <field name="alias" type="lowercasestring" indexed="true" stored="true" multiValued="true"/>
+
+    <field name="area" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
+
+    <!-- dates -->
+    <field name="begin" type="date" indexed="true" stored="true" multiValued="false"/>
+    <field name="end" type="date" indexed="true" stored="true" multiValued="false"/>
+
+    <field name="comment" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="ipi" type="string" indexed="true" stored="true" multiValued="true"/>
+    <field name="type" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+  </fields>
+  <copyField source="alias" dest="names" />
+  <copyField source="name" dest="names" />
+  <!-- field to use to determine and enforce document uniqueness. -->
+  <uniqueKey>mbid</uniqueKey>
+  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+  <defaultSearchField>names</defaultSearchField>
+  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+  <solrQueryParser defaultOperator="OR"/>
+</schema>
