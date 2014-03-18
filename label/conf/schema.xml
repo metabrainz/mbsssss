@@ -34,7 +34,7 @@
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
   <copyField source="alias" dest="names" />
-  <copyField source="name" dest="names" />
+  <copyField source="label" dest="names" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
