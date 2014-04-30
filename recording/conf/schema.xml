@@ -25,7 +25,7 @@
 
     <!-- releases this recording appears on -->
     <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
-    <field name="release" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="true"/>
+    <field name="release" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
 
     <!-- date is a list of all the release dates of all releases this recording appears on -->
     <field name="date" type="date" indexed="true" stored="false" multiValued="true" required="false"/>
