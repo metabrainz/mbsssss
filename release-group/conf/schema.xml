@@ -27,7 +27,7 @@
 
     <!-- releases in this release group -->
     <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
-    <!--<field name="releases" type="int" indexed="true" stored="true" multiValued="true" required="true"/> this is probably better done in the compatibility layer-->
+    <field name="releases" type="int" indexed="true" stored="true" multiValued="false" required="true"/>
 
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
