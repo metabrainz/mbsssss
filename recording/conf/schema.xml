@@ -34,8 +34,17 @@
     <field name="dur" type="long" indexed="true" stored="true" multiValued="false" required="false"/>
     <field name="video" type="bool" indexed="true" stored="true" multiValued="false" required="true"/>
 
+    <!-- types -->
+    <field name="secondarytype" type="lowercasestring" indexed="true"
+      stored="true" multiValued="true" required="false"/>
+    <field name="primarytype" type="lowercasestring" indexed="true"
+      stored="true" multiValued="false" required="false"/>
+    <field name="type" type="lowercasestring" indexed="true"
+      stored="true" multiValued="true" required="false"/>
+
     <field name="script" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
     <field name="_version_" type="long" indexed="true" stored="true"/>
+
   </fields>
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
