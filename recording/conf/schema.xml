@@ -23,22 +23,69 @@
     <!-- artists -->
     <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="true"/>
 
+    <field name="artist" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
+
+    <field name="artistname" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="true"/>
+
+    <field name="creditname" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="true"/>
+
+    <field name="isrc" type="lowercasestring" indexed="true" stored="true"
+    multiValued="true"       required="false"/>
+
+    <field name="tag" type="lowercasestring" indexed="true" stored="true" multiValued="true"
+      required="false"/>
+
+    <!-- release groups -->
+    <field name="rgid" type="mbid" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
     <!-- releases this recording appears on -->
     <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
+
     <field name="release" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
 
-    <!-- date is a list of all the release dates of all releases this recording appears on -->
+    <field name="status" type="lowercasestring" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
+    <field name="format" type="lowercasestring" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
+    <field name="position" type="long" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
+    <field name="number" type="string" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
+    <field name="tnum" type="long" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
+    <field name="tracks" type="long" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
+    <field name="tracksrelease" type="long" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
+    <field name="tid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
+
+    <!-- release events -->
+    <field name="country" type="lowercasestring" indexed="true" stored="true"
+      multiValued="true" required="false"/>
+
     <field name="date" type="date" indexed="true" stored="false" multiValued="true" required="false"/>
 
     <field name="comment" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
+
     <field name="dur" type="long" indexed="true" stored="true" multiValued="false" required="false"/>
+
+    <field name="qdur" type="long" indexed="true" stored="true" multiValued="false" required="false"/>
+
     <field name="video" type="bool" indexed="true" stored="true" multiValued="false" required="true"/>
 
     <!-- types -->
     <field name="secondarytype" type="lowercasestring" indexed="true"
       stored="true" multiValued="true" required="false"/>
     <field name="primarytype" type="lowercasestring" indexed="true"
-      stored="true" multiValued="false" required="false"/>
+      stored="true" multiValued="true" required="false"/>
     <field name="type" type="lowercasestring" indexed="true"
       stored="true" multiValued="true" required="false"/>
 
@@ -46,6 +93,8 @@
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
   </fields>
+  <copyField source="primarytype" dest="type" />
+  <copyField source="secondarytype" dest="type" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
