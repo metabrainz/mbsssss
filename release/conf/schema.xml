@@ -26,7 +26,7 @@
     <field name="country" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
     <field name="date" type="date" indexed="true" stored="true" multiValued="false" required="false"/>
 
-    <field name="comment" type="long" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="comment" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
     <!-- works use 'language' here -->
     <field name="lang" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
     <field name="script" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
