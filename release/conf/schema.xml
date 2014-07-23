@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<schema name="release" version="1.1">
+<schema name="release" version="1.2">
   <types>
     <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
     <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
@@ -10,6 +10,7 @@
             <filter class="solr.LowerCaseFilterFactory"/>
         </analyzer>
     </fieldType>
+    <fieldType name="storefield" class="solr.StrField"/>
     <!-- Solr only supports date types with a format of YYYY-MM-DDThh:mm:ssZ -->
     <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
   </types>
@@ -30,6 +31,9 @@
     <!-- works use 'language' here -->
     <field name="lang" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
     <field name="script" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
+
+    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="true"/>
+
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
   <!-- field to use to determine and enforce document uniqueness. -->
