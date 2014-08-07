@@ -32,7 +32,7 @@
     <field name="comment" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="ipi" type="string" indexed="true" stored="true" multiValued="true"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="true"/>
+    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false"/>
 
     <field name="type" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="_version_" type="long" indexed="true" stored="true"/>

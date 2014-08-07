@@ -30,7 +30,7 @@
     <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
     <field name="releases" type="int" indexed="true" stored="true" multiValued="false" required="true"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="true"/>
+    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false"/>
 
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>

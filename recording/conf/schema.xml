@@ -90,7 +90,7 @@
     <field name="type" type="lowercasestring" indexed="true"
       stored="true" multiValued="true" required="false"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="true"/>
+    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false"/>
 
     <field name="script" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
     <field name="_version_" type="long" indexed="true" stored="true"/>
