@@ -5,10 +5,10 @@
     <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
     <fieldType name="mbid" class="solr.UUIDField"/>
     <fieldType name="lowercasestring" class="solr.TextField" sortMissingLast="false">
-        <analyzer>
-            <tokenizer class="solr.StandardTokenizerFactory"/>
-            <filter class="solr.LowerCaseFilterFactory"/>
-        </analyzer>
+	<analyzer>
+	    <tokenizer class="solr.StandardTokenizerFactory"/>
+	    <filter class="solr.LowerCaseFilterFactory"/>
+	</analyzer>
     </fieldType>
     <fieldType name="storefield" class="solr.StrField"/>
     <!-- Solr only supports date types with a format of YYYY-MM-DDThh:mm:ssZ -->
@@ -19,11 +19,12 @@
     <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
 
     <field name="release" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
+    <field name="name" type="lowercasestring" indexed="true" stored="false" multiValued="true" required="false"/>
     <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
 
     <!-- release event
-         in reality, a release may have multiple release events, but the
-         current search server only supports 1 -->
+	 in reality, a release may have multiple release events, but the
+	 current search server only supports 1 -->
     <field name="country" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
     <field name="date" type="date" indexed="true" stored="true" multiValued="true" required="false"/>
 
@@ -36,6 +37,7 @@
 
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
+  <copyField source="artist" dest="name" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
