@@ -19,7 +19,7 @@
     <!-- mbid needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
 
-    <field name="release-group" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
+    <field name="releasegroup" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
     <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
 
 
@@ -37,7 +37,7 @@
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>release-group</defaultSearchField>
+  <defaultSearchField>releasegroup</defaultSearchField>
   <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
   <solrQueryParser defaultOperator="OR"/>
 </schema>
