@@ -11,32 +11,36 @@
 	</analyzer>
     </fieldType>
     <fieldType name="storefield" class="solr.StrField"/>
-    <!-- Solr only supports date types with a format of YYYY-MM-DDThh:mm:ssZ -->
-    <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
   </types>
   <fields>
     <!-- mbid needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
+    <field name="arid" type="mbid" indexed="true" stored="true" multiValued="false" required="false"/>
 
     <!-- search on all names, but provide the primary name and aliases separately in the response -->
-    <field name="name" type="lowercasestring" indexed="false" stored="true" multiValued="false" required="true"/>
+    <field name="name" type="lowercasestring" indexed="false" stored="true" multiValued="false" required="false"/>
     <field name="artist" type="lowercasestring" indexed="false" stored="true" multiValued="false" required="true"/>
     <field name="names" type="lowercasestring" indexed="true" stored="false" multiValued="true" required="false"/>
     <field name="alias" type="lowercasestring" indexed="false" stored="true" multiValued="true"/>
-    <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
+    <field name="sortname" type="lowercasestring" indexed="false" stored="true" multiValued="false" required="true"/>
 
     <!-- areas -->
     <field name="area" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
     <field name="beginarea" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
     <field name="endarea" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
+    <field name="country" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
 
     <!-- dates -->
-    <field name="begin" type="date" indexed="true" stored="true" multiValued="false"/>
-    <field name="end" type="date" indexed="true" stored="true" multiValued="false"/>
+    <field name="begin" type="lowercasestring" indexed="true" stored="true" multiValued="false"/>
+    <field name="end" type="lowercasestring" indexed="true" stored="true" multiValued="false"/>
+    <!-- `true` or `false` -->
+    <field name="ended" type="lowercasestring" indexed="true" stored="true" multiValued="false"/>
 
     <field name="comment" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="gender" type="string" indexed="true" stored="true" multiValued="false"/>
     <field name="ipi" type="string" indexed="true" stored="true" multiValued="true"/>
     <field name="language" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="tag" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
 
     <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false"/>
 
@@ -44,8 +48,9 @@
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
   <copyField source="alias" dest="names" />
-  <copyField source="name" dest="names" />
-  <copyField source="name" dest="artist" />
+  <copyField source="artist" dest="names" />
+  <copyField source="artist" dest="name" />
+  <copyField source="mbid" dest="arid" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
