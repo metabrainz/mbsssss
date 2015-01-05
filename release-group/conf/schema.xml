@@ -18,22 +18,37 @@
   <fields>
     <!-- mbid needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
+    <field name="rgid" type="mbid" indexed="true" stored="true" multiValued="false" required="false"/>
 
     <field name="releasegroup" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
     <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
 
 
+    <field name="artist" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="artistname" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
     <field name="comment" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
-    <field name="credit-name" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
+    <field name="creditname" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
 
     <!-- releases in this release group -->
     <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
-    <field name="releases" type="int" indexed="true" stored="true" multiValued="false" required="true"/>
+    <!-- some release groups don't contain releases -->
+    <field name="releases" type="int" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="release" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
+
+
+    <!-- types -->
+    <field name="primarytype" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="secondarytype" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
+    <field name="type" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
+
+    <field name="status" type="lowercasestring" indexed="true" stored="true" multiValued = "true" required="false"/>
+    <field name="tag" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
 
     <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false"/>
 
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
+  <copyField source="mbid" dest="rgid" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
