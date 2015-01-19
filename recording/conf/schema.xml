@@ -34,9 +34,6 @@
     <field name="isrc" type="lowercasestring" indexed="true" stored="true"
     multiValued="true"       required="false"/>
 
-    <field name="tag" type="lowercasestring" indexed="true" stored="true" multiValued="true"
-      required="false"/>
-
     <!-- release groups -->
     <field name="rgid" type="mbid" indexed="true" stored="true"
       multiValued="true" required="false"/>
