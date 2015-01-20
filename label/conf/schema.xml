@@ -1,19 +1,9 @@
 <?xml version="1.0"?>
+<!DOCTYPE doc [
+<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
+]>
 <schema name="label" version="1.2">
-  <types>
-    <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
-    <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
-    <fieldType name="mbid" class="solr.UUIDField"/>
-    <fieldType name="lowercasestring" class="solr.TextField" sortMissingLast="false">
-        <analyzer>
-            <tokenizer class="solr.StandardTokenizerFactory"/>
-            <filter class="solr.LowerCaseFilterFactory"/>
-        </analyzer>
-    </fieldType>
-    <fieldType name="storefield" class="solr.StrField"/>
-    <!-- Solr only supports date types with a format of YYYY-MM-DDThh:mm:ssZ -->
-    <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
-  </types>
+  &fieldtypes;
   <fields>
     <!-- mbid needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>

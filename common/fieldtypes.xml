@@ -1,0 +1,15 @@
+<types>
+  <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
+  <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
+  <fieldType name="mbid" class="solr.UUIDField"/>
+  <fieldType name="lowercasestring" class="solr.TextField" sortMissingLast="false">
+      <analyzer>
+          <tokenizer class="solr.StandardTokenizerFactory"/>
+          <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+  </fieldType>
+  <fieldType name="storefield" class="solr.StrField"/>
+  <fieldType name="bool" class="solr.BoolField"/>
+  <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
+  <fieldType name="int" class="solr.IntField" sortMissingLast="false"/>
+</types>
