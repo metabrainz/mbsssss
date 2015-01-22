@@ -11,5 +11,5 @@
   <fieldType name="storefield" class="solr.StrField"/>
   <fieldType name="bool" class="solr.BoolField"/>
   <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
-  <fieldType name="int" class="solr.IntField" sortMissingLast="false"/>
+  <fieldType name="int" class="solr.TrieIntField" sortMissingLast="false"/>
 </types>
