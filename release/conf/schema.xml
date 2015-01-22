@@ -6,24 +6,34 @@
   &fieldtypes;
   <fields>
     <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
-    <field name="reid" type="mbid" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="mbid" type="mbid" indexed="true" stored="true"
+           multiValued="false" required="true"/>
+    <field name="reid" type="mbid" indexed="true" stored="true"
+           multiValued="false" required="false"/>
 
-    <field name="release" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
-    <field name="name" type="lowercasestring" indexed="true" stored="false" multiValued="true" required="false"/>
-    <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
+    <field name="release" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="true"/>
+    <field name="name" type="lowercasestring" indexed="true" stored="false"
+           multiValued="true" required="false"/>
+    <field name="arid" type="mbid" indexed="true" stored="true"
+           multiValued="true" required="false"/>
 
     <!-- release event
          in reality, a release may have multiple release events, but the
          current search server only supports 1
     -->
-    <field name="country" type="string" indexed="true" stored="true" multiValued="true" required="false"/>
-    <field name="date" type="date" indexed="true" stored="true" multiValued="true" required="false"/>
+    <field name="country" type="string" indexed="true" stored="true"
+           multiValued="true" required="false"/>
+    <field name="date" type="date" indexed="true" stored="true"
+           multiValued="true" required="false"/>
 
-    <field name="comment" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="comment" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
     <!-- works use 'language' here -->
-    <field name="lang" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
-    <field name="script" type="string" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="lang" type="string" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="script" type="string" indexed="true" stored="true"
+           multiValued="false" required="false"/>
 
     <field name="artistname" type="lowercasestring" indexed="true" stored="true"
            multiValued="true" required="true"/>

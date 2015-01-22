@@ -6,23 +6,37 @@
   &fieldtypes;
   <fields>
     <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true" multiValued="false" required="true"/>
-    <field name="wid" type="mbid" indexed="true" stored="true" multiValued="false" required="false"/>
+    <field name="mbid" type="mbid" indexed="true" stored="true"
+           multiValued="false" required="true"/>
+    <field name="wid" type="mbid" indexed="true" stored="true"
+           multiValued="false" required="false"/>
     <!-- search on all names, but provide the primary name and aliases separately in the response -->
-    <field name="name" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="false"/>
-    <field name="work" type="lowercasestring" indexed="true" stored="true" multiValued="false" required="true"/>
-    <field name="names" type="lowercasestring" indexed="true" stored="false" multiValued="true" required="false"/>
-    <field name="alias" type="lowercasestring" indexed="true" stored="true" multiValued="true"/>
+    <field name="name" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="work" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="true"/>
+    <field name="names" type="lowercasestring" indexed="true" stored="false"
+           multiValued="true" required="false"/>
+    <field name="alias" type="lowercasestring" indexed="true" stored="true"
+           multiValued="true"/>
 
-    <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true" required="false"/>
-    <field name="artist" type="lowercasestring" indexed="true" stored="true" multiValued="true" required="false"/>
-    <field name="comment" type="lowercasestring" indexed="true" stored="true" multiValued="false"/>
-    <field name="iswc" type="string" indexed="true" stored="true" multiValued="true"/>
-    <field name="lang" type="string" indexed="true" stored="true" multiValued="false"/>
-    <field name="tag" type="string" indexed="true" stored="true" multiValued="true"/>
-    <field name="type" type="string" indexed="true" stored="true" multiValued="false"/>
+    <field name="arid" type="mbid" indexed="true" stored="true"
+           multiValued="true" required="false"/>
+    <field name="artist" type="lowercasestring" indexed="true" stored="true"
+           multiValued="true" required="false"/>
+    <field name="comment" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false"/>
+    <field name="iswc" type="string" indexed="true" stored="true"
+           multiValued="true"/>
+    <field name="lang" type="string" indexed="true" stored="true"
+           multiValued="false"/>
+    <field name="tag" type="string" indexed="true" stored="true"
+           multiValued="true"/>
+    <field name="type" type="string" indexed="true" stored="true"
+           multiValued="false"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false"/>
+    <field name="_store" type="storefield" indexed="false" stored="true"
+           multiValued="false" required="false"/>
 
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
