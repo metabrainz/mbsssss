@@ -24,7 +24,7 @@
     -->
     <field name="country" type="string" indexed="true" stored="true"
            multiValued="true" required="false"/>
-    <field name="date" type="date" indexed="true" stored="true"
+    <field name="date" type="lowercasestring" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
     <field name="comment" type="lowercasestring" indexed="true" stored="true"
