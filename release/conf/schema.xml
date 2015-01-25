@@ -35,6 +35,8 @@
     <field name="script" type="string" indexed="true" stored="true"
            multiValued="false" required="false"/>
 
+    <field name="artist" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="true"/>
     <field name="artistname" type="lowercasestring" indexed="true" stored="true"
            multiValued="true" required="true"/>
     <field name="asin" type="lowercasestring" indexed="true" stored="true"
@@ -48,9 +50,9 @@
     <field name="creditname" type="lowercasestring" indexed="true" stored="true"
            multiValued="true" required="false"/>
     <field name="discids" type="int" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+           multiValued="false" required="false"/>
     <field name="format" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="true"/>
+           multiValued="true" required="false"/>
     <field name="laid" type="mbid" indexed="true" stored="true"
            multiValued="true" required="false"/>
     <field name="label" type="lowercasestring" indexed="true" stored="true"
