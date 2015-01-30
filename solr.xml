@@ -34,6 +34,7 @@
     <core name="recording" instanceDir="recording" />
     <core name="release" instanceDir="release" />
     <core name="release-group" instanceDir="release-group" />
+    <core name="tag" instanceDir="tag" />
     <core name="work" instanceDir="work" />
     <shardHandlerFactory name="shardHandlerFactory" class="HttpShardHandlerFactory">
       <str name="urlScheme">${urlScheme:}</str>
