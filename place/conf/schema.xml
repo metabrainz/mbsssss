@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE doc [
+<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
+]>
+<schema name="place" version="1.2">
+  &fieldtypes;
+  <fields>
+    <!-- mbid needs to be indexed because it's the unique key -->
+    <field name="mbid" type="mbid" indexed="true" stored="true"
+           multiValued="false" required="true"/>
+    <field name="pid" type="mbid" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+
+    <field name="names" type="lowercasestring" indexed="true" stored="true"
+           multiValued="true" required="false"/>
+
+    <field name="address" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="alias" type="lowercasestring" indexed="true" stored="true"
+           multiValued="true" required="false"/>
+    <field name="area" type="lowercasestring" indexed="true" stored="true"
+           multiValued="true" required="false"/>
+    <field name="begin" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="comment" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="end" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="ended" type="bool" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="lat" type="float" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="long" type="float" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="place" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="true"/>
+    <field name="type" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+    <field name="_store" type="storefield" indexed="false" stored="true"
+           multiValued="false" required="false"/>
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+  </fields>
+  <copyField source="mbid" dest="pid"/>
+  <copyField source="place" dest="names"/>
+  <copyField source="alias" dest="names"/>
+  <!-- field to use to determine and enforce document uniqueness. -->
+  <uniqueKey>mbid</uniqueKey>
+  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+  <defaultSearchField>names</defaultSearchField>
+  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+  <solrQueryParser defaultOperator="OR"/>
+</schema>

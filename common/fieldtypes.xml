@@ -12,4 +12,5 @@
   <fieldType name="bool" class="solr.BoolField"/>
   <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
   <fieldType name="int" class="solr.TrieIntField" sortMissingLast="false"/>
+  <fieldType name="float" class="solr.TrieFloatField"/>
 </types>
