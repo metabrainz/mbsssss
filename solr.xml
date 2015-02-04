@@ -30,6 +30,8 @@
   -->
   <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:8983}" hostContext="${hostContext:solr}">
     <core name="artist" instanceDir="artist" />
+    <core name="area" instanceDir="area" />
+    <core name="cdstub" instanceDir="cdstub" />
     <core name="label" instanceDir="label" />
     <core name="place" instanceDir="place" />
     <core name="recording" instanceDir="recording" />
