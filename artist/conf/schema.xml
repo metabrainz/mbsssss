@@ -12,15 +12,15 @@
            multiValued="false" required="false"/>
 
     <!-- search on all names, but provide the primary name and aliases separately in the response -->
-    <field name="name" type="lowercasestring" indexed="false" stored="true"
+    <field name="name" type="lowercasestring" indexed="true" stored="true"
            multiValued="false" required="false"/>
-    <field name="artist" type="lowercasestring" indexed="false" stored="true"
+    <field name="artist" type="lowercasestring" indexed="true" stored="true"
            multiValued="false" required="true"/>
     <field name="names" type="lowercasestring" indexed="true" stored="false"
            multiValued="true" required="false"/>
-    <field name="alias" type="lowercasestring" indexed="false" stored="true"
+    <field name="alias" type="lowercasestring" indexed="true" stored="true"
            multiValued="true"/>
-    <field name="sortname" type="lowercasestring" indexed="false" stored="true"
+    <field name="sortname" type="lowercasestring" indexed="true" stored="true"
            multiValued="false" required="true"/>
 
     <!-- areas -->
