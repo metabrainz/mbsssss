@@ -29,6 +29,7 @@
     If 'null' (or absent), cores will not be manageable via request handler
   -->
   <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:8983}" hostContext="${hostContext:solr}">
+    <core name="annotation" instanceDir="annotation" />
     <core name="artist" instanceDir="artist" />
     <core name="area" instanceDir="area" />
     <core name="cdstub" instanceDir="cdstub" />
