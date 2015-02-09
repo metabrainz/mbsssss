@@ -9,23 +9,25 @@
 <schema name="annotation" version="1.2">
   &fieldtypes;
   <fields>
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="entity" type="mbid" indexed="true" stored="true"
+    <!-- id needs to be indexed because it's the unique key -->
+    <field name="id" type="int" indexed="true" stored="false"
            multiValued="false" required="true"/>
 
+    <field name="entity" type="mbid" indexed="true" stored="true"
+           multiValued="false" required="false"/>
     <field name="name" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+           multiValued="false" required="false"/>
     <field name="text" type="lowercasestring" indexed="true" stored="true"
            multiValued="false" required="false"/>
     <field name="type" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+           multiValued="false" required="false"/>
 
     <field name="_store" type="storefield" indexed="false" stored="true"
            multiValued="false" required="false"/>
     <field name="_version_" type="long" indexed="true" stored="true"/>
   </fields>
   <!-- field to use to determine and enforce document uniqueness. -->
-  <uniqueKey>entity</uniqueKey>
+  <uniqueKey>id</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>text</defaultSearchField>
   <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
