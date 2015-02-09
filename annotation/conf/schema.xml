@@ -16,7 +16,7 @@
     <field name="name" type="lowercasestring" indexed="true" stored="true"
            multiValued="false" required="true"/>
     <field name="text" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+           multiValued="false" required="false"/>
     <field name="type" type="lowercasestring" indexed="true" stored="true"
            multiValued="false" required="true"/>
 
