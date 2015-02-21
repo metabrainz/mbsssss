@@ -15,33 +15,11 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
-
-<!--
- All (relative) paths are relative to the installation path
-
-  persistent: Save changes made via the API to this file
-  sharedLib: path to a lib directory that will be shared across all cores
--->
-<solr persistent="false" sharedLib="lib">
-
-  <!--
-  adminPath: RequestHandler path to manage cores.
-    If 'null' (or absent), cores will not be manageable via request handler
-  -->
-  <cores adminPath="/admin/cores" host="${host:}" hostPort="${jetty.port:8983}" hostContext="${hostContext:solr}">
-    <core name="annotation" instanceDir="annotation" />
-    <core name="artist" instanceDir="artist" />
-    <core name="area" instanceDir="area" />
-    <core name="cdstub" instanceDir="cdstub" />
-    <core name="label" instanceDir="label" />
-    <core name="place" instanceDir="place" />
-    <core name="recording" instanceDir="recording" />
-    <core name="release" instanceDir="release" />
-    <core name="release-group" instanceDir="release-group" />
-    <core name="tag" instanceDir="tag" />
-    <core name="work" instanceDir="work" />
-    <shardHandlerFactory name="shardHandlerFactory" class="HttpShardHandlerFactory">
-      <str name="urlScheme">${urlScheme:}</str>
-    </shardHandlerFactory>
-  </cores>
+<solr>
+  <solrcloud>
+    <str name="host">${host:}</str>
+    <str name="hostContext">${hostContext:solr}</str>
+    <int name="hostPort">${jetty.port:8983}</int>
+  </solrcloud>
+  <str name="sharedLib">lib</str>
 </solr>
