@@ -10,7 +10,7 @@
   &fieldtypes;
   <fields>
     <!-- id needs to be indexed because it's the unique key -->
-    <field name="id" type="int" indexed="true" stored="false"
+    <field name="id" type="int" indexed="true" stored="true"
            multiValued="false" required="true"/>
 
     <field name="entity" type="mbid" indexed="true" stored="true"
