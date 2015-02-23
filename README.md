@@ -11,12 +11,20 @@ mechanism of Solr 5. It will not work with all versions of Solr 4.
 
 ## Running a Solr server with these cores
 
-After downloading Solr from its
+To run a Solr server with the cores definied in this repository, you first need
+to install
+[the MusicBrainz QueryResponseWriter](https://github.com/mineo/mb-solrquerywriter)
+into the `lib` folder, which is configured as the Solr servers **sharedLib**
+folder.
+
+Then download Solr from its
 [website](https://lucene.apache.org/solr/mirrors-solr-latest-redir.html) and
-extracting the archive, you will have a solr-x.x.x folder (where x.x.x is Solrs
-version number). Inside this folder, there's a `bin` folder containing scripts
-to start a Solr server. You can use those to start a Solr server which knows the
-cores in this repository with the following command:
+extract the archive.
+
+You will now have a solr-x.x.x folder (where x.x.x is Solrs version
+number). Inside this folder, there's a `bin` folder containing scripts to start
+a Solr server. You can use those to start a Solr server which knows the cores in
+this repository with the following command:
 
 > /path/to/solr-x.x.x/bin/solr -f -s /path/to/this/repository
 
