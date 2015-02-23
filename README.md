@@ -34,3 +34,18 @@ Defining a new core requires following these steps:
    in common.
 4. Edit the `solrconfig.xml` and `schema.xml` file in the configuration folder
    according to your needs.
+
+## Generating mediawiki tables for the documentation
+
+The file `searchfields.py` is a script that generates Mediawiki tables to
+document the cores and all their search fields. Simply running it like
+
+> python searchfields.py
+
+prints that markup to standard output. You can either redirect it to a file:
+
+> python searchfields.py > searchfields.txt
+
+or copy it directly to the clipboard:
+
+> python searchfields.py | xclip
