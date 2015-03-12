@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE doc [
+<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
+]>
+<schema name="editor" version="1.2">
+  &fieldtypes;
+  <fields>
+    <field name="id" type="int" indexed="true" stored="true" multiValued="false"
+           required="true"/>
+    <field name="editor" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="true"/>
+    <field name="bio" type="lowercasestring" indexed="true" stored="true"
+           multiValued="false" required="false"/>
+
+    <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false"/>
+    <field name="_version_" type="long" indexed="true" stored="true"/>
+  </fields>
+  <!-- field to use to determine and enforce document uniqueness. -->
+  <uniqueKey>id</uniqueKey>
+  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+  <defaultSearchField>editor</defaultSearchField>
+  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
+  <solrQueryParser defaultOperator="OR"/>
+</schema>
