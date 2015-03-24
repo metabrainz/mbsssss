@@ -14,7 +14,7 @@
     <field name="series" type="lowercasestring" indexed="true" stored="true"
            multiValued="false" required="true"/>
     <field name="names" type="lowercasestring" indexed="true" stored="false"
-           multiValued="false" required="false"/>
+           multiValued="true" required="false"/>
     <field name="alias" type="lowercasestring" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
