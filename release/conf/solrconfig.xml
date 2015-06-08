@@ -7,7 +7,7 @@
  also >1800 lines long...
 -->
 <config>
-  <luceneMatchVersion>5.0</luceneMatchVersion>
+  <luceneMatchVersion>5.1</luceneMatchVersion>
   <!-- we could use org.apache.solr.core.RAMDirectoryFactory to store the index in RAM -->
   <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}"/>
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="CleanDialogSettings">
+		<item value="563" key="DIALOG_WIDTH"/>
+		<item value="false" key="TOGGLE_SELECTED"/>
+		<item value="386" key="DIALOG_HEIGHT"/>
+		<item value="402" key="DIALOG_X_ORIGIN"/>
+		<item value="153" key="DIALOG_Y_ORIGIN"/>
+	</section>
+	<section name="ChooseWorkspaceDialogSettings">
+		<item value="371" key="DIALOG_X_ORIGIN"/>
+		<item value="174" key="DIALOG_Y_ORIGIN"/>
+	</section>
+</section>
