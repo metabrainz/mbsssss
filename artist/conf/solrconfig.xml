@@ -7,24 +7,33 @@
  also >1800 lines long...
 -->
 <config xmlns:xi="http://www.w3.org/2001/XInclude">
-  <xi:include href="../../common/luceneMatchVersion.xml" />
-  <xi:include href="../../common/directoryFactory.xml" />
-  <xi:include href="../../common/dataDir.xml" />
-  <xi:include href="../../common/schemaFactory.xml" />
-  <xi:include href="../../common/updateHandler-open.xml" />
+  <xi:include href="common/luceneMatchVersion.xml" />
+  <xi:include href="common/directoryFactory.xml" />
+  <xi:include href="common/dataDir.xml" />
+  <xi:include href="common/schemaFactory.xml" />
+  <updateHandler class="solr.DirectUpdateHandler2">
     <updateLog>
       <str name="dir">${solr.artist.data.dir:}</str>
     </updateLog>
-  <xi:include href="../../common/updateHandler-close.xml" />
-  <xi:include href="../../common/requestHandler-get.xml" />
-  <xi:include href="../../common/requestHandler-replication.xml" />
-  <xi:include href="../../common/requestDispatcher.xml" />
-  <xi:include href="../../common/requestHandler-standard.xml" />
-  <xi:include href="../../common/requestHandler-field.xml" />
-  <xi:include href="../../common/requestHandler-update.xml" />
-  <xi:include href="../../common/requestHandler-ping.xml" />
+    <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
+    <autoCommit>
+        <maxTime>60000</maxTime>
+        <!-- maybe change this to false in production -->
+        <openSearcher>false</openSearcher>
+    </autoCommit>
+    <autoSoftCommit>
+        <maxTime>1000</maxTime>
+    </autoSoftCommit>
+  </updateHandler>
+  <xi:include href="common/requestHandler-get.xml" />
+  <xi:include href="common/requestHandler-replication.xml" />
+  <xi:include href="common/requestDispatcher.xml" />
+  <xi:include href="common/requestHandler-standard.xml" />
+  <xi:include href="common/requestHandler-field.xml" />
+  <xi:include href="common/requestHandler-update.xml" />
+  <xi:include href="common/requestHandler-ping.xml" />
   <!-- config for the admin interface -->
-  <xi:include href="../../common/admin.xml" />
+  <xi:include href="common/admin.xml" />
 
   <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
       <str name="entitytype">artist</str>
