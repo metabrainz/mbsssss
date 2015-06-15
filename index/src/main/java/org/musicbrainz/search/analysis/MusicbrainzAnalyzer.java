@@ -30,7 +30,6 @@ package org.musicbrainz.search.analysis;
 
 import com.ibm.icu.text.Transliterator;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.CharFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.charfilter.MappingCharFilter;
@@ -39,7 +38,6 @@ import org.apache.lucene.analysis.cjk.CJKBigramFilter;
 import org.apache.lucene.analysis.icu.ICUTransformFilter;
 import org.musicbrainz.search.LuceneVersion;
 
-import java.io.IOException;
 import java.io.Reader;
 
 /**
@@ -65,8 +63,8 @@ public class MusicbrainzAnalyzer extends Analyzer {
     }
 
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer source = new MusicbrainzTokenizer(LuceneVersion.LUCENE_VERSION,reader);
+    protected TokenStreamComponents createComponents(String fieldName) {
+        Tokenizer source = new MusicbrainzTokenizer(LuceneVersion.LUCENE_VERSION);
         TokenStream filter = new ICUTransformFilter(source, Transliterator.getInstance("[ー[:Script=Katakana:]]Katakana-Hiragana"));
         filter = new ICUTransformFilter(filter, Transliterator.getInstance("Traditional-Simplified"));
         filter = new AccentFilter(filter);

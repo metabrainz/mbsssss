@@ -2,7 +2,6 @@ package org.musicbrainz.search.index;
 
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.KeywordAnalyzer;
-import org.apache.lucene.document.Field;
 import org.apache.lucene.document.FieldType;
 import org.musicbrainz.search.analysis.MusicbrainzAnalyzer;
 

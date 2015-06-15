@@ -32,8 +32,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.analysis.core.KeywordAnalyzer;
 import org.apache.lucene.document.FieldType;
 import org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer;
-import org.musicbrainz.search.analysis.MusicbrainzAnalyzer;
-import org.musicbrainz.search.analysis.MusicbrainzWithPosGapAnalyzer;
 
 /**
  * Fields created in Lucene Search Index

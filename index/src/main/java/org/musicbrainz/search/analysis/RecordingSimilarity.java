@@ -31,7 +31,6 @@ package org.musicbrainz.search.analysis;
 
 import org.apache.lucene.index.FieldInvertState;
 import org.apache.lucene.search.similarities.DefaultSimilarity;
-import org.musicbrainz.search.index.RecordingIndex;
 import org.musicbrainz.search.index.RecordingIndexField;
 
 /**

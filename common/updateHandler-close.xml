@@ -1,0 +1,10 @@
+    <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
+    <autoCommit>
+        <maxTime>60000</maxTime>
+        <!-- maybe change this to false in production -->
+        <openSearcher>false</openSearcher>
+    </autoCommit>
+    <autoSoftCommit>
+        <maxTime>1000</maxTime>
+    </autoSoftCommit>
+  </updateHandler>

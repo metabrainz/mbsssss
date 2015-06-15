@@ -1,14 +1,12 @@
 package org.musicbrainz.search.analysis;
 
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.CharFilter;
 import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.charfilter.MappingCharFilter;
 import org.apache.lucene.analysis.charfilter.NormalizeCharMap;
 import org.apache.lucene.analysis.core.KeywordTokenizer;
 
-import java.io.IOException;
 import java.io.Reader;
 
 /**
@@ -34,8 +32,8 @@ public class StripSpacesAndSeparatorsAnalyzer extends Analyzer {
     }
 
     @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer source = new KeywordTokenizer(reader);
+    protected TokenStreamComponents createComponents(String fieldName) {
+        Tokenizer source = new KeywordTokenizer();
         TokenStream filter = new LowercaseFilter(source);
         return new TokenStreamComponents(source, filter);
     }

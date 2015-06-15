@@ -24,6 +24,7 @@ import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.PositionIncrementAttribute;
 import org.apache.lucene.analysis.tokenattributes.TypeAttribute;
+import org.apache.lucene.util.AttributeFactory;
 import org.apache.lucene.util.AttributeSource;
 import org.apache.lucene.util.Version;
 
@@ -96,13 +97,9 @@ public final class MusicbrainzTokenizer extends Tokenizer {
   /**
    * Creates a new instance of the {@link org.apache.lucene.analysis.standard.StandardTokenizer}.  Attaches
    * the <code>input</code> to the newly created JFlex scanner.
-   *
-   * @param input The input reader
-   *
-   * See http://issues.apache.org/jira/browse/LUCENE-1068
    */
-  public MusicbrainzTokenizer(Version matchVersion, Reader input) {
-    super(input);
+  public MusicbrainzTokenizer(Version matchVersion) {
+    super();
     this.scanner = new MusicbrainzTokenizerImpl(input);
     init(input, matchVersion);
   }
@@ -111,7 +108,7 @@ public final class MusicbrainzTokenizer extends Tokenizer {
    * Creates a new MusicbrainzTokenizer with a given {@link AttributeSource}.
    */
   public MusicbrainzTokenizer(Version matchVersion, AttributeSource source, Reader input) {
-    super(source, input);
+    super();
     this.scanner = new MusicbrainzTokenizerImpl(input);
     init(input, matchVersion);
   }
@@ -120,7 +117,7 @@ public final class MusicbrainzTokenizer extends Tokenizer {
    * Creates a new MusicbrainzTokenizer with a given {@link org.apache.lucene.util.AttributeSource.AttributeFactory}
    */
   public MusicbrainzTokenizer(Version matchVersion, AttributeFactory factory, Reader input) {
-    super(factory, input);
+    super();
     this.scanner = new MusicbrainzTokenizerImpl(input);
     init(input, matchVersion);
   }

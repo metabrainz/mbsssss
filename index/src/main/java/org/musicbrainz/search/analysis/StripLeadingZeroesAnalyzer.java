@@ -5,8 +5,6 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.Tokenizer;
 import org.apache.lucene.analysis.core.KeywordTokenizer;
 
-import java.io.Reader;
-
 /**
  * For analyzing barcodes and labelcodes treat those with leading zeroes and those without the same
  */
@@ -16,9 +14,8 @@ public class StripLeadingZeroesAnalyzer extends Analyzer {
 
     }
 
-    @Override
-    protected TokenStreamComponents createComponents(String fieldName, Reader reader) {
-        Tokenizer source = new KeywordTokenizer(reader);
+    protected TokenStreamComponents createComponents(String fieldName) {
+        Tokenizer source = new KeywordTokenizer();
         TokenStream filter = new StripLeadingZeroesFilter(source);
         return new TokenStreamComponents(source, filter);
     }
