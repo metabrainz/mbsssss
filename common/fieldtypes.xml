@@ -1,15 +1,379 @@
+<!-- 
+Jeff Weeks c2015 
+
+fieldtypes ported from Lucene search server MusicBrainzFieldTypes.java
+-->
+
 <types>
+
   <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
   <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
   <fieldType name="mbid" class="solr.UUIDField"/>
-  <fieldType name="lowercasestring" class="solr.TextField" sortMissingLast="false">
-      <analyzer class="org.musicbrainz.search.analysis.MusicbrainzAnalyzer" />
-      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizer"/>
-      <filter class="org.musicbrainz.search.analysis.LowercaseFilter"/>
+
+
+  <!-- ******************************************* -->
+
+
+  <!-- TEXT_STORED_ANALYZED
+       annotation: NAME, TEXT 
+       cdstub: ARTIST, COMMENT
+       freedb: ARTIST
+       releasegroup: COMMENT
+       work: COMMENT
+  -->
+  <fieldType name="annotation_name" class="solr.TextField" 
+      sortMissingLast="false" stored="true"/>
+
+
+  <!-- TEXT_STORED_ANALYZED, MusicbrainzAnalyzer
+       area: AREA, SORTNAME
+       artist: ARTIST
+       editor: EDITOR, BIO
+       event: EVENT
+       instrument: INSTRUMENT
+       label: LABEL
+       place: PLACE, ADDRESS
+       series: SERIES
+       tag: TAG
+  -->
+  <fieldType name="area_area" class="solr.TextField" 
+      sortMissingLast="false" stored="true">
+    <analyzer class="org.musicbrainz.search.analysis.MusicbrainzAnalyzer"/>
   </fieldType>
+
+  
+  <!-- TEXT_STORED_ANALYZED, TitleAnalyzer
+       freedb: TITLE
+       releasegroup: RELEASEGROUP
+       release: RELEASE
+       work: WORK
+  -->
+  <fieldType name="freedb_title" class="solr.TextField" 
+      sortMissingLast="false" stored="true">
+    <analyzer class="org.musicbrainz.search.analysis.TitleAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_STORED_ANALYZED, TitleWithPosGapAnalyzer
+       releasegroup: RELEASE
+  -->
+  <fieldType name="releasegroup_release" class="solr.TextField" 
+      sortMissingLast="false" stored="true">
+    <analyzer class="org.musicbrainz.search.analysis.TitleWithPosGapAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_STORED_ANALYZED, CaseInsensitiveKeywordAnalyzer       
+       url: RELATION_TYPE, TARGET_TYPE
+  -->
+  <fieldType name="url_relation_type" class="solr.TextField" 
+      sortMissingLast="false" stored="true">
+    <analyzer class="org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_STORED_ANALYZED, MusicbrainzWithPosGapAnalyzer       
+       recording: RECORDING
+       releasegroup: TAG
+       work: TAG
+  -->
+  <fieldType name="recording_recording" class="solr.TextField" 
+      sortMissingLast="false" stored="true">
+      <analyzer class="org.musicbrainz.search.analysis.MusicbrainzWithPosGapAnalyzer"/>
+  </fieldType>
+
+
+  <!-- ******************************************* -->
+
+
+  <!-- TEXT_STORED_NOT_INDEXED
+       area: AREA_STORE
+       artist: ARTIST_STORE
+       editor: EDITOR_STORE
+       event: EVENT_STORE
+       instrument: INSTRUMENT_STORE
+       label: LABEL_STORE
+       place: PLACE_STORE
+       recording: RECORDING_STORE
+       releasegroup: ARTIST_CREDIT, TAGCOUNT
+       release: RELEASE_STORE
+       series: SERIES_STORE
+       url: URL_STORE
+       work: WORK_STORE
+  -->
+  <fieldType name="area_area_store" class="solr.TextField" 
+      sortMissingLast="false" stored="true" indexed="false"/>
+
+
+  <!-- ******************************************* -->
+
+
+  <!-- TEXT_STORED_ANALYZED_NO_NORMS
+       freedb: YEAR, TRACKS
+  -->
+  <fieldType name="freedb_year" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="true"/>
+
+
+  <!-- TEXT_STORED_ANALYZED_NO_NORMS, KeywordAnalyzer       
+       area: ID 
+       editor: ID
+       event: ID
+       instrument: ID
+       place: ID
+       series: ID
+       tag: ID
+       url: ID
+  -->
+  <fieldType name="area_id" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="true">
+      <analyzer class="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_STORED_ANALYZED_NO_NORMS, StripLeadingZeroesAnalyzer       
+       cdstub: BARCODE
+  -->
+  <fieldType name="cdstub_barcode" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="true">
+      <analyzer class="org.musicbrainz.search.analysis.StripLeadingZeroesAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_STORED_ANALYZED_NO_NORMS, CaseInsensitiveKeywordAnalyzer       
+       releasegroup: PRIMARY_TYPE
+       works: ISWC, TYPE
+  -->
+  <fieldType name="releasegroup_primary_type" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="true">
+      <analyzer class="org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+
+
+  <!-- ******************************************* -->
+
+
+  <!-- TEXT_STORED_NOT_ANALYZED_NO_NORMS
+       cdstub: ADDED
+       meta: LAST_UPDATED, REPLICATION_SEQUENCE, SCHEMA_SEQUENCE, LAST_CHANGE_SEQUENCE, META
+  -->
+  <fieldType name="cdstub_added" class="solr.StrField" 
+      sortMissingLast="false" omitNorms="true" stored="true"/>
+
+  
+  <!-- TEXT_STORED_NOT_ANALYZED_NO_NORMS, KeywordAnalyzer       
+       annotation: ID, ENTITY, TYPE 
+	     area: AREA_ID
+	     artist: ID, ARTIST_ID
+	     cdstub: ID, tracks, discid
+	     event: EVENT_ID
+	     freedb: DISCID, CATEGORY
+	     instrument: INSTRUMENT_ID
+	     label: ID, LABEL_ID
+	     place: PLACE_ID
+	     recording: RECORDING_ID, TRACKNUM
+	     releasegroup: ID, ARTIST_ID, NUM_RELEASES, RELEASE_ID, RELEASEGROUP_ID
+       release: ID, RELEASE_ID
+       series: SERIES_ID
+       url: URL_ID, URL, TARGET_ID
+       work: ID, WORK_ID
+	-->
+  <fieldType name="annotation_id" class="solr.StrField" 
+      sortMissingLast="false" omitNorms="true" stored="true">
+      <analyzer class="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_STORED_NOT_ANALYZED_NO_NORMS, CaseInsensitiveKeywordAnalyzer       
+       work: LYRICS_LANG
+  -->
+    <fieldType name="work_lyrics_lang" class="solr.StrField" 
+      sortMissingLast="false" omitNorms="true" stored="true">
+      <analyzer class="org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+
+  
+  <!-- ******************************************* -->
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED
+       area: COMMENT 
+       artist: COMMENT, SORTNAME
+       event: COMMENT
+       instrument: COMMENT, DESCRIPTION
+       label: COMMENT, COUNTRY, SORTNAME
+       place: COMMENT
+       recording: COMMENT
+       release: COMMENT
+       series: COMMENT
+  -->
+  <fieldType name="area_comment" class="solr.TextField" 
+      sortMissingLast="false" stored="false"/>
+
+  
+  <!-- TEXT_NOT_STORED_ANALYZED, MusicbrainzKeepAccentsAnalyzer       
+       artist: ARTIST_ACCENT
+       label: LABEL_ACCENT
+       recording: RECORDING_ACCENT
+       releasegroup: RELEASEGROUP_ACCENT
+       realease: RELEASE_ACCENT
+       work: WORK_ACCENT
+  -->
+  <fieldType name="artist_artist_accent" class="solr.TextField" 
+      sortMissingLast="false" stored="false">
+    <analyzer class="org.musicbrainz.search.analysis.MusicbrainzKeepAccentsAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED, CaseInsensitiveKeywordAnalyzer       
+       series: ORDERING_ATTRIBUTE
+  -->
+  <fieldType name="series_ordering_attribute" class="solr.TextField" 
+      sortMissingLast="false" stored="false">
+    <analyzer class="org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+  
+
+  <!-- TEXT_NOT_STORED_ANALYZED, MusicbrainzWithPosGapAnalyzer       
+       area: ALIAS, TAG
+       artist: ALIAS, TAG
+       event: ALIAS, TAG, ARTIST, PLACE, AREA
+       instrument: ALIAS, TAG
+       label: ALIAS, TAG
+       place: ALIAS, TAG
+       recording: ARTIST, ARTIST_NAME, ARTIST_NAMECREDIT, TAG
+       releasegroup: ARTIST, ARTIST_NAME, ARTIST_NAMECREDIT
+       release: ARTIST, ARTIST_NAME, ARTIST_NAMECREDIT, LABEL, TAG
+       series: ALIAS, TAG
+       work: ALIAS, ARTIST, RECORDING
+  -->
+  <fieldType name="area_alias" class="solr.TextField" 
+      sortMissingLast="false" stored="false">
+      <analyzer class="org.musicbrainz.search.analysis.MusicbrainzWithPosGapAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED, MusicbrainzAnalyzer
+       artist: AREA, BEGIN_AREA, END_AREA
+       label: AREA
+       place: AREA
+  -->
+  <fieldType name="artist_area" class="solr.TextField" 
+      sortMissingLast="false" stored="false">
+    <analyzer class="org.musicbrainz.search.analysis.MusicbrainzAnalyzer"/>
+  </fieldType>  
+  
+
+  <!-- TEXT_NOT_STORED_ANALYZED, TitleWithPosGapAnalyzer
+       recording: release
+  -->
+  <fieldType name="recording_release" class="solr.TextField" 
+      sortMissingLast="false" stored="false">
+    <analyzer class="org.musicbrainz.search.analysis.TitleWithPosGapAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED, CaseInsensitiveKeywordAnalyzer       
+       release: FORMAT, SCRIPT, PACKAGING
+  -->
+  <fieldType name="release_format" class="solr.TextField" 
+      sortMissingLast="false" stored="false">
+    <analyzer class="org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+
+
+  <!-- ******************************************* -->
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED_NO_NORMS
+       recording: NUMBER
+  -->
+  <fieldType name="recording_number" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="false"/> 
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED_NO_NORMS, StripLeadingZeroesAnalyzer       
+       release: BARCODE
+  -->
+  <fieldType name="release_barcode" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="false">
+      <analyzer class="org.musicbrainz.search.analysis.StripLeadingZeroesAnalyzer"/>
+  </fieldType> 
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED_NO_NORMS, CaseInsensitiveKeywordAnalyzer       
+       area: ENDED, ISO, ISO1, ISO2, ISO3, TYPE
+       artist: COUNTRY, ENDED, GENDER, IPI, ISNI, TYPE
+       event: TYPE
+       instrument: TYPE
+       label: ENDED, IPI, TYPE
+       place: ENDED, TYPE
+       recording: COUNTRY, FORMAT, ISRC, RELEASE_PRIMARY_TYPE, RELEASE_SECONDARY_TYPE, 
+                  RELEASE_STATUS, RELEASE_TYPE, VIDEO
+       release: AMAZON_ID, COUNTRY, PRIMARY_TYPE, QUALITY, SECONDARY_TYPE, STATUS, TYPE
+       series: TYPE
+  -->
+  <fieldType name="area_ended" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="false">
+      <analyzer class="org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED_NO_NORMS, KeywordAnalyzer       
+       release: ARTIST_ID
+  -->
+  <fieldType name="release_artist_id" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="false">
+      <analyzer class="org.musicbrainz.search.analysis.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+
+
+  <!-- TEXT_NOT_STORED_ANALYZED_NO_NORMS, StripSpacesAndSeparatorsAnalyzer       
+       release: CATALOG_NO
+  -->
+  <fieldType name="release_catalog_no" class="solr.TextField" 
+      sortMissingLast="false" omitNorms="true" stored="false">
+      <analyzer class="org.musicbrainz.search.analysis.StripSpacesAndSeparatorsAnalyzer"/>
+  </fieldType>
+ 
+
+  <!-- ******************************************* -->
+  
+
+  <!-- TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, KeywordAnalyzer	     
+       area: BEGIN, END
+	     artist: BEGIN, END
+	     event: BEGIN, END, ARTIST_ID, PLACE_ID, AREA_ID
+	     label: BEGIN, END
+	     place: BEGIN, END, LAT, LONG
+	     recording: ID, ARTIST_ID, DURATION, NUM_TRACKS, NUM_TRACKS_RELEASE, POSITION, 
+                  PUID, QUANTITIZED_DURATION, RELEASE_DATE, RELEASE_ID, RELEASEGROUP_ID, TRACK_ID
+       release: DATE, LABEL_ID, NUM_DISCIDS, NUM_DISCIDS_MEDIUM, NUM_MEDIUMS, NUM_TRACKS, 
+                NUM_TRACKS_MEDIUM, PUID, RELEASEGROUP_ID
+       work: ARTIST_ID, RECORDING_ID
+	-->
+  <fieldType name="area_begin" class="solr.StrField" 
+      sortMissingLast="false" omitNorms="true" stored="false">
+      <analyzer class="org.apache.lucene.analysis.core.KeywordAnalyzer"/>
+  </fieldType>
+
+  
+  <!-- TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, CaseInsensitiveKeywordAnalyzer
+       release: LANGUAGE  
+  -->
+  <fieldType name="release_language" class="solr.StrField" 
+      sortMissingLast="false" omitNorms="true" stored="false">
+      <analyzer class="org.apache.lucene.analysis.core.CaseInsensitiveKeywordAnalyzer"/>
+  </fieldType>
+  
+
+<!-- ******************************************* -->
+    
+  
   <fieldType name="storefield" class="solr.StrField"/>
   <fieldType name="bool" class="solr.BoolField"/>
   <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
   <fieldType name="int" class="solr.TrieIntField" sortMissingLast="false"/>
   <fieldType name="float" class="solr.TrieFloatField"/>
+
 </types>
