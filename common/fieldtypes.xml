@@ -2,6 +2,7 @@
 Jeff Weeks c2015 
 
 fieldtypes ported from Lucene search server MusicBrainzFieldTypes.java
+field attributes/analysis ported from Lucene search server *IndexField.java
 -->
 
 <types>
@@ -163,16 +164,16 @@ fieldtypes ported from Lucene search server MusicBrainzFieldTypes.java
   
   <!-- TEXT_STORED_NOT_ANALYZED_NO_NORMS, KeywordAnalyzer       
        annotation: ID, ENTITY, TYPE 
-	     area: AREA_ID
-	     artist: ID, ARTIST_ID
-	     cdstub: ID, tracks, discid
-	     event: EVENT_ID
-	     freedb: DISCID, CATEGORY
-	     instrument: INSTRUMENT_ID
-	     label: ID, LABEL_ID
-	     place: PLACE_ID
-	     recording: RECORDING_ID, TRACKNUM
-	     releasegroup: ID, ARTIST_ID, NUM_RELEASES, RELEASE_ID, RELEASEGROUP_ID
+       area: AREA_ID
+       artist: ID, ARTIST_ID
+       cdstub: ID, tracks, discid
+       event: EVENT_ID
+       freedb: DISCID, CATEGORY
+       instrument: INSTRUMENT_ID
+       label: ID, LABEL_ID
+       place: PLACE_ID
+       recording: RECORDING_ID, TRACKNUM
+       releasegroup: ID, ARTIST_ID, NUM_RELEASES, RELEASE_ID, RELEASEGROUP_ID
        release: ID, RELEASE_ID
        series: SERIES_ID
        url: URL_ID, URL, TARGET_ID
