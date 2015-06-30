@@ -45,8 +45,6 @@ field attributes/analysis ported from Lucene search server *IndexField.java
                     stemEnglishPossessive="0"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Greek-Latin"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Cyrillic-Latin"/>
         <filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" />
         <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
@@ -70,8 +68,6 @@ field attributes/analysis ported from Lucene search server *IndexField.java
                     stemEnglishPossessive="0"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Greek-Latin"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Cyrillic-Latin"/>
         <filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" />
         <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
@@ -94,8 +90,6 @@ field attributes/analysis ported from Lucene search server *IndexField.java
                     stemEnglishPossessive="0"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Greek-Latin"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Cyrillic-Latin"/>
         <filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" />
         <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
@@ -118,8 +112,6 @@ field attributes/analysis ported from Lucene search server *IndexField.java
                     stemEnglishPossessive="0"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Greek-Latin"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Cyrillic-Latin"/>
         <filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" />
         <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
@@ -142,8 +134,6 @@ field attributes/analysis ported from Lucene search server *IndexField.java
                     stemEnglishPossessive="0"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Greek-Latin"/>
-        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Cyrillic-Latin"/>
         <filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" />
         <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
