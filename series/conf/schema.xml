@@ -1,21 +1,20 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="series" version="1.2">
-  &fieldtypes;
-  <fields>
-    <!-- mbid needs to be indexed because it's the unique key -->
+
+<schema name="series" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+    
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
+  <!-- id needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true"
            multiValued="false"  required="true"/>
     <field name="sid" type="mbid" indexed="true" stored="true"
            multiValued="false" required="false"/>
 
-    <field name="series" type="lowercasestring" indexed="true" stored="true"
+    <field name="series" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="true"/>
-    <field name="names" type="lowercasestring" indexed="true" stored="false"
+    <field name="names" type="lowercase" indexed="true" stored="false"
            multiValued="true" required="false"/>
-    <field name="alias" type="lowercasestring" indexed="true" stored="true"
+    <field name="alias" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
     <field name="comment" type="string" indexed="true" stored="true"
@@ -23,22 +22,23 @@
     <field name="orderingattribute" type="string" indexed="true" stored="true"
            multiValued="false" required="false"/>
 
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
+    <field name="tag" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
-    <field name="type" type="lowercasestring" indexed="true" stored="true"
+    <field name="type" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="false"/>
     <field name="_store" type="storefield" indexed="false" stored="true"
            multiValued="false" required="false"/>
     <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
+
   <copyField source="alias" dest="names"/>
   <copyField source="series" dest="names"/>
   <copyField source="mbid" dest="sid"/>
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
+
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>names</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>
 

@@ -1,30 +1,29 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="place" version="1.2">
-  &fieldtypes;
-  <fields>
+
+<schema name="place" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+    
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
     <!-- mbid needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true"
            multiValued="false" required="true"/>
     <field name="pid" type="mbid" indexed="true" stored="true"
            multiValued="false" required="false"/>
 
-    <field name="names" type="lowercasestring" indexed="true" stored="true"
+    <field name="names" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
-    <field name="address" type="lowercasestring" indexed="true" stored="true"
+    <field name="address" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="false"/>
-    <field name="alias" type="lowercasestring" indexed="true" stored="true"
+    <field name="alias" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
-    <field name="area" type="lowercasestring" indexed="true" stored="true"
+    <field name="area" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
-    <field name="begin" type="lowercasestring" indexed="true" stored="true"
+    <field name="begin" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="false"/>
-    <field name="comment" type="lowercasestring" indexed="true" stored="true"
+    <field name="comment" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="false"/>
-    <field name="end" type="lowercasestring" indexed="true" stored="true"
+    <field name="end" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="false"/>
     <field name="ended" type="bool" indexed="true" stored="true"
            multiValued="false" required="false"/>
@@ -32,14 +31,14 @@
            multiValued="false" required="false"/>
     <field name="long" type="float" indexed="true" stored="true"
            multiValued="false" required="false"/>
-    <field name="place" type="lowercasestring" indexed="true" stored="true"
+    <field name="place" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="true"/>
-    <field name="type" type="lowercasestring" indexed="true" stored="true"
+    <field name="type" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="false"/>
     <field name="_store" type="storefield" indexed="false" stored="true"
            multiValued="false" required="false"/>
     <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
+
   <copyField source="mbid" dest="pid"/>
   <copyField source="place" dest="names"/>
   <copyField source="alias" dest="names"/>
@@ -47,6 +46,5 @@
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>names</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>

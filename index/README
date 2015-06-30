@@ -1,3 +1,0 @@
-MusicbrainzTokenizerImpl.java subclasses MusicbrainzTokenizer but is created using jflex.
-If you need to recreate this file do the following
-jflex.

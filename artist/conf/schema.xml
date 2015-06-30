@@ -1,73 +1,96 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="artist" version="1.2">
-  &fieldtypes;
-  <fields>
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="arid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="false"/>
 
-    <!-- search on all names, but provide the primary name and aliases separately in the response -->
-    <field name="name" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="artist" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="names" type="lowercasestring" indexed="true" stored="false"
-           multiValued="true" required="false"/>
-    <field name="alias" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true"/>
-    <field name="sortname" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+<schema name="artist" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+    
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
 
-    <!-- areas -->
-    <field name="area" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="beginarea" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="endarea" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="country" type="string" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+  <!-- * -->
+  <field name="id" type="int" indexed="true" stored="true"/>
 
-    <!-- dates -->
-    <field name="begin" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="end" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
-    <!-- `true` or `false` -->
-    <field name="ended" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true"
+         required="true"/>
+  <field name="arid" type="mbid" indexed="true" stored="false"/>
 
-    <field name="comment" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="gender" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="ipi" type="string" indexed="true" stored="true"
-           multiValued="true"/>
-    <field name="language" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <!-- search on all names, but provide the primary name and aliases separately in the response -->
+  <field name="name" type="string" indexed="true" stored="true"/>
+  <field name="artist" type="text_general" indexed="true" stored="true"/>
+  <field name="names" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true"/>
+  <field name="alias" type="text_general_multi" indexed="true" stored="true"
+         multiValued="true"/>
+  <field name="sortname" type="lowercase" indexed="true" stored="true"
+         required="true"/>
+  <field name="artistaccent" type="keep_accents" indexed="true" stored="false"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
+  <!-- areas -->
+  <field name="area" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true"/>
+  <field name="beginarea" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true"/>
+  <field name="endarea" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true" required="false"/>
+  <field name="country" type="lowercase" indexed="true" stored="false"
+         omitNorms="true"/>
 
-    <field name="type" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
+  <!-- dates -->
+  <field name="begin" type="date" indexed="true" stored="true"/>
+  <field name="end" type="date" indexed="true" stored="true"/>
+
+  <!-- `true` or `false` -->
+  <field name="ended" type="string" indexed="true" stored="false"/>
+
+  <field name="comment" type="text_general" indexed="true" stored="false"/>
+  <field name="gender" type="lowercase" indexed="true" stored="false"/>
+  <field name="ipi" type="string" indexed="true" stored="true"
+         multiValued="true"/>
+  <field name="tag" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false"
+         omitNorms="true"/>
+
+  <!-- Holds data for reponse writer -->
+  <field name="_store" type="storefield" indexed="false" stored="true"
+         multiValued="false" required="false"/>
+
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+     or Solr won't start. _version_ and update log are required for SolrCloud. --> 
+  <field name="_version_" type="long" indexed="true" stored="true"/>
+
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
   <copyField source="artist" dest="name" />
+  <copyField source="artist" dest="artistaccent" />
   <copyField source="mbid" dest="arid" />
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
+
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>names</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>
+
+<!-- 
+ID            ("_id", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ALIAS         ("alias", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+ARTIST_ID     ("arid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ARTIST        ("artist", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+ARTIST_ACCENT ("artistaccent",MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzKeepAccentsAnalyzer()),
+BEGIN         ("begin", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+COMMENT       ("comment", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+COUNTRY       ("country", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+END           ("end", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ENDED         ("ended", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+GENDER        ("gender", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+IPI           ("ipi", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+ISNI          ("isni", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+SORTNAME      ("sortname", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+TAG           ("tag", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+TYPE          ("type", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+AREA          ("area", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+BEGIN_AREA    ("beginarea", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+END_AREA      ("endarea", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+ARTIST_STORE  ("artiststore", MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
+-->

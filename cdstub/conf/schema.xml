@@ -1,37 +1,49 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="cdstub" version="1.2">
-  &fieldtypes;
-  <fields>
+
+<schema name="cdstub" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+    
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
     <!-- id needs to be indexed because it's the unique key -->
+
     <field name="id" type="int" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+           required="true"/>
 
-    <field name="artist" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="barcode" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="comment" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="discid" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="title" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="tracks" type="int" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+    <field name="artist" type="text_general" indexed="true" stored="true"/>
 
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+    <field name="barcode" type="barcode" indexed="true" stored="true"
+           omitNorms="true"/>
+
+    <field name="comment" type="text_general" indexed="true" stored="true"/>
+
+    <field name="discid" type="string" indexed="true" stored="true"
+           required="true"/>
+
+    <field name="title" type="title" indexed="true" stored="true"
+           required="true"/>
+
+    <field name="tracks" type="int" indexed="true" stored="true"/>
+
+    <field name="added" type="date" indexed="true" stored="true"/>
+
     <field name="_store" type="storefield" indexed="false" stored="true"
            multiValued="false" required="false"/>
+
     <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>title</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>
+
+<!-- 
+ID              ("_id",         MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),    ARTIST          ("artist",      MusicBrainzFieldTypes.TEXT_STORED_ANALYZED),
+TITLE           ("title",       MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new TitleAnalyzer()),
+BARCODE         ("barcode",     MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new StripLeadingZeroesAnalyzer()),
+COMMENT         ("comment",     MusicBrainzFieldTypes.TEXT_STORED_ANALYZED),
+NUM_TRACKS      ("tracks",      MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+DISCID          ("discid",      MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ADDED           ("added",       MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS),
+-->

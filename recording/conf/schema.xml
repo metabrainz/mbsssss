@@ -1,33 +1,32 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="recording" version="1.2">
-  &fieldtypes;
-  <fields>
+
+<schema name="recording" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+    
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
     <!-- mbid needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true"
            multiValued="false" required="true"/>
 
-    <field name="recording" type="lowercasestring" indexed="true" stored="true"
+    <field name="recording" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="true"/>
-    <field name="name" type="lowercasestring" indexed="true" stored="true"
+    <field name="name" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="true"/>
 
     <!-- artists -->
     <field name="arid" type="mbid" indexed="true" stored="true"
            multiValued="true" required="true"/>
 
-    <field name="artist" type="lowercasestring" indexed="true" stored="true"
+    <field name="artist" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="true"/>
 
-    <field name="artistname" type="lowercasestring" indexed="true" stored="true"
+    <field name="artistname" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="true"/>
 
-    <field name="creditname" type="lowercasestring" indexed="true" stored="true"
+    <field name="creditname" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="true"/>
 
-    <field name="isrc" type="lowercasestring" indexed="true" stored="true"
+    <field name="isrc" type="lowercase" indexed="true" stored="true"
            multiValued="true"       required="false"/>
 
     <!-- release groups -->
@@ -38,13 +37,13 @@
     <field name="reid" type="mbid" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
-    <field name="release" type="lowercasestring" indexed="true" stored="true"
+    <field name="release" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
-    <field name="status" type="lowercasestring" indexed="true" stored="true"
+    <field name="status" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
-    <field name="format" type="lowercasestring" indexed="true" stored="true"
+    <field name="format" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
 
     <field name="position" type="long" indexed="true" stored="true"
@@ -66,22 +65,22 @@
            multiValued="true" required="false"/>
 
     <!-- release events -->
-    <field name="country" type="lowercasestring" indexed="true" stored="true"
+    <field name="country" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
-    <field name="date" type="lowercasestring" indexed="true" stored="true"
+    <field name="date" type="lowercase" indexed="true" stored="true"
            multiValued="false"/>
 
     <!-- types -->
-    <field name="secondarytype" type="lowercasestring" indexed="true"
+    <field name="secondarytype" type="lowercase" indexed="true"
            stored="true" multiValued="true" required="false"/>
-    <field name="primarytype" type="lowercasestring" indexed="true"
+    <field name="primarytype" type="lowercase" indexed="true"
            stored="true" multiValued="true" required="false"/>
-    <field name="type" type="lowercasestring" indexed="true"
+    <field name="type" type="lowercase" indexed="true"
            stored="true" multiValued="true" required="false"/>
 
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
+    <field name="tag" type="lowercase" indexed="true" stored="true"
            multiValued="true" required="false"/>
-    <field name="comment" type="lowercasestring" indexed="true" stored="true"
+    <field name="comment" type="lowercase" indexed="true" stored="true"
            multiValued="false" required="false"/>
     <field name="dur" type="long" indexed="true" stored="true"
            multiValued="false" required="false"/>
@@ -95,14 +94,15 @@
 
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
-  </fields>
+
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
   <copyField source="recording" dest="name" />
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+
+    <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>recording</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>
