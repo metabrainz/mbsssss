@@ -6,7 +6,7 @@ field attributes/analysis in each core's schema.xml ported from *IndexField.java
 
 Mapping of old configuration to new
 -----------------------------------
-OLD                                         NEW
+OLD                                           NEW
 AmpersandToAndMappingHelper.java      =>      common/mapping-MBCharEquivToChar.txt
 CharEquivToCharHelper.java            =>      common/mapping-MBCharEquivToChar.txt
 HebrewCharMappingHelper.java          =>      common/mapping-MBCharEquivToChar.txt
@@ -39,6 +39,12 @@ ReleaseGroupSimilarity.java           =>      TODO
 StripLeadingZeroesFilter.java         =>      Now represented as fieldtype: barcode
                                               used PatternReplaceCharFilter and Regex to strip leading zeroes
 StripSpacesAndSeparatorsAnalyzer.java =>      solr.WordDelimiterFilterFactory, with catenateAll="1"
+AreaBoostDoc.java                     =>      TODO
+ArtistBoostDoc.java                   =>      TODO
+LabelBoostDoc.java                    =>      TODO
+Event                                 =>      TODO
+FreeDB                                =>      TODO
+URL                                   =>      TODO
 
 -->
 
