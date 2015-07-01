@@ -1,50 +1,63 @@
 <?xml version="1.0"?>
 
 <schema name="place" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
     <!-- mbid needs to be indexed because it's the unique key -->
     <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="pid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+           required="true"/>
+    <field name="pid" type="mbid" indexed="true" stored="true"/>
 
-    <field name="names" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+    <field name="names" type="text_general_multi" indexed="true" stored="false"
+           multiValued="true"/>
 
-    <field name="address" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="alias" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="area" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="begin" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="comment" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="end" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="ended" type="bool" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="lat" type="float" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="long" type="float" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="place" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="type" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+    <field name="address" type="text_general" indexed="true" stored="true"/>
+    <field name="alias" type="text_general_multi" indexed="true" stored="false"
+           multiValued="true" />
+    <field name="area" type="text_general" indexed="true" stored="false"
+           multiValued="true" />
+    <field name="begin" type="date" indexed="true" stored="true"/>
+    <field name="comment" type="text_general" indexed="true" stored="false"/>
+    <field name="end" type="date" indexed="true" stored="true"/>
+    <field name="ended" type="string" indexed="true" stored="false"/>
+    <field name="lat" type="float" indexed="true" stored="true"/>
+    <field name="long" type="float" indexed="true" stored="true"/>
+    <field name="place" type="text_general" indexed="true" stored="true"
+           required="true"/>
+    <field name="type" type="lowercase" indexed="true" stored="false"/>
+
+
     <field name="_store" type="storefield" indexed="false" stored="true"
            multiValued="false" required="false"/>
+           
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
   <copyField source="mbid" dest="pid"/>
   <copyField source="place" dest="names"/>
   <copyField source="alias" dest="names"/>
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>names</defaultSearchField>
 
 </schema>
+
+<!--
+ID		        ("_id",	MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+PLACE_ID      ("pid",	MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ALIAS		      ("alias",	MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+AREA		      ("area", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+COMMENT		    ("comment",	MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+PLACE         ("place", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+ADDRESS       ("address", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+BEGIN		      ("begin",	MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+END			      ("end",	MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ENDED         ("ended", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+TYPE		      ("type",	MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+LAT		        ("lat",	MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+LONG		      ("long", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+TAG		        ("tag",	MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+PLACE_STORE   ("placestore", MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
+-->
