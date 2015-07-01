@@ -15,7 +15,7 @@
   <field name="name" type="string" indexed="true" stored="true"
          required="true"/>
   <field name="label" type="text_general" indexed="true" stored="true"/>
-  <field name="labelaccent" type="keep_accent" indexed="true" stored="false"/>         
+  <field name="labelaccent" type="keep_accents" indexed="true" stored="false"/>         
   <field name="names" type="text_general_multi" indexed="true" stored="false"
          multiValued="true" />
   <field name="alias" type="text_general_multi" indexed="true" stored="true"

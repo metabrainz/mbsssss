@@ -5,7 +5,7 @@ fieldtypes ported from Lucene search server MusicBrainzFieldTypes.java and *Inde
 field attributes/analysis in each core's schema.xml ported from *IndexField.java
 
 Mapping of old configuration to new
------------------------------------
+=====================================
 OLD                                           NEW
 AmpersandToAndMappingHelper.java      =>      common/mapping-MBCharEquivToChar.txt
 CharEquivToCharHelper.java            =>      common/mapping-MBCharEquivToChar.txt
