@@ -11,7 +11,7 @@
 
     <field name="artist" type="text_general" indexed="true" stored="true"/>
 
-    <field name="barcode" type="barcode" indexed="true" stored="true"
+    <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="true"
            omitNorms="true"/>
 
     <field name="comment" type="text_general" indexed="true" stored="true"/>
