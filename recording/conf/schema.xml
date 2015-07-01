@@ -11,95 +11,98 @@
 
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
 
-    <field name="recording" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="name" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true"
+         required="true"/>
 
-    <!-- artists -->
-    <field name="arid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="true"/>
+  <field name="recording" type="lowercase" indexed="true" stored="true"
+         required="true"/>
+  <field name="name" type="lowercase" indexed="true" stored="true"
+         required="true"/>
 
-    <field name="artist" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+  <!-- artists -->
+  <field name="arid" type="mbid" indexed="true" stored="false"
+         multiValued="true" required="true"/>
 
-    <field name="artistname" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="true"/>
+  <field name="artist" type="text_general_multi" indexed="true" stored="false"
+         required="true"/>
 
-    <field name="creditname" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="true"/>
+  <field name="artistname" type="text_general_multi" indexed="true"
+         stored="false" multiValued="true" required="true"/>
 
-    <field name="isrc" type="lowercase" indexed="true" stored="true"
-           multiValued="true"       required="false"/>
+  <field name="creditname" type="text_general_multi" indexed="true"
+         stored="false" multiValued="true" required="false"/>
 
-    <!-- release groups -->
-    <field name="rgid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+ <!-- ********* -->
 
-    <!-- releases this recording appears on -->
-    <field name="reid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="isrc" type="lowercase" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="release" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <!-- release groups -->
+  <field name="rgid" type="mbid" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="status" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <!-- releases this recording appears on -->
+  <field name="reid" type="mbid" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="format" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="release" type="lowercase" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="position" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="status" type="lowercase" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="number" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="format" type="lowercase" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="tnum" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="position" type="long" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="tracks" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="number" type="string" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="tracksrelease" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="tnum" type="long" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="tid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="tracks" type="long" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <!-- release events -->
-    <field name="country" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="date" type="lowercase" indexed="true" stored="true"
-           multiValued="false"/>
+  <field name="tracksrelease" type="long" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <!-- types -->
-    <field name="secondarytype" type="lowercase" indexed="true"
-           stored="true" multiValued="true" required="false"/>
-    <field name="primarytype" type="lowercase" indexed="true"
-           stored="true" multiValued="true" required="false"/>
-    <field name="type" type="lowercase" indexed="true"
-           stored="true" multiValued="true" required="false"/>
+  <field name="tid" type="mbid" indexed="true" stored="true"
+         multiValued="true" required="false"/>
 
-    <field name="tag" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="comment" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="dur" type="long" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="qdur" type="long" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="video" type="bool" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+  <!-- release events -->
+  <field name="country" type="lowercase" indexed="true" stored="true"
+         multiValued="true" required="false"/>
+  <field name="date" type="lowercase" indexed="true" stored="true"
+         multiValued="false"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
+  <!-- types -->
+  <field name="secondarytype" type="lowercase" indexed="true"
+         stored="true" multiValued="true" required="false"/>
+  <field name="primarytype" type="lowercase" indexed="true"
+         stored="true" multiValued="true" required="false"/>
+  <field name="type" type="lowercase" indexed="true"
+         stored="true" multiValued="true" required="false"/>
 
-    <field name="_version_" type="long" indexed="true" stored="true"/>
+  <field name="tag" type="lowercase" indexed="true" stored="true"
+         multiValued="true" required="false"/>
+  <field name="comment" type="lowercase" indexed="true" stored="true"
+         multiValued="false" required="false"/>
+  <field name="dur" type="long" indexed="true" stored="true"
+         multiValued="false" required="false"/>
+  <field name="qdur" type="long" indexed="true" stored="true"
+         multiValued="false" required="false"/>
+  <field name="video" type="bool" indexed="true" stored="true"
+         multiValued="false" required="true"/>
+
+  <field name="_store" type="storefield" indexed="false" stored="true"
+         multiValued="false" required="false"/>
+
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
 
   <copyField source="primarytype" dest="type" />
@@ -115,37 +118,37 @@
 </schema>
 
 <!--
-ID                      ("_id",		            MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-ARTIST_ID		        ("arid",			    MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-ARTIST                  ("artist",              MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-ARTIST_NAME             ("artistname",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-ARTIST_NAMECREDIT       ("creditname",	        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-COMMENT		            ("comment",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
-COUNTRY			        ("country",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-DURATION			    ("dur",			        MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-FORMAT			        ("format",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-ISRC    		        ("isrc",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-NUM_TRACKS              ("tracks",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-NUM_TRACKS_RELEASE      ("tracksrelease",       MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-POSITION                ("position",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-NUMBER                  ("number",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS),
+ID                    ("_id",	MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ARTIST_ID		          ("arid", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ARTIST                ("artist", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+ARTIST_NAME           ("artistname", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+ARTIST_NAMECREDIT     ("creditname", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+COMMENT		            ("comment",	MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+COUNTRY			          ("country",	MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+DURATION			        ("dur",	MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+FORMAT			          ("format", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+ISRC    		          ("isrc", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+NUM_TRACKS            ("tracks", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+NUM_TRACKS_RELEASE    ("tracksrelease", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+POSITION              ("position", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+NUMBER                ("number", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS),
 //TODO This does nothing but cannot remove yet for backwards compatability
-PUID    		        ("puid",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-QUANTIZED_DURATION	    ("qdur",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-RECORDING_ID            ("rid",		            MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-RECORDING               ("recording",		    MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-RECORDING_ACCENT        ("recordingaccent",     MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzKeepAccentsAnalyzer()),
-RELEASE				    ("release",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new TitleWithPosGapAnalyzer()),
-RELEASE_DATE	        ("date",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-RELEASE_ID			    ("reid",		        MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-RELEASE_PRIMARY_TYPE    ("primarytype",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-RELEASE_SECONDARY_TYPE  ("secondarytype",       MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-RELEASE_STATUS          ("status",              MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-RELEASE_TYPE            ("type",                MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-RELEASEGROUP_ID	        ("rgid",			    MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-TAG		                ("tag",		            MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-TRACKNUM			    ("tnum",		        MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-TRACK_ID                ("tid",		            MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-VIDEO                   ("video",                MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-RECORDING_STORE		     ("recordingstore",    MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
+PUID    		          ("puid", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+QUANTIZED_DURATION	  ("qdur", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+RECORDING_ID          ("rid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+RECORDING             ("recording", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+RECORDING_ACCENT      ("recordingaccent", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzKeepAccentsAnalyzer()),
+RELEASE				        ("release", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new TitleWithPosGapAnalyzer()),
+RELEASE_DATE	        ("date", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+RELEASE_ID			      ("reid", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+RELEASE_PRIMARY_TYPE  ("primarytype", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+RELEASE_SECONDARY_TYPE("secondarytype", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+RELEASE_STATUS        ("status", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+RELEASE_TYPE          ("type", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+RELEASEGROUP_ID	      ("rgid", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+TAG		                ("tag", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+TRACKNUM			        ("tnum", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+TRACK_ID              ("tid", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+VIDEO                 ("video", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+RECORDING_STORE		    ("recordingstore", MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
 -->
