@@ -5,9 +5,6 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <!-- * -->
-  <field name="id" type="int" indexed="true" stored="true"/>
-
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true"
          required="true"/>
@@ -58,11 +55,13 @@
      or Solr won't start. _version_ and update log are required for SolrCloud. --> 
   <field name="_version_" type="long" indexed="true" stored="true"/>
 
+
+  <copyField source="name" dest="artist" />
+  <copyField source="name" dest="artistaccent" />
+  <copyField source="mbid" dest="arid" />
+  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? --> 
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
-  <copyField source="artist" dest="name" />
-  <copyField source="artist" dest="artistaccent" />
-  <copyField source="mbid" dest="arid" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
