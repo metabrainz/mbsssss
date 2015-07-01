@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 
 <schema name="cdstub" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+  <!--Searchable Fields
+  artist, title, barcode, comment, tracks, discid
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
     <!-- id needs to be indexed because it's the unique key -->
@@ -38,7 +42,7 @@
 
 </schema>
 
-<!-- 
+<!--
 ID              ("_id",         MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),    ARTIST          ("artist",      MusicBrainzFieldTypes.TEXT_STORED_ANALYZED),
 TITLE           ("title",       MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new TitleAnalyzer()),
 BARCODE         ("barcode",     MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new StripLeadingZeroesAnalyzer()),

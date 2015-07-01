@@ -2,6 +2,13 @@
 
 <schema name="recording" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
+  <!--Searchable Fields
+  arid, artist, artistname, creditname, comment, country, date, dur, format,
+  isrc, number, position, primarytype, puid?, qdur, recording,
+  TODO recordingaccent, reid, release, rgid, rid, secondarytype, status, tid,
+  tnum, tracks, tracksrelease, tag, SCHEMA type, video
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
     <!-- mbid needs to be indexed because it's the unique key -->

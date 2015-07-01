@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 
 <schema name="annotation" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+    <!--Searchable Fields
+        text, type, name, entity
+    -->
+
     <!-- link to fieldType definitions for all cores-->
     <xi:include href="common/fieldtypes.xml" />
 
@@ -17,7 +21,7 @@
 
     <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
       or Solr won't start. _version_ and update log are required for SolrCloud
-    --> 
+    -->
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
 
@@ -28,7 +32,7 @@
 </schema>
 
 <!--
-        /* Now stored as an int; norms ommited by default */ 
+        /* Now stored as an int; norms ommited by default */
 ID      ("_id",   MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 ENTITY  ("entity",  MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 NAME    ("name",  MusicBrainzFieldTypes.TEXT_STORED_ANALYZED),

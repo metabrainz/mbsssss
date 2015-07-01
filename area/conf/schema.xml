@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 
 <schema name="area" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+  <!--Searchable Fields
+  aid, alias, area, begin, comment, end, ended, iso, iso1, iso2, iso3, type
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -20,11 +24,11 @@
   <field name="begin" type="date" indexed="true" stored="false"/>
 
   <field name="comment" type="text_general" indexed="true" stored="false"/>
-  
+
   <field name="end" type="date" indexed="true" stored="false"/>
-  
+
   <field name="ended" type="bool" indexed="true" stored="false"/>
-  
+
   <field name="iso" type="lowercase_multi" indexed="true" stored="false"
            multiValued="true" omitNorms="true"/>
 
@@ -50,14 +54,14 @@
   <field name="_store" type="storefield" indexed="false" stored="true" />
 
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
-     or Solr won't start. _version_ and update log are required for SolrCloud. --> 
+     or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true"/>
-  
+
   <copyField source="mbid" dest="aid"/>
   <copyField source="iso1" dest="iso"/>
   <copyField source="iso2" dest="iso"/>
   <copyField source="iso3" dest="iso"/>
-  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? --> 
+  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? -->
   <copyField source="area" dest="names"/>
   <copyField source="alias" dest="names"/>
 
@@ -69,31 +73,31 @@
 </schema>
 
 
-<!-- 
-            /* Now stored as an int; norms ommited by default */ 
+<!--
+            /* Now stored as an int; norms ommited by default */
 ID          ("_id", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 
             /* Copied field form mbid; now stored in the mbid field, but indexed as both mbid and aid; norms ommited by default */
 AREA_ID     ("aid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 
-            /* uses the same analysis chain as the text_general fieldtype, but with the positionIncrementGap set to 1 */           
+            /* uses the same analysis chain as the text_general fieldtype, but with the positionIncrementGap set to 1 */
 ALIAS       ("alias", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-           
+
 AREA        ("area", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
 
             /* now using an int type */
 BEGIN       ("begin", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-           
+
 COMMENT     ("comment", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
 
-            /* now using an int type */ 
+            /* now using an int type */
 END         ("end", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 
             /* now using a boolean type */
-ENDED       ("ended", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new 
+ENDED       ("ended", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new
 CaseInsensitiveKeywordAnalyzer()),
 
-            /* not used yet...it looks like this might not be needed */ 
+            /* not used yet...it looks like this might not be needed */
 SORTNAME    ("sortname", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
 
 

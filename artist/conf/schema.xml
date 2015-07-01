@@ -1,7 +1,12 @@
 <?xml version="1.0"?>
 
 <schema name="artist" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+  <!--Searchable Fields
+  area, beginarea, endarea, arid, artist, artistaccent, alias, begin, comment,
+  country, end, ended, gender, ipi, sortname, tag, type
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -52,14 +57,14 @@
          multiValued="false" required="false"/>
 
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
-     or Solr won't start. _version_ and update log are required for SolrCloud. --> 
+     or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true"/>
 
 
   <copyField source="name" dest="artist" />
   <copyField source="name" dest="artistaccent" />
   <copyField source="mbid" dest="arid" />
-  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? --> 
+  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? -->
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
 
@@ -71,7 +76,7 @@
 
 </schema>
 
-<!-- 
+<!--
 ID            ("_id", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 ALIAS         ("alias", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
 ARTIST_ID     ("arid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),

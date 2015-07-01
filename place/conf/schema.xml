@@ -2,6 +2,10 @@
 
 <schema name="place" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
+  <!--Searchable Fields
+  pid, address, alias, area, begin, comment, end, ended, lat, long, place, type
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
     <!-- mbid needs to be indexed because it's the unique key -->
@@ -30,7 +34,7 @@
 
     <field name="_store" type="storefield" indexed="false" stored="true"
            multiValued="false" required="false"/>
-           
+
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
   <copyField source="mbid" dest="pid"/>

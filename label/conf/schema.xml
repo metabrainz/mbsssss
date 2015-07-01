@@ -1,10 +1,15 @@
 <?xml version="1.0"?>
 
 <schema name="label" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+  <!--Searchable Fields
+  alias, area, begin, code, comment, country, end, ended, ipi, label,
+  labelaccent, laid, type, tag
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-  
+
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true"
          multiValued="false" required="true"/>
@@ -15,7 +20,7 @@
   <field name="name" type="string" indexed="true" stored="true"
          required="true"/>
   <field name="label" type="text_general" indexed="true" stored="true"/>
-  <field name="labelaccent" type="keep_accents" indexed="true" stored="false"/>         
+  <field name="labelaccent" type="keep_accents" indexed="true" stored="false"/>
   <field name="names" type="text_general_multi" indexed="true" stored="false"
          multiValued="true" />
   <field name="alias" type="text_general_multi" indexed="true" stored="true"
@@ -31,7 +36,7 @@
 
   <!-- `true` or `false` -->
   <field name="ended" type="string" indexed="true" stored="true"/>
-  
+
   <field name="comment" type="text_general" indexed="true" stored="false"/>
   <field name="code" type="strip_leading_zeroes_multi" indexed="true" stored="false"
          multiValued="true" />
@@ -49,7 +54,7 @@
   <copyField source="name" dest="label" />
   <copyField source="name" dest="labelaccent"/>
   <copyField source="mbid" dest="laid" />
-  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? --> 
+  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? -->
   <copyField source="label" dest="names" />
   <copyField source="alias" dest="names" />
 
@@ -62,7 +67,7 @@
 
 </schema>
 
-<!-- 
+<!--
 ID            ("_id", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 ALIAS         ("alias", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
 BEGIN         ("begin", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),

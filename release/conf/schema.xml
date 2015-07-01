@@ -1,7 +1,15 @@
 <?xml version="1.0"?>
 
 <schema name="release" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+  <!--Searchable Fields
+  arid, artist, artistname, SCHEMA asin, barcode, catno, comment, country,
+  creditname, date, discids, TODO discidsmedium, format, laid, label, lang,
+  mediums, primarytype, TODO puid, SCHEMA quality, reid, release,
+  TODO releaseaccent, rgid, script, secondarytype, status, tag, tracks,
+  tracksmedium, SCHEMA type
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
     <!-- mbid needs to be indexed because it's the unique key -->

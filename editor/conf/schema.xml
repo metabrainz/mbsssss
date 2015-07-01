@@ -1,10 +1,14 @@
 <?xml version="1.0"?>
 
 <schema name="editor" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+  <!--Searchable Fields
+  bio, editor
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-    <field name="id" type="int" indexed="true" stored="true" 
+    <field name="id" type="int" indexed="true" stored="true"
            required="true"/>
     <field name="editor" type="text_general" indexed="true" stored="true"
            required="true"/>
@@ -20,7 +24,7 @@
   <defaultSearchField>editor</defaultSearchField>
 </schema>
 
-<!-- 
+<!--
 ID                ("_id",           MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 EDITOR            ("editor",        MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
 BIO               ("bio",           MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),

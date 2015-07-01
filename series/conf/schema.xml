@@ -1,7 +1,11 @@
 <?xml version="1.0"?>
 
 <schema name="series" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-    
+
+  <!--Searchable Fields
+  alias, comment, orderingattribute, series, sid, tag, type
+  -->
+
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
   <!-- id needs to be indexed because it's the unique key -->
@@ -41,4 +45,3 @@
   <defaultSearchField>names</defaultSearchField>
 
 </schema>
-
