@@ -4,56 +4,80 @@
     
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="laid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+  
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true"
+         multiValued="false" required="true"/>
+  <field name="laid" type="mbid" indexed="true" stored="true"
+         multiValued="false" required="true"/>
 
-    <!-- search on all names, but provide the primary name and aliases separately in the response -->
-    <field name="label" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="names" type="lowercase" indexed="true" stored="false"
-           multiValued="true" required="false"/>
-    <field name="alias" type="lowercase" indexed="true" stored="true"
-           multiValued="true"/>
+  <!-- search on all names, but provide the primary name and aliases separately in the response -->
+  <field name="name" type="string" indexed="true" stored="true"
+         required="true"/>
+  <field name="label" type="text_general" indexed="true" stored="true"/>
+  <field name="labelaccent" type="keep_accent" indexed="true" stored="false"/>         
+  <field name="names" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true" />
+  <field name="alias" type="text_general_multi" indexed="true" stored="true"
+         multiValued="true"/>
+  <field name="area" type="text_general_multi" indexed="true" stored="true"
+         multiValued="true"/>
+  <field name="country" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true"/>
 
-    <field name="area" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="country" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <!-- dates -->
+  <field name="begin" type="date" indexed="true" stored="false"/>
+  <field name="end" type="date" indexed="true" stored="false"/>
 
-    <!-- dates -->
-    <field name="begin" type="lowercase" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="end" type="lowercase" indexed="true" stored="true"
-           multiValued="false"/>
-    <!-- `true` or `false` -->
-    <field name="ended" type="lowercase" indexed="true" stored="true"
-           multiValued="false"/>
+  <!-- `true` or `false` -->
+  <field name="ended" type="string" indexed="true" stored="true"/>
+  
+  <field name="comment" type="text_general" indexed="true" stored="false"/>
+  <field name="code" type="strip_leading_zeroes_multi" indexed="true" stored="false"
+         multiValued="true" />
+  <field name="ipi" type="string" indexed="true" stored="true"
+         multiValued="true"/>
+  <field name="tag" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false"
+         omitNorms="true"/>
 
-    <field name="comment" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="code" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="ipi" type="string" indexed="true" stored="true"
-           multiValued="true"/>
-    <field name="tag" type="string" indexed="true" stored="true"
-           multiValued="true"/>
+  <field name="_store" type="storefield" indexed="false" stored="true"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
-    <field name="type" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-
-  <copyField source="alias" dest="names" />
-  <copyField source="label" dest="names" />
+  <copyField source="name" dest="label" />
+  <copyField source="name" dest="labelaccent"/>
   <copyField source="mbid" dest="laid" />
+  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? --> 
+  <copyField source="label" dest="names" />
+  <copyField source="alias" dest="names" />
+
+
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>names</defaultSearchField>
 
 </schema>
+
+<!-- 
+ID            ("_id", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ALIAS         ("alias", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+BEGIN         ("begin", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+COMMENT       ("comment", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+CODE          ("code", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new StripLeadingZeroesAnalyzer()),
+COUNTRY       ("country", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+END           ("end", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+ENDED         ("ended", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+IPI           ("ipi", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+LABEL         ("label", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+LABEL_ACCENT  ("labelaccent", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzKeepAccentsAnalyzer()),
+LABEL_ID      ("laid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+SORTNAME      ("sortname", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+TAG           ("tag", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+TYPE          ("type", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+AREA          ("area", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+LABEL_STORE   ("labelstore", MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
+-->
