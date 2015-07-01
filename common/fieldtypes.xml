@@ -36,7 +36,7 @@ TitleWithPosGapAnalyzer.java          =>      Now represented as fieldtype: titl
 PatternReplaceCharFilter.java         =>      solr.PatternReplaceCharFilterFactory
 RecordingSimilarity.java              =>      TODO
 ReleaseGroupSimilarity.java           =>      TODO
-StripLeadingZeroesFilter.java         =>      Now represented as fieldtype: barcode
+StripLeadingZeroesFilter.java         =>      Now represented as fieldtype: strip_leading_zeroes
                                               used PatternReplaceCharFilter and Regex to strip leading zeroes
 StripSpacesAndSeparatorsAnalyzer.java =>      solr.WordDelimiterFilterFactory, with catenateAll="1"
 AreaBoostDoc.java                     =>      TODO
@@ -194,11 +194,21 @@ URL                                   =>      TODO
     <fieldtype name="string_multi" class="solr.StrField" sortMissingLast="false"
                positionIncrementGap="1"/>
 
-    <!-- Strips leading zeroes from a barcode -->
-    <fieldType name="barcode" class="solr.TextField" positionIncrementGap="100">
+    <!-- Strips leading zeroes from a string -->
+    <fieldType name="strip_leading_zeroes" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="(^[0]+)" replacement=""/>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <!-- Strips leading zeroes from a string (multiple values)-->
+    <fieldType name="strip_leading_zeroes_multi" class="solr.TextField" positionIncrementGap="1">
+      <analyzer>
+      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="(^[0]+)" replacement=""/>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
     </fieldType>
 
