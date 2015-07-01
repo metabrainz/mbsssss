@@ -11,9 +11,6 @@
   <field name="aid" type="mbid" indexed="true" stored="false"
            required="false"/>
 
-  <!-- * -->
-  <field name="id" type="int" indexed="true" stored="true" required="true"/>
-
   <field name="alias" type="text_general_multi" indexed="true" stored="false"
            multiValued="true"/>
 
@@ -57,11 +54,12 @@
   <field name="_version_" type="long" indexed="true" stored="true"/>
   
   <copyField source="mbid" dest="aid"/>
-  <copyField source="area" dest="names"/>
-  <copyField source="alias" dest="names"/>
   <copyField source="iso1" dest="iso"/>
   <copyField source="iso2" dest="iso"/>
   <copyField source="iso3" dest="iso"/>
+  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? --> 
+  <copyField source="area" dest="names"/>
+  <copyField source="alias" dest="names"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
