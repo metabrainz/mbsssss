@@ -8,31 +8,21 @@
 
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
+
+  <field name="alias" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="comment" type="text" indexed="true" stored="false"/>
+  <field name="orderingattribute" type="lowercase" indexed="true" stored="false"/>
   <!-- id needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false"  required="true"/>
-    <field name="sid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <field name="names" type="string_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="series" type="text" indexed="true" stored="true" required="true"/>
+  <field name="sid" type="mbid" indexed="true" stored="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
-    <field name="series" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="names" type="lowercase" indexed="true" stored="false"
-           multiValued="true" required="false"/>
-    <field name="alias" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="_store" type="storefield" indexed="false" stored="true"/>
 
-    <field name="comment" type="string" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="orderingattribute" type="string" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-
-    <field name="tag" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="type" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
-    <field name="_version_" type="long" indexed="true" stored="true"/>
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
   <copyField source="alias" dest="names"/>
   <copyField source="series" dest="names"/>
