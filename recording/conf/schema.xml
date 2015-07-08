@@ -4,8 +4,8 @@
 
   <!--Searchable Fields
   arid, artist, artistname, creditname, comment, country, date, dur, format,
-  isrc, number, position, primarytype, puid?, qdur, recording,
-  TODO recordingaccent, reid, release, rgid, rid, secondarytype, status, tid,
+  isrc, number, position, primarytype, puid, qdur, recording,
+  recordingaccent, reid, release, rgid, rid, secondarytype, status, tid,
   tnum, tracks, tracksrelease, tag, SCHEMA type, video
   -->
 
@@ -16,9 +16,11 @@
   <field name="mbid" type="mbid" indexed="true" stored="true"
          required="true"/>
 
-  <field name="recording" type="lowercase" indexed="true" stored="true"
-         required="true"/>
-  <field name="name" type="lowercase" indexed="true" stored="true"
+  <field name="recording" type="text_general" indexed="true" stored="true" />
+
+  <field name="recordingaccent" type="keep_accent" indexed="true" stored="false"/>
+
+  <field name="name" type="string" indexed="true" stored="true"
          required="true"/>
 
   <!-- artists -->
@@ -34,70 +36,65 @@
   <field name="creditname" type="text_general_multi" indexed="true"
          stored="false" multiValued="true" required="false"/>
 
- <!-- ********* -->
-
-  <field name="isrc" type="lowercase" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="isrc" type="lowercase_multi" indexed="true" stored="false"
+         multiValued="true" />
 
   <!-- release groups -->
-  <field name="rgid" type="mbid" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="rgid" type="mbid" indexed="true" stored="false"
+         multiValued="true"/>
 
   <!-- releases this recording appears on -->
-  <field name="reid" type="mbid" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="reid" type="mbid" indexed="true" stored="false"
+         multiValued="true" />
 
-  <field name="release" type="lowercase" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="puid" type="string" indexed="true" stored="false" />
 
-  <field name="status" type="lowercase" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="release" type="title_multi" indexed="true" stored="false"
+         multiValued="true" />
 
-  <field name="format" type="lowercase" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="status" type="lowercase_multi" indexed="true" stored="false"
+         multiValued="true" />
 
-  <field name="position" type="long" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="format" type="lowercase_multi" indexed="true" stored="false"
+         multiValued="true" />
 
-  <field name="number" type="string" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="position" type="int" indexed="true" stored="false"
+         multiValued="true"/>
 
-  <field name="tnum" type="long" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="number" type="int" indexed="true" stored="false"
+         multiValued="true" />
 
-  <field name="tracks" type="long" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="tnum" type="int" indexed="true" stored="true"
+         multiValued="true" />
 
-  <field name="tracksrelease" type="long" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="tracks" type="int" indexed="true" stored="false"
+         multiValued="true"/>
 
-  <field name="tid" type="mbid" indexed="true" stored="true"
-         multiValued="true" required="false"/>
+  <field name="tracksrelease" type="int" indexed="true" stored="false"
+         multiValued="true"/>
+
+  <field name="tid" type="mbid" indexed="true" stored="false"
+         multiValued="true"/>
 
   <!-- release events -->
-  <field name="country" type="lowercase" indexed="true" stored="true"
-         multiValued="true" required="false"/>
-  <field name="date" type="lowercase" indexed="true" stored="true"
-         multiValued="false"/>
+  <field name="country" type="lowercase_multi" indexed="true" stored="false"
+         multiValued="true"/>
+  <field name="date" type="date" indexed="true" stored="false"/>
 
   <!-- types -->
-  <field name="secondarytype" type="lowercase" indexed="true"
-         stored="true" multiValued="true" required="false"/>
-  <field name="primarytype" type="lowercase" indexed="true"
-         stored="true" multiValued="true" required="false"/>
-  <field name="type" type="lowercase" indexed="true"
-         stored="true" multiValued="true" required="false"/>
+  <field name="secondarytype" type="lowercase_multi" indexed="true"
+         stored="false" multiValued="true" />
+  <field name="primarytype" type="lowercase_multi" indexed="true"
+         stored="false" multiValued="true" />
+  <field name="type" type="lowercase_multi" indexed="true"
+         stored="false" multiValued="true" />
 
-  <field name="tag" type="lowercase" indexed="true" stored="true"
-         multiValued="true" required="false"/>
-  <field name="comment" type="lowercase" indexed="true" stored="true"
-         multiValued="false" required="false"/>
-  <field name="dur" type="long" indexed="true" stored="true"
-         multiValued="false" required="false"/>
-  <field name="qdur" type="long" indexed="true" stored="true"
-         multiValued="false" required="false"/>
-  <field name="video" type="bool" indexed="true" stored="true"
-         multiValued="false" required="true"/>
+  <field name="tag" type="text_general_multi" indexed="true" stored="false"
+         multiValued="true" />
+  <field name="comment" type="text_general" indexed="true" stored="false" />
+  <field name="dur" type="long" indexed="true" stored="false" />
+  <field name="qdur" type="long" indexed="true" stored="false" />
+  <field name="video" type="bool" indexed="true" stored="false" required="true"/>
 
   <field name="_store" type="storefield" indexed="false" stored="true"
          multiValued="false" required="false"/>
@@ -107,7 +104,8 @@
 
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
-  <copyField source="recording" dest="name" />
+  <copyField source="name" dest="recording" />
+  <copyField source="name" dest="recordingaccent" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
@@ -132,7 +130,6 @@ NUM_TRACKS            ("tracks", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALY
 NUM_TRACKS_RELEASE    ("tracksrelease", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 POSITION              ("position", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 NUMBER                ("number", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS),
-//TODO This does nothing but cannot remove yet for backwards compatability
 PUID    		          ("puid", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 QUANTIZED_DURATION	  ("qdur", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
 RECORDING_ID          ("rid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
