@@ -12,27 +12,18 @@
 
   <!-- These are the fields from the "artist" core; edit as needed -->
   <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true"/>
+  <field name="aid" type="mbid" indexed="true" stored="false"/>
   <field name="area" type="text_multi" indexed="true" stored="false" multiValued="true"/>
   <field name="arid" type="mbid" indexed="true" stored="false"/>
-  <field name="artist" type="text" indexed="true" stored="true"/>
-  <field name="artistaccent" type="keep_accents" indexed="true" stored="false"/>
+  <field name="artist" type="text" indexed="true" stored="false"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
-  <field name="beginarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
-  <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <field name="end" type="date" indexed="true" stored="false"/>
-  <field name="endarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
-  <field name="ended" type="bool" indexed="true" stored="false"/>
-  <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
-  <field name="ipi" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
-  <field name="isni" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
-  <!-- mbid needs to be indexed because it's the unique key -->
-  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
-       "artist" and "artistaccent"-->
-  <field name="name" type="string" indexed="true" stored="true"/>
+  <field name="eid" type="mbid" indexed="true" stored="false"/>
+  <field name="event" type="text" indexed="true" stored="true"/>
   <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true"/>
-  <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
+  <field name="pid" type="mbid" indexed="true" stored="false"/>
+  <field name="place" type="text" indexed="true" stored="false"/>
   <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
@@ -45,9 +36,7 @@
   <field name="_version_" type="long" indexed="true" stored="true"/>
 
 
-  <copyField source="name" dest="artist" />
-  <copyField source="name" dest="artistaccent" />
-  <copyField source="mbid" dest="arid" />
+  <copyField source="mbid" dest="eid" />
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
 
@@ -58,23 +47,3 @@
   <defaultSearchField>names</defaultSearchField>
 
 </schema>
-
-<!--
-ID		    ("_id",		    MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-  EVENT_ID    ("eid",		    MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-  ALIAS		("alias",		MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-  COMMENT		("comment",		MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
-  EVENT       ("event",       MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
-  BEGIN		("begin",		MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-  END			("end",			MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-  TYPE		("type",		MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-  TAG		    ("tag",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-  ARTIST_ID   ("arid",		MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-  ARTIST      ("artist",      MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-  PLACE_ID    ("pid",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-  PLACE       ("place",       MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-  AREA_ID     ("aid",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-  AREA        ("area",        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-  EVENT_STORE ("eventstore",  MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
-  ;
--->
