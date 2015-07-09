@@ -10,29 +10,20 @@
   <xi:include href="common/fieldtypes.xml" />
     <!-- id needs to be indexed because it's the unique key -->
 
-    <field name="id" type="int" indexed="true" stored="true"
-           required="true"/>
-
-    <field name="artist" type="text_general" indexed="true" stored="true"/>
-
-    <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="true"
-           omitNorms="true"/>
-
-    <field name="comment" type="text_general" indexed="true" stored="true"/>
-
-    <field name="discid" type="string" indexed="true" stored="true"
-           required="true"/>
-
-    <field name="title" type="title" indexed="true" stored="true"
-           required="true"/>
-
+    <field name="added" type="date" indexed="true" stored="true"/>
+    <field name="artist" type="text" indexed="true" stored="true"/>
+    <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="true" omitNorms="true"/>
+    <field name="comment" type="text" indexed="true" stored="true"/>
+    <field name="discid" type="string" indexed="true" stored="true" required="true"/>
+    <field name="id" type="int" indexed="true" stored="true" required="true"/>
+    <field name="title" type="title" indexed="true" stored="true" required="true"/>
     <field name="tracks" type="int" indexed="true" stored="true"/>
 
-    <field name="added" type="date" indexed="true" stored="true"/>
+    <!-- Holds data for reponse writer -->
+    <field name="_store" type="storefield" indexed="false" stored="true"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
-
+    <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+       or Solr won't start. _version_ and update log are required for SolrCloud. -->
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
@@ -41,13 +32,3 @@
   <defaultSearchField>title</defaultSearchField>
 
 </schema>
-
-<!--
-ID              ("_id",         MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),    ARTIST          ("artist",      MusicBrainzFieldTypes.TEXT_STORED_ANALYZED),
-TITLE           ("title",       MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new TitleAnalyzer()),
-BARCODE         ("barcode",     MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new StripLeadingZeroesAnalyzer()),
-COMMENT         ("comment",     MusicBrainzFieldTypes.TEXT_STORED_ANALYZED),
-NUM_TRACKS      ("tracks",      MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-DISCID          ("discid",      MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-ADDED           ("added",       MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS),
--->

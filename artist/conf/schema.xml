@@ -4,53 +4,36 @@
 
   <!--Searchable Fields
   area, beginarea, endarea, arid, artist, artistaccent, alias, begin, comment,
-  country, end, ended, gender, ipi, sortname, tag, type
+  country, end, ended, gender, ipi, isni, sortname, tag, type
   -->
 
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <!-- mbid needs to be indexed because it's the unique key -->
-  <field name="mbid" type="mbid" indexed="true" stored="true"
-         required="true"/>
+  <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true"/>
+  <field name="area" type="text_multi" indexed="true" stored="false" multiValued="true"/>
   <field name="arid" type="mbid" indexed="true" stored="false"/>
-
-  <!-- search on all names, but provide the primary name and aliases separately in the response -->
-  <field name="name" type="string" indexed="true" stored="true"/>
-  <field name="artist" type="text_general" indexed="true" stored="true"/>
-  <field name="names" type="text_general_multi" indexed="true" stored="false"
-         multiValued="true"/>
-  <field name="alias" type="text_general_multi" indexed="true" stored="true"
-         multiValued="true"/>
-  <field name="sortname" type="lowercase" indexed="true" stored="true"
-         required="true"/>
+  <field name="artist" type="text" indexed="true" stored="true"/>
   <field name="artistaccent" type="keep_accents" indexed="true" stored="false"/>
-
-  <!-- areas -->
-  <field name="area" type="text_general_multi" indexed="true" stored="false"
-         multiValued="true"/>
-  <field name="beginarea" type="text_general_multi" indexed="true" stored="false"
-         multiValued="true"/>
-  <field name="endarea" type="text_general_multi" indexed="true" stored="false"
-         multiValued="true" required="false"/>
-  <field name="country" type="lowercase" indexed="true" stored="false"
-         omitNorms="true"/>
-
-  <!-- dates -->
-  <field name="begin" type="date" indexed="true" stored="true"/>
-  <field name="end" type="date" indexed="true" stored="true"/>
-
-  <!-- `true` or `false` -->
-  <field name="ended" type="string" indexed="true" stored="false"/>
-
-  <field name="comment" type="text_general" indexed="true" stored="false"/>
-  <field name="gender" type="lowercase" indexed="true" stored="false"/>
-  <field name="ipi" type="string" indexed="true" stored="true"
-         multiValued="true"/>
-  <field name="tag" type="text_general_multi" indexed="true" stored="false"
-         multiValued="true"/>
-  <field name="type" type="lowercase" indexed="true" stored="false"
-         omitNorms="true"/>
+  <field name="begin" type="date" indexed="true" stored="false"/>
+  <field name="beginarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="comment" type="text" indexed="true" stored="false"/>
+  <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="end" type="date" indexed="true" stored="false"/>
+  <field name="endarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="ended" type="bool" indexed="true" stored="false"/>
+  <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="ipi" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="isni" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
+       "artist" and "artistaccent"-->
+  <field name="name" type="string" indexed="true" stored="true"/>
+  <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
+  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
   <!-- Holds data for reponse writer -->
   <field name="_store" type="storefield" indexed="false" stored="true"
@@ -64,7 +47,6 @@
   <copyField source="name" dest="artist" />
   <copyField source="name" dest="artistaccent" />
   <copyField source="mbid" dest="arid" />
-  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? -->
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
 
@@ -75,26 +57,3 @@
   <defaultSearchField>names</defaultSearchField>
 
 </schema>
-
-<!--
-ID            ("_id", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-ALIAS         ("alias", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-ARTIST_ID     ("arid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-ARTIST        ("artist", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
-ARTIST_ACCENT ("artistaccent",MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzKeepAccentsAnalyzer()),
-BEGIN         ("begin", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-COMMENT       ("comment", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
-COUNTRY       ("country", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-END           ("end", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-ENDED         ("ended", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-GENDER        ("gender", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-IPI           ("ipi", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-ISNI          ("isni", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-SORTNAME      ("sortname", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
-TAG           ("tag", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-TYPE          ("type", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-AREA          ("area", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
-BEGIN_AREA    ("beginarea", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
-END_AREA      ("endarea", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
-ARTIST_STORE  ("artiststore", MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
--->

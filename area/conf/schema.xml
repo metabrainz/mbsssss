@@ -9,46 +9,25 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <!-- mbid needs to be indexed because it's the unique key -->
-  <field name="mbid" type="mbid" indexed="true" stored="true"/>
-
-  <field name="aid" type="mbid" indexed="true" stored="false"
-           required="false"/>
-
-  <field name="alias" type="text_general_multi" indexed="true" stored="false"
-           multiValued="true"/>
-
-  <field name="area" type="text_general" indexed="true" stored="true"
-           required="true"/>
-
+  <field name="aid" type="mbid" indexed="true" stored="false"/>
+  <field name="alias" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="area" type="text" indexed="true" stored="true" required="true"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
-
-  <field name="comment" type="text_general" indexed="true" stored="false"/>
-
+  <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="end" type="date" indexed="true" stored="false"/>
-
   <field name="ended" type="bool" indexed="true" stored="false"/>
-
   <field name="iso" type="lowercase_multi" indexed="true" stored="false"
            multiValued="true" omitNorms="true"/>
-
-  <field name="iso1" type="lowercase" indexed="true" stored="false"
-           omitNorms="true"/>
-
+  <field name="iso1" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <field name="iso2" type="lowercase_multi" indexed="true" stored="false"
            multiValued="true" omitNorms="true"/>
-
-  <field name="iso3" type="lowercase" indexed="true" stored="false"
-           omitNorms="true"/>
-
-  <field name="names" type="lowercase_multi" indexed="true" stored="false"
-           multiValued="true"/>
-
-  <field name="type" type="lowercase" indexed="true" stored="true"
-           omitNorms="true"/>
-
-  <field name="tag" type="text_general_multi" indexed="true" stored="false"
-           multiValued="true"/>
+  <field name="iso3" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true"/>
+  <field name="names" type="string_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="sortname" type="text" indexed="true" stored="false"/>
+  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
 
   <!-- Holds data for reponse writer -->
   <field name="_store" type="storefield" indexed="false" stored="true" />
@@ -61,7 +40,6 @@
   <copyField source="iso1" dest="iso"/>
   <copyField source="iso2" dest="iso"/>
   <copyField source="iso3" dest="iso"/>
-  <!-- should these be analyzed on the way to names if they have already been analyzed? ...PosGap=1? -->
   <copyField source="area" dest="names"/>
   <copyField source="alias" dest="names"/>
 
@@ -71,43 +49,3 @@
   <defaultSearchField>names</defaultSearchField>
 
 </schema>
-
-
-<!--
-            /* Now stored as an int; norms ommited by default */
-ID          ("_id", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-
-            /* Copied field form mbid; now stored in the mbid field, but indexed as both mbid and aid; norms ommited by default */
-AREA_ID     ("aid", MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-
-            /* uses the same analysis chain as the text_general fieldtype, but with the positionIncrementGap set to 1 */
-ALIAS       ("alias", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-
-AREA        ("area", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
-
-            /* now using an int type */
-BEGIN       ("begin", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-
-COMMENT     ("comment", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
-
-            /* now using an int type */
-END         ("end", MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-
-            /* now using a boolean type */
-ENDED       ("ended", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new
-CaseInsensitiveKeywordAnalyzer()),
-
-            /* not used yet...it looks like this might not be needed */
-SORTNAME    ("sortname", MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
-
-
-ISO         ("iso", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-ISO1        ("iso1", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-ISO2        ("iso2", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-ISO3        ("iso3", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-TYPE        ("type", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-TAG         ("tag", MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
-
-            /* Not sure if this is needed */
-AREA_STORE  ("areastore", MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
--->
