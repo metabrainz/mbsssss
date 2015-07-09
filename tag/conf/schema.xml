@@ -8,15 +8,14 @@
 
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="id" type="int" indexed="true" stored="true" multiValued="false"
-           required="true"/>
-    <field name="tag" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
-    <field name="_version_" type="long" indexed="true" stored="true"/>
+  <!-- id needs to be indexed because it's the unique key -->
+  <field name="id" type="int" indexed="true" stored="true" required="true"/>
+  <field name="tag" type="text" indexed="true" stored="true"/>
+
+  <field name="_store" type="storefield" indexed="false" stored="true"/>
+
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>

@@ -4,62 +4,45 @@
 
   <!--Searchable Fields
   arid, artist, artistname, comment, creditname, primarytype, rgid,
-  releasegroup, TODO releasegroupaccent, releases, release, reid, secondarytype,
-  status, tag, SCHEMA type
+  releasegroup, releasegroupaccent, releases, release, reid, secondarytype,
+  status, tag, TODO SCHEMA type
   -->
 
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="rgid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="false"/>
 
-    <field name="releasegroup" type="lowercase" indexed="true"
-           stored="true" multiValued="false" required="true"/>
-    <field name="arid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true"/>
+  <field name="artist" type="text_mult" indexed="true" stored="false"/>
+  <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="comment" type="text" indexed="true" stored="true"/>
+  <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <field name="name" type="string" indexed="false" stored="true" required="true"/>
+  <field name="primarytype" type="lowercase" indexed="true" stored="true"/>
+  <!-- releases in this release group -->
+  <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true"/>
+  <field name="release" type="title_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="releasegroup" type="title" indexed="true" stored="true" required="true"/>
+  <field name="releasegroupaccent" type="title_keep_accents" indexed="true" stored="false"
+         required="true"/>
+  <!-- some release groups don't contain releases -->
+  <field name="releases" type="int" indexed="true" stored="true"/>
+  <field name="rgid" type="mbid" indexed="true" stored="true"/>
+  <field name="secondarytype" type="lowercase_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="status" type="lowercase_mult" indexed="true" stored="true" multiValued="true"
+         omitNorms="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="type" type="lowercase_mult" indexed="true" stored="true" multiValued="true"
+         omitNorms="true"/>
 
+  <field name="_store" type="storefield" indexed="false" stored="true"/>
 
-    <field name="artist" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="artistname" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="comment" type="lowercase" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="creditname" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
-    <!-- releases in this release group -->
-    <field name="reid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <!-- some release groups don't contain releases -->
-    <field name="releases" type="int" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="release" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-
-    <!-- types -->
-    <field name="primarytype" type="lowercase" indexed="true"
-           stored="true" multiValued="false" required="false"/>
-    <field name="secondarytype" type="lowercase" indexed="true"
-           stored="true" multiValued="true" required="false"/>
-    <field name="type" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="status" type="lowercase" indexed="true" stored="true"
-           multiValued = "true" required="false"/>
-    <field name="tag" type="lowercase" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
-
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-
-  <copyField source="mbid" dest="rgid" />
+  <copyField source="mbid" dest="rgid"/>
+  <copyField source="name" dest="releasegroup"/>
+  <copyField source="name" dest="releasegroupaccent"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
