@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<!-- This is a template for new cores. -->
+
+<schema name="event" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <!--Searchable Fields
+  include comma seperated list of searchable fields for reference
+  -->
+
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
+
+  <!-- These are the fields from the "artist" core; edit as needed -->
+  <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true"/>
+  <field name="area" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="arid" type="mbid" indexed="true" stored="false"/>
+  <field name="artist" type="text" indexed="true" stored="true"/>
+  <field name="artistaccent" type="keep_accents" indexed="true" stored="false"/>
+  <field name="begin" type="date" indexed="true" stored="false"/>
+  <field name="beginarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="comment" type="text" indexed="true" stored="false"/>
+  <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="end" type="date" indexed="true" stored="false"/>
+  <field name="endarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="ended" type="bool" indexed="true" stored="false"/>
+  <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="ipi" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="isni" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
+       "artist" and "artistaccent"-->
+  <field name="name" type="string" indexed="true" stored="true"/>
+  <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
+  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+
+  <!-- Holds data for reponse writer -->
+  <field name="_store" type="storefield" indexed="false" stored="true"
+         multiValued="false" required="false"/>
+
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+     or Solr won't start. _version_ and update log are required for SolrCloud. -->
+  <field name="_version_" type="long" indexed="true" stored="true"/>
+
+
+  <copyField source="name" dest="artist" />
+  <copyField source="name" dest="artistaccent" />
+  <copyField source="mbid" dest="arid" />
+  <copyField source="alias" dest="names" />
+  <copyField source="artist" dest="names" />
+
+  <!-- field to use to determine and enforce document uniqueness. -->
+  <uniqueKey>mbid</uniqueKey>
+
+  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+  <defaultSearchField>names</defaultSearchField>
+
+</schema>
+
+<!--
+ID		    ("_id",		    MusicBrainzFieldTypes.TEXT_STORED_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+  EVENT_ID    ("eid",		    MusicBrainzFieldTypes.TEXT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+  ALIAS		("alias",		MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+  COMMENT		("comment",		MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED),
+  EVENT       ("event",       MusicBrainzFieldTypes.TEXT_STORED_ANALYZED, new MusicbrainzAnalyzer()),
+  BEGIN		("begin",		MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+  END			("end",			MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+  TYPE		("type",		MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+  TAG		    ("tag",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+  ARTIST_ID   ("arid",		MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+  ARTIST      ("artist",      MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+  PLACE_ID    ("pid",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+  PLACE       ("place",       MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+  AREA_ID     ("aid",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+  AREA        ("area",        MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED, new MusicbrainzWithPosGapAnalyzer()),
+  EVENT_STORE ("eventstore",  MusicBrainzFieldTypes.TEXT_STORED_NOT_INDEXED),
+  ;
+-->

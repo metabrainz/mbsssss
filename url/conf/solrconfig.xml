@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+ This is a config file adapted from the example config files of the multicore example of the solr tarball and is not ready for prime-time use.
+
+ The file `example/solr/collection1/conf/solrconfig.xml` has a way more
+ complete explanation of everything that can be changed in this file - it is
+ also >1800 lines long...
+-->
+<config xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="common/luceneMatchVersion.xml" />
+  <xi:include href="common/directoryFactory.xml" />
+  <xi:include href="common/dataDir.xml" />
+  <xi:include href="common/schemaFactory.xml" />
+  <updateHandler class="solr.DirectUpdateHandler2">
+    <updateLog>
+      <str name="dir">${solr.url.data.dir:}</str>
+    </updateLog>
+    <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
+    <xi:include href="common/autoCommit.xml" />
+    <xi:include href="common/autoSoftCommit.xml" />
+  </updateHandler>
+  <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/requestHandler-get.xml" />
+  <xi:include href="common/requestHandler-replication.xml" />
+  <xi:include href="common/requestDispatcher.xml" />
+  <xi:include href="common/requestHandler-standard.xml" />
+  <xi:include href="common/requestHandler-field.xml" />
+  <xi:include href="common/requestHandler-update.xml" />
+  <xi:include href="common/requestHandler-ping.xml" />
+  <!-- config for the admin interface -->
+  <xi:include href="common/admin.xml" />
+
+  <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
+      <str name="entitytype">url</str>
+  </queryResponseWriter>
+  <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
+      <str name="entitytype">url</str>
+  </queryResponseWriter>
