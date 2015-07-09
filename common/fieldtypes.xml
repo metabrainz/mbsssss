@@ -42,9 +42,10 @@ StripSpacesAndSeparatorsAnalyzer.java =>      solr.WordDelimiterFilterFactory, w
 AreaBoostDoc.java                     =>      TODO
 ArtistBoostDoc.java                   =>      TODO
 LabelBoostDoc.java                    =>      TODO
-Event                                 =>      TODO
-FreeDB                                =>      TODO
-URL                                   =>      TODO
+Event                                 =>      Check
+FreeDB                                =>      Check
+URL                                   =>      Check
+Instrument                            =>      Check
 
 -->
 
@@ -276,18 +277,11 @@ URL                                   =>      TODO
     </fieldType>
 
 
-
-
-    <!-- These may prove useful -->
-
-
-
-
-    <!--
+   <!--
       Example of using PathHierarchyTokenizerFactory at index time, so
       queries for paths match documents at that path, or in descendent paths
     -->
-    <!--
+
     <fieldType name="descendent_path" class="solr.TextField">
       <analyzer type="index">
         <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" />
@@ -296,13 +290,13 @@ URL                                   =>      TODO
         <tokenizer class="solr.KeywordTokenizerFactory" />
       </analyzer>
     </fieldType>
-    -->
+
 
     <!--
       Example of using PathHierarchyTokenizerFactory at query time, so
       queries for paths match documents at that path, or in ancestor paths
     -->
-    <!-- <fieldType name="ancestor_path" class="solr.TextField">
+    <fieldType name="ancestor_path" class="solr.TextField">
       <analyzer type="index">
         <tokenizer class="solr.KeywordTokenizerFactory" />
       </analyzer>
@@ -310,6 +304,6 @@ URL                                   =>      TODO
         <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" />
       </analyzer>
     </fieldType>
-    -->
+
 
 </types>
