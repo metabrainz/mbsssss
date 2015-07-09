@@ -10,13 +10,13 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true"/>
-  <field name="area" type="text_multi" indexed="true" stored="true" multiValued="true"/>
+  <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="area" type="text_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
-  <field name="code" type="strip_leading_zeroes_multi" indexed="true" stored="false"
+  <field name="code" type="strip_leading_zeroes_mult" indexed="true" stored="false"
          multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false"/>
-  <field name="country" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="country" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="end" type="date" indexed="true" stored="false"/>
   <field name="ended" type="bool" indexed="true" stored="true"/>
   <field name="ipi" type="string" indexed="true" stored="true" multiValued="true"/>
@@ -28,10 +28,10 @@
   <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
        "label" and "labelaccent"-->
   <field name="name" type="string" indexed="true" stored="true" required="true"/>
-  <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true" />
+  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
-  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
 
   <!-- Holds data for reponse writer -->
   <field name="_store" type="storefield" indexed="false" stored="true"/>

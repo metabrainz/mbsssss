@@ -29,10 +29,10 @@ LowercaseFilter.java                  =>      ICUFoldingFilterFactory
                                               Need to check:
                                                 lowercases Hiragana characters?
 MusicbrainzAnalyzer.java              =>      Now represented as fieldtype: text
-MusicbrainzWithPosGapAnalyzer.java    =>      Now represented as fieldtype: text_multi
+MusicbrainzWithPosGapAnalyzer.java    =>      Now represented as fieldtype: text_mult
 MusicbrainzKeepAccents.java           =>      Now represented as fieldtype: keep_accents
 TitleAnalyzer.java                    =>      Now represented as fieldtype: title
-TitleWithPosGapAnalyzer.java          =>      Now represented as fieldtype: title_multi
+TitleWithPosGapAnalyzer.java          =>      Now represented as fieldtype: title_mult
 PatternReplaceCharFilter.java         =>      solr.PatternReplaceCharFilterFactory
 RecordingSimilarity.java              =>      TODO
 ReleaseGroupSimilarity.java           =>      TODO
@@ -88,7 +88,7 @@ URL                                   =>      TODO
 
     <!-- Like text, but used for fields with multiple values
          Replaces MusicbrainzWithPosGapAnalyzer.java -->
-    <fieldType name="text_multi"
+    <fieldType name="text_mult"
                class="solr.TextField" positionIncrementGap="1">
       <analyzer>
         <charFilter class="solr.MappingCharFilterFactory"
@@ -229,7 +229,7 @@ URL                                   =>      TODO
 
     <!-- lowercases the entire field value, keeping it as a single token; uses position
       increment gap of 1 as recommended for fields with multiple values  -->
-    <fieldType name="lowercase_multi" class="solr.TextField"
+    <fieldType name="lowercase_mult" class="solr.TextField"
                positionIncrementGap="1">
       <analyzer>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
@@ -238,7 +238,7 @@ URL                                   =>      TODO
     </fieldType>
 
     <!-- for use with string fields where there can be multiple values -->
-    <fieldtype name="string_multi" class="solr.StrField" sortMissingLast="false"
+    <fieldtype name="string_mult" class="solr.StrField" sortMissingLast="false"
                positionIncrementGap="1"/>
 
     <!-- Strips leading zeroes from a string -->
@@ -253,7 +253,7 @@ URL                                   =>      TODO
     </fieldType>
 
     <!-- Strips leading zeroes from a string (multiple values)-->
-    <fieldType name="strip_leading_zeroes_multi" class="solr.TextField"
+    <fieldType name="strip_leading_zeroes_mult" class="solr.TextField"
                positionIncrementGap="1">
       <analyzer>
         <charFilter class="solr.PatternReplaceCharFilterFactory"
@@ -267,6 +267,7 @@ URL                                   =>      TODO
     <fieldType name="strip_spaces_and_separators" class="solr.TextField" positionIncrementGap="100"
       autoGeneratePhraseQueries="true">
       <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
         <!-- might consider making more of these = 1 -->
         <filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0"
           catenateWords="0" catenateNumbers="0" catenateAll="1"/>

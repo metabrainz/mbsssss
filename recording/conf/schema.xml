@@ -13,40 +13,40 @@
   <xi:include href="common/fieldtypes.xml" />
 
   <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true" required="true"/>
-  <field name="artist" type="text_multi" indexed="true" stored="false" required="true"/>
-  <field name="artistname" type="text_multi" indexed="true" stored="false" multiValued="true"
+  <field name="artist" type="text_mult" indexed="true" stored="false" required="true"/>
+  <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true"
          required="true"/>
-  <field name="creditname" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false" />
-  <field name="country" type="lowercase_multi" indexed="true" stored="false" multiValued="true"
+  <field name="country" type="lowercase_mult" indexed="true" stored="false" multiValued="true"
          omitNorms="true"/>
   <field name="date" type="date" indexed="true" stored="false"/>
   <field name="dur" type="long" indexed="true" stored="false" />
-  <field name="format" type="lowercase_multi" indexed="true" stored="false" multiValued="true"
+  <field name="format" type="lowercase_mult" indexed="true" stored="false" multiValued="true"
          omitNorms="true"/>
-  <field name="isrc" type="lowercase_multi" indexed="true" stored="false" multiValued="true"
+  <field name="isrc" type="lowercase_mult" indexed="true" stored="false" multiValued="true"
          omitNorms="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="number" type="int" indexed="true" stored="false" multiValued="true" />
   <field name="name" type="string" indexed="true" stored="true" required="true"/>
   <field name="position" type="int" indexed="true" stored="false" multiValued="true"/>
-  <field name="primarytype" type="lowercase_multi" indexed="true" stored="false" multiValued="true" />
+  <field name="primarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
   <field name="qdur" type="long" indexed="true" stored="false" />
   <field name="recording" type="text" indexed="true" stored="true" />
-  <field name="recordingaccent" type="keep_accent" indexed="true" stored="false"/>
+  <field name="recordingaccent" type="keep_accents" indexed="true" stored="false"/>
   <field name="reid" type="mbid" indexed="true" stored="false" multiValued="true" />
-  <field name="release" type="title_multi" indexed="true" stored="false" multiValued="true" />
+  <field name="release" type="title_mult" indexed="true" stored="false" multiValued="true" />
   <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true"/>
   <field name="rid" type="mbid" indexed="true" stored="false" required="true"/>
-  <field name="secondarytype" type="lowercase_multi" indexed="true" stored="false" multiValued="true" />
-  <field name="status" type="lowercase_multi" indexed="true" stored="false" multiValued="true" />
-  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true" />
+  <field name="secondarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="status" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="tid" type="mbid" indexed="true" stored="false" multiValued="true"/>
   <field name="tnum" type="int" indexed="true" stored="true" multiValued="true" />
   <field name="tracks" type="int" indexed="true" stored="false" multiValued="true"/>
   <field name="tracksrelease" type="int" indexed="true" stored="false" multiValued="true"/>
-  <field name="type" type="lowercase_multi" indexed="true" stored="false" multiValued="true" />
+  <field name="type" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
   <field name="video" type="bool" indexed="true" stored="false" required="true"/>
 
   <!-- Holds data for reponse writer -->

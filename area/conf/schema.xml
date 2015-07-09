@@ -10,23 +10,23 @@
   <xi:include href="common/fieldtypes.xml" />
 
   <field name="aid" type="mbid" indexed="true" stored="false"/>
-  <field name="alias" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="area" type="text" indexed="true" stored="true" required="true"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="end" type="date" indexed="true" stored="false"/>
   <field name="ended" type="bool" indexed="true" stored="false"/>
-  <field name="iso" type="lowercase_multi" indexed="true" stored="false"
+  <field name="iso" type="lowercase_mult" indexed="true" stored="false"
            multiValued="true" omitNorms="true"/>
   <field name="iso1" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
-  <field name="iso2" type="lowercase_multi" indexed="true" stored="false"
+  <field name="iso2" type="lowercase_mult" indexed="true" stored="false"
            multiValued="true" omitNorms="true"/>
   <field name="iso3" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true"/>
-  <field name="names" type="string_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="names" type="string_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="sortname" type="text" indexed="true" stored="false"/>
-  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
 
   <!-- Holds data for reponse writer -->

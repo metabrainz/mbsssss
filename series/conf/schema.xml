@@ -9,12 +9,12 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <field name="alias" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="orderingattribute" type="lowercase" indexed="true" stored="false"/>
   <!-- id needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="names" type="string_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="names" type="string_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="series" type="text" indexed="true" stored="true" required="true"/>
   <field name="sid" type="mbid" indexed="true" stored="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>

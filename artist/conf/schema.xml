@@ -10,17 +10,17 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true"/>
-  <field name="area" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="arid" type="mbid" indexed="true" stored="false"/>
   <field name="artist" type="text" indexed="true" stored="true"/>
   <field name="artistaccent" type="keep_accents" indexed="true" stored="false"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
-  <field name="beginarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="beginarea" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <field name="end" type="date" indexed="true" stored="false"/>
-  <field name="endarea" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="endarea" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="ended" type="bool" indexed="true" stored="false"/>
   <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <field name="ipi" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
@@ -30,9 +30,9 @@
   <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
        "artist" and "artistaccent"-->
   <field name="name" type="string" indexed="true" stored="true"/>
-  <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
-  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
   <!-- Holds data for reponse writer -->
