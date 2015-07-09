@@ -4,7 +4,7 @@
 <schema name="event" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
   <!--Searchable Fields
-  include comma seperated list of searchable fields for reference
+  alias, aid, area, arid, artist, begin, comment, end, eid, event, pid, place, tag, type
   -->
 
   <!-- link to fieldType definitions for all cores-->
