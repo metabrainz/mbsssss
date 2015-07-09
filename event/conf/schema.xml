@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!-- This is a template for new cores. -->
 
 <schema name="event" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
@@ -10,7 +9,6 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <!-- These are the fields from the "artist" core; edit as needed -->
   <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true"/>
   <field name="aid" type="mbid" indexed="true" stored="false"/>
   <field name="area" type="text_multi" indexed="true" stored="false" multiValued="true"/>
