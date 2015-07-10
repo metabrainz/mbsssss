@@ -3,7 +3,7 @@
 <schema name="instrument" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
   <!--Searchable Fields
-  alias, comment, description
+  alias, comment, description, iid, instrument, tag, type
   -->
 
   <!-- link to fieldType definitions for all cores-->
