@@ -14,7 +14,7 @@
   <field name="artist" type="text" indexed="true" stored="true"/>
   <field name="cat" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
   <field name="discid" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
-  <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="title" type="title" indexed="true" stored="true"/>
   <field name="tracks" type="int" indexed="true" stored="true"/>
   <field name="year" type="int" indexed="true" stored="true"/>

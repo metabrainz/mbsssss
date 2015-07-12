@@ -9,7 +9,7 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true"/>
+  <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="description" type="text" indexed="true" stored="false"/>
   <field name="iid" type="mbid" indexed="true" stored="false"/>
@@ -17,7 +17,7 @@
   <field name="keywords" type="string_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
 

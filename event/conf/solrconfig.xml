@@ -36,3 +36,5 @@
   <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
       <str name="entitytype">event</str>
   </queryResponseWriter>
+  
+</config>
