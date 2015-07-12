@@ -42,8 +42,7 @@
   <field name="quality" type="lowercase" indexed="true" stored="false"/>
   <field name="reid" type="mbid" indexed="true" stored="true"/>
   <field name="release" type="title" indexed="true" stored="true" required="true"/>
-  <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false"
-        required="true"/>
+  <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false"/>
   <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true"/>
   <field name="script" type="lowercase" indexed="true" stored="false"/>
   <field name="secondarytype" type="lowercase" indexed="true" stored="false" multiValued="true"/>
