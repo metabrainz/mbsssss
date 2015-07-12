@@ -18,14 +18,13 @@
   <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="name" type="string" indexed="false" stored="true" required="true"/>
+  <field name="name" type="string" indexed="false" stored="true"/>
   <field name="primarytype" type="lowercase" indexed="true" stored="true"/>
   <!-- releases in this release group -->
   <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true"/>
   <field name="release" type="title_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="releasegroup" type="title" indexed="true" stored="true" required="true"/>
-  <field name="releasegroupaccent" type="title_keep_accents" indexed="true" stored="false"
-         required="true"/>
+  <field name="releasegroupaccent" type="title_keep_accents" indexed="true" stored="false"/>
   <!-- some release groups don't contain releases -->
   <field name="releases" type="int" indexed="true" stored="true"/>
   <field name="rgid" type="mbid" indexed="true" stored="true"/>
