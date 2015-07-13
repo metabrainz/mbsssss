@@ -6,62 +6,29 @@
  complete explanation of everything that can be changed in this file - it is
  also >1800 lines long...
 -->
-<config>
-  <luceneMatchVersion>5.0</luceneMatchVersion>
-  <!-- we could use org.apache.solr.core.RAMDirectoryFactory to store the index in RAM -->
-  <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}"/>
-
-  <dataDir>${solr.release-group.data.dir:}</dataDir>
-
-  <schemaFactory class="ClassicIndexSchemaFactory"/>
-
+<config xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="common/luceneMatchVersion.xml" />
+  <xi:include href="common/directoryFactory.xml" />
+  <xi:include href="common/dataDir.xml" />
+  <xi:include href="common/schemaFactory.xml" />
   <updateHandler class="solr.DirectUpdateHandler2">
     <updateLog>
-      <str name="dir">${solr.release-group.data.dir:}</str>
+      <str name="dir">${solr.release_group.data.dir:}</str>
     </updateLog>
     <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
-    <autoCommit>
-        <maxTime>60000</maxTime>
-        <!-- maybe change this to false in production -->
-        <openSearcher>false</openSearcher>
-    </autoCommit>
-    <autoSoftCommit>
-        <maxTime>1000</maxTime>
-    </autoSoftCommit>
+    <xi:include href="common/autoCommit.xml" />
+    <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-
-  <!-- realtime get handler, guaranteed to return the latest stored fields
-    of any document, without the need to commit or open a new searcher. The current
-    implementation relies on the updateLog feature being enabled. -->
-  <requestHandler name="/get" class="solr.RealTimeGetHandler">
-    <lst name="defaults">
-      <str name="omitHeader">true</str>
-    </lst>
-  </requestHandler>
-
-  <requestHandler name="/replication" class="solr.ReplicationHandler" startup="lazy" />
-
-  <requestDispatcher handleSelect="true" >
-    <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" formdataUploadLimitInKB="2048" />
-  </requestDispatcher>
-
-  <requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
-  <requestHandler name="/analysis/field" startup="lazy" class="solr.FieldAnalysisRequestHandler" />
-  <requestHandler name="/update" class="solr.UpdateRequestHandler"  />
-
-  <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
-    <lst name="invariants">
-      <str name="q">solrpingquery</str>
-    </lst>
-    <lst name="defaults">
-      <str name="echoParams">all</str>
-    </lst>
-  </requestHandler>
-
+  <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/requestHandler-get.xml" />
+  <xi:include href="common/requestHandler-replication.xml" />
+  <xi:include href="common/requestDispatcher.xml" />
+  <xi:include href="common/requestHandler-standard.xml" />
+  <xi:include href="common/requestHandler-field.xml" />
+  <xi:include href="common/requestHandler-update.xml" />
+  <xi:include href="common/requestHandler-ping.xml" />
   <!-- config for the admin interface -->
-  <admin>
-    <defaultQuery>solr</defaultQuery>
-  </admin>
+  <xi:include href="common/admin.xml" />
 
   <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
       <str name="entitytype">release_group</str>

@@ -1,108 +1,72 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="recording" version="1.2">
-  &fieldtypes;
-  <fields>
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
 
-    <field name="recording" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="name" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+<schema name="recording" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <!-- artists -->
-    <field name="arid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="true"/>
+  <!--Searchable Fields
+  arid, artist, artistname, creditname, comment, country, date, dur, format,
+  isrc, number, position, primarytype, qdur, recording,
+  recordingaccent, reid, release, rgid, rid, secondarytype, status, tid,
+  tnum, tracks, tracksrelease, tag, TODO SCHEMA type, video
+  -->
 
-    <field name="artist" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
 
-    <field name="artistname" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="true"/>
+  <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true" required="true"/>
+  <field name="artist" type="text_mult" indexed="true" stored="false" required="true"/>
+  <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true"
+         required="true"/>
+  <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="comment" type="text" indexed="true" stored="false" />
+  <field name="country" type="lowercase_mult" indexed="true" stored="false" multiValued="true"
+         omitNorms="true"/>
+  <field name="date" type="date" indexed="true" stored="false"/>
+  <field name="dur" type="long" indexed="true" stored="false" />
+  <field name="format" type="lowercase_mult" indexed="true" stored="false" multiValued="true"
+         omitNorms="true"/>
+  <field name="isrc" type="lowercase_mult" indexed="true" stored="false" multiValued="true"
+         omitNorms="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <field name="number" type="int" indexed="true" stored="false" multiValued="true" />
+  <field name="name" type="string" indexed="true" stored="true" required="true"/>
+  <field name="position" type="int" indexed="true" stored="false" multiValued="true"/>
+  <field name="primarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="qdur" type="long" indexed="true" stored="false" />
+  <field name="recording" type="text" indexed="true" stored="true" multiValued="true" />
+  <field name="recordingaccent" type="keep_accents" indexed="true" stored="false"/>
+  <field name="reid" type="mbid" indexed="true" stored="false" multiValued="true" />
+  <field name="release" type="title_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true"/>
+  <field name="rid" type="mbid" indexed="true" stored="false" required="true"/>
+  <field name="secondarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="status" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="tid" type="mbid" indexed="true" stored="false" multiValued="true"/>
+  <field name="tnum" type="int" indexed="true" stored="true" multiValued="true" />
+  <field name="tracks" type="int" indexed="true" stored="false" multiValued="true"/>
+  <field name="tracksrelease" type="int" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="video" type="bool" indexed="true" stored="false" required="true"/>
 
-    <field name="creditname" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="true"/>
+  <!-- Holds data for reponse writer -->
+  <field name="_store" type="storefield" indexed="false" stored="true"
+         multiValued="false" required="false"/>
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+       or Solr won't start. _version_ and update log are required for SolrCloud. -->
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
-    <field name="isrc" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true"       required="false"/>
 
-    <!-- release groups -->
-    <field name="rgid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <!-- releases this recording appears on -->
-    <field name="reid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="release" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="status" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="format" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="position" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="number" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="tnum" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="tracks" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="tracksrelease" type="long" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <field name="tid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-
-    <!-- release events -->
-    <field name="country" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="date" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
-
-    <!-- types -->
-    <field name="secondarytype" type="lowercasestring" indexed="true"
-           stored="true" multiValued="true" required="false"/>
-    <field name="primarytype" type="lowercasestring" indexed="true"
-           stored="true" multiValued="true" required="false"/>
-    <field name="type" type="lowercasestring" indexed="true"
-           stored="true" multiValued="true" required="false"/>
-
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="comment" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="dur" type="long" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="qdur" type="long" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="video" type="bool" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
-
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-
-  </fields>
+  <copyField source="mbid" dest="rid" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
-  <copyField source="recording" dest="name" />
+  <copyField source="name" dest="recording" />
+  <copyField source="name" dest="recordingaccent" />
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
+
+    <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>recording</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>

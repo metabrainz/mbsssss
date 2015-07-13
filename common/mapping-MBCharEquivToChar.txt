@@ -1,0 +1,117 @@
+
+# Syntax:
+#   "source" => "target"
+#     "source".length() > 0 (source cannot be empty.)
+#     "target".length() >= 0 (target can be empty.)
+
+
+# À  [LATIN CAPITAL LETTER A WITH GRAVE]
+"\u00C0" => "A"
+
+
+#SEARCH-220:Lucene can't match fullwidth and halfwidth spaces (anymore ?)
+#FullWidth Space to Half-width-space so treated as word separator
+"\u3000" => " "
+
+#Treat '&' and 'and' interchangeably
+"&" => "and"
+
+#Apostrophes
+"’" => "'"
+
+#Various Hyphens, from http://www.fileformat.info/info/unicode/category/Pd/list.htm
+"‐" => "-"
+"–" => "-"
+"‒" => "-"
+"—" => "-"
+"−" => "-"
+"_" => "-"
+
+#These are from Phonetic Extensions http://www.fileformat.info/info/unicode/block/phonetic_extensions/list.htm
+"ᴀ" => "A"
+"ᴁ" => "ae"
+"ᴂ" => "ae"
+"ᴃ" => "B"
+"ᴄ" => "C"
+"ᴅ" => "D"
+"ᴆ" => "E"
+"ᴇ" => "E"
+"ᴌ" => "L"
+"ᴍ" => "M"
+"ᴏ" => "O"
+"ᴒ" => "O"
+"ᴓ" => "o"
+"ᴛ" => "T"
+"ᴜ" => "U"
+"ᴠ" => "V"
+"ᴡ" => "W"
+"ᴢ" => "Z"
+"ᴬ" => "A"
+"ᴭ" => "AE"
+"ᴮ" => "B"
+"ᴰ" => "D"
+"ᴱ" => "E"
+"ᴳ" => "G"
+"ᴴ" => "H"
+"ᴵ" => "I"
+"ᴶ" => "J"
+"ᴷ" => "K"
+"ᴸ" => "L"
+"ᴹ" => "M"
+"ᴺ" => "N"
+"ᴼ" => "O"
+"ᴾ" => "P"
+"ᴿ" => "R"
+"ᵀ" => "T"
+"ᵁ" => "U"
+"ᵂ" => "W"
+"ᵃ" => "a"
+"ᵇ" => "b"
+"ᵈ" => "d"
+"ᵉ" => "e"
+"ᵍ" => "g"
+"ᵏ" => "k"
+"ᵐ" => "m"
+"ᵒ" => "o"
+"ᵖ" => "p"
+"ᵗ" => "t"
+"ᵘ" => "u"
+"ᵛ" => "v"
+"ᵢ" => "i"
+"ᵣ" => "r"
+"ᵤ" => "u"
+"ᵥ" => "v"
+"ᵬ" => "b"
+"ᵭ" => "d"
+"ᵮ" => "f"
+"ᵯ" => "m"
+"ᵰ" => "n"
+"ᵱ" => "p"
+"ᵲ" => "r"
+"ᵳ" => "r"
+"ᵴ" => "s"
+"ᵵ" => "t"
+"ᵶ" => "z"
+"ᵻ" => "I"
+"ᵽ" => "p"
+"ᵾ" => "u"
+"ᵧ" => "γ"
+"ᵨ" => "ϱ"
+"ᵦ" => "β"
+"ᵩ" => "ϕ"
+"ᵪ" => "χ"
+"ᵟ" => "δ"
+"ᵡ" => "χ"
+"ᴊ" => "j"
+"ı" => "i"
+
+# Certain Hebrew chars converted to western cases so matches both
+
+# u0f53 HEBREW PUNCTUATION GERESH
+"׳" => "'" 
+
+# u05be HEBREW PUNCTUATION MAQAF
+"\u05be" => "-" 
+
+# u05f4 HEBREW PUNCTUATION GERSHAYIM
+"״" => "\"" 

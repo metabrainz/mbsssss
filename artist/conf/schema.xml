@@ -1,73 +1,59 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="artist" version="1.2">
-  &fieldtypes;
-  <fields>
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="arid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="false"/>
 
-    <!-- search on all names, but provide the primary name and aliases separately in the response -->
-    <field name="name" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="artist" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="names" type="lowercasestring" indexed="true" stored="false"
-           multiValued="true" required="false"/>
-    <field name="alias" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true"/>
-    <field name="sortname" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
+<schema name="artist" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <!-- areas -->
-    <field name="area" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="beginarea" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="endarea" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="country" type="string" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+  <!--Searchable Fields
+  area, beginarea, endarea, arid, artist, artistaccent, alias, begin, comment,
+  country, end, ended, gender, ipi, isni, sortname, tag, type
+  -->
 
-    <!-- dates -->
-    <field name="begin" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="end" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
-    <!-- `true` or `false` -->
-    <field name="ended" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
 
-    <field name="comment" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="gender" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="ipi" type="string" indexed="true" stored="true"
-           multiValued="true"/>
-    <field name="language" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="arid" type="mbid" indexed="true" stored="false"/>
+  <field name="artist" type="text" indexed="true" stored="true"/>
+  <field name="artistaccent" type="keep_accents" indexed="true" stored="false"/>
+  <field name="begin" type="date" indexed="true" stored="false"/>
+  <field name="beginarea" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="comment" type="text" indexed="true" stored="false"/>
+  <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="end" type="date" indexed="true" stored="false"/>
+  <field name="endarea" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="ended" type="bool" indexed="true" stored="false"/>
+  <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="ipi" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="isni" type="lowercase_mult" indexed="true" stored="false" multiValued="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
+       "artist" and "artistaccent"-->
+  <field name="name" type="string" indexed="true" stored="true"/>
+  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
+  <!-- Holds data for reponse writer -->
+  <field name="_store" type="storefield" indexed="false" stored="true"
+         multiValued="false" required="false"/>
 
-    <field name="type" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+     or Solr won't start. _version_ and update log are required for SolrCloud. -->
+  <field name="_version_" type="long" indexed="true" stored="true"/>
+
+
+  <copyField source="name" dest="artist" />
+  <copyField source="name" dest="artistaccent" />
+  <copyField source="mbid" dest="arid" />
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
-  <copyField source="artist" dest="name" />
-  <copyField source="mbid" dest="arid" />
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
+
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>names</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>

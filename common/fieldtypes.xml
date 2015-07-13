@@ -1,16 +1,309 @@
+<!--
+Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
+
+fieldtypes ported from Lucene search server MusicBrainzFieldTypes.java and *IndexField.java
+field attributes/analysis in each core's schema.xml ported from *IndexField.java
+
+Mapping of old configuration to new
+=====================================
+OLD                                           NEW
+AmpersandToAndMappingHelper.java      =>      common/mapping-MBCharEquivToChar.txt
+CharEquivToCharHelper.java            =>      common/mapping-MBCharEquivToChar.txt
+HebrewCharMappingHelper.java          =>      common/mapping-MBCharEquivToChar.txt
+MusicbrainzTokenizer.java             =>      solr.ClassicTokenizer (seems to operate the same way)
+MusicbrainzWordDelimiterFilter.java   =>      solr.WordDelimiterFilter (seems to operate the same way)
+                                              Need to check (per note at bottom of MusicBrainzWordDelimiterFilter):
+                                                negative numbers?
+                                                -42 indexed as just 42?
+                                                dollar sign?  $42
+                                                percent sign?  33%
+                                                if source text is "powershot" then a query of "PowerShot" won't match!
+AccentFilter.java                     =>      ICUFoldingFilterFactory
+LowercaseFilter.java                  =>      ICUFoldingFilterFactory
+                                              -The ICUFoldingFilterFactory combines the behavior of ASCIIFoldingFilter,
+                                              LowerCaseFilter and ICUNormalizer2Filter all in an efficient single-pass
+                                              through the string.
+                                              solr.ICUFOldingFilterFactory: wiki.apache.org/solr/AnalyzersTokenizersTokenFilters#solr.ICUFoldingFilterFactory
+                                              Unicode Foldings: www.unicode.org/reports/tr30/tr30-4.html
+                                              Unicode Normalization: www.unicode.org/reports/tr15/
+                                              Need to check:
+                                                lowercases Hiragana characters?
+MusicbrainzAnalyzer.java              =>      Now represented as fieldtype: text
+MusicbrainzWithPosGapAnalyzer.java    =>      Now represented as fieldtype: text_mult
+MusicbrainzKeepAccents.java           =>      Now represented as fieldtype: keep_accents
+TitleAnalyzer.java                    =>      Now represented as fieldtype: title
+TitleWithPosGapAnalyzer.java          =>      Now represented as fieldtype: title_mult
+PatternReplaceCharFilter.java         =>      solr.PatternReplaceCharFilterFactory
+RecordingSimilarity.java              =>      TODO
+ReleaseGroupSimilarity.java           =>      TODO
+StripLeadingZeroesFilter.java         =>      Now represented as fieldtype: strip_leading_zeroes
+                                              used PatternReplaceCharFilter and Regex to strip leading zeroes
+StripSpacesAndSeparatorsAnalyzer.java =>      solr.WordDelimiterFilterFactory, with catenateAll="1"
+AreaBoostDoc.java                     =>      TODO
+ArtistBoostDoc.java                   =>      TODO
+LabelBoostDoc.java                    =>      TODO
+Event                                 =>      Check
+FreeDB                                =>      Check
+URL                                   =>      Check
+Instrument                            =>      Check
+
+-->
+
 <types>
+
   <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
   <fieldType name="long" class="solr.TrieLongField" precisionStep="0" positionIncrementGap="0"/>
-  <fieldType name="mbid" class="solr.UUIDField"/>
-  <fieldType name="lowercasestring" class="solr.TextField" sortMissingLast="false">
-      <analyzer>
-          <tokenizer class="solr.StandardTokenizerFactory"/>
-          <filter class="solr.LowerCaseFilterFactory"/>
-      </analyzer>
-  </fieldType>
+  <fieldType name="mbid" class="solr.UUIDField" omitNorms="true" />
   <fieldType name="storefield" class="solr.StrField"/>
   <fieldType name="bool" class="solr.BoolField"/>
-  <fieldType name="date" class="solr.TrieDateField" sortMissingLast="false"/>
+  <fieldType name="date" class="solr.DateRangeField" sortMissingLast="false"/>
   <fieldType name="int" class="solr.TrieIntField" sortMissingLast="false"/>
   <fieldType name="float" class="solr.TrieFloatField"/>
+
+    <!-- A general text field that has reasonable, generic
+         cross-language defaults
+
+         An attempt at replicating the steps in MusicBrainzAnalyzer.java -->
+    <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <!-- Like text, but used for fields with multiple values
+         Replaces MusicbrainzWithPosGapAnalyzer.java -->
+    <fieldType name="text_mult"
+               class="solr.TextField" positionIncrementGap="1">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="title" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                    pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2"/>
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="title_mult" class="solr.TextField"
+               positionIncrementGap="1">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                    pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+
+    <fieldType name="keep_accents" class="solr.TextField"
+               positionIncrementGap="100">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="title_keep_accents" class="solr.TextField" positionIncrementGap="100">
+      <analyzer>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                    pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2"/>
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <!-- lowercases the entire field value, keeping it as a single token.  -->
+    <fieldType name="lowercase" class="solr.TextField"
+               positionIncrementGap="100">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <!-- lowercases the entire field value, keeping it as a single token; uses position
+      increment gap of 1 as recommended for fields with multiple values  -->
+    <fieldType name="lowercase_mult" class="solr.TextField"
+               positionIncrementGap="1">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <!-- for use with string fields where there can be multiple values -->
+    <fieldtype name="string_mult" class="solr.StrField" sortMissingLast="false"
+               positionIncrementGap="1"/>
+
+    <!-- Strips leading zeroes from a string -->
+    <fieldType name="strip_leading_zeroes" class="solr.TextField"
+               positionIncrementGap="100">
+      <analyzer>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                  pattern="(^[0]+)" replacement=""/>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <!-- Strips leading zeroes from a string (multiple values)-->
+    <fieldType name="strip_leading_zeroes_mult" class="solr.TextField"
+               positionIncrementGap="1">
+      <analyzer>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                    pattern="(^[0]+)" replacement=""/>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory" />
+      </analyzer>
+    </fieldType>
+
+    <!-- Can insert dashes, spaces, etc. in the wrong place and still match. -->
+    <fieldType name="strip_spaces_and_separators" class="solr.TextField" positionIncrementGap="100"
+      autoGeneratePhraseQueries="true">
+      <analyzer>
+        <tokenizer class="solr.KeywordTokenizerFactory"/>
+        <!-- might consider making more of these = 1 -->
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0"
+          catenateWords="0" catenateNumbers="0" catenateAll="1"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+
+   <!--
+      Example of using PathHierarchyTokenizerFactory at index time, so
+      queries for paths match documents at that path, or in descendent paths
+    -->
+
+    <fieldType name="descendent_path" class="solr.TextField">
+      <analyzer type="index">
+        <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" />
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+      </analyzer>
+    </fieldType>
+
+
+    <!--
+      Example of using PathHierarchyTokenizerFactory at query time, so
+      queries for paths match documents at that path, or in ancestor paths
+    -->
+    <fieldType name="ancestor_path" class="solr.TextField">
+      <analyzer type="index">
+        <tokenizer class="solr.KeywordTokenizerFactory" />
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" />
+      </analyzer>
+    </fieldType>
+
+
 </types>

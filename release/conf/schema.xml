@@ -1,95 +1,78 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="release" version="1.2">
-  &fieldtypes;
-  <fields>
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="reid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="false"/>
 
-    <field name="release" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="name" type="lowercasestring" indexed="true" stored="false"
-           multiValued="true" required="false"/>
-    <field name="arid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+<schema name="release" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <!-- release event
-         in reality, a release may have multiple release events, but the
-         current search server only supports 1
-    -->
-    <field name="country" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="date" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <!--Searchable Fields
+  arid, artist, artistname, TODO (sir) SCHEMA asin, barcode, catno, comment, country,
+  creditname, date, discids, TODO (sir) discidsmedium, format, laid, label, lang,
+  mediums, primarytype, TODO (sir) SCHEMA quality, reid, release,
+  releaseaccent, rgid, script, secondarytype, status, tag, tracks,
+  tracksmedium, TODO (sir) SCHEMA type
+  -->
 
-    <field name="comment" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <!-- works use 'language' here -->
-    <field name="lang" type="string" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="script" type="string" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
 
-    <field name="artist" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="artistname" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="true"/>
-    <field name="asin" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <!-- a barcode is an integer, but it doesn't really make sense to store it
-         as one because range queries etc. don't really make sense -->
-    <field name="barcode" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="catno" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="creditname" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="discids" type="int" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="format" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="laid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="label" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false" />
-    <field name="mediums" type="int" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="quality" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="rgid" type="mbid" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="status" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="tracks" type="int" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="tracksmedium" type="int" indexed="true" stored="true"
-           multiValued="true"/>
+  <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true" />
+  <field name="artist" type="text_mult" indexed="true" stored="false"
+         multiValued="true" required="true"/>
+  <field name="artistname" type="text_mult" indexed="true" stored="false"
+         multiValued="true" required="true"/>
+  <field name="asin" type="lowercase" indexed="true" stored="false" multiValued="true"/>
+  <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="false"/>
+  <field name="catno" type="strip_spaces_and_separators" indexed="true" stored="false"
+         multiValued="true"/>
+  <field name="comment" type="text" indexed="true" stored="false"/>
+  <field name="country" type="lowercase" indexed="true" stored="false" multiValued="true" />
+  <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="date" type="date" indexed="true" stored="false" multiValued="true" />
+  <field name="discids" type="int" indexed="true" stored="false"/>
+  <field name="discidsmedium" type="int" indexed="true" stored="false"/>
+  <field name="format" type="lowercase" indexed="true" stored="false" multiValued="true"/>
+  <field name="laid" type="mbid" indexed="true" stored="false" multiValued="true"/>
+  <field name="label" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="lang" type="lowercase" indexed="true" stored="false"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <field name="mediums" type="int" indexed="true" stored="false"/>
+  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
+       "release" and "releaseaccent"-->
+  <field name="name" type="string" indexed="false" stored="true" multiValued="true" />
+  <field name="primarytype" type="lowercase" indexed="true" stored="false"/>
+  <field name="quality" type="lowercase" indexed="true" stored="false"/>
+  <field name="reid" type="mbid" indexed="true" stored="true"/>
+  <field name="release" type="title" indexed="true" stored="true" required="true"/>
+  <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false"/>
+  <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true"/>
+  <field name="script" type="lowercase" indexed="true" stored="false"/>
+  <field name="secondarytype" type="lowercase" indexed="true" stored="false" multiValued="true"/>
+  <field name="status" type="lowercase" indexed="true" stored="false"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="tracks" type="int" indexed="true" stored="false"/>
+  <field name="tracksmedium" type="int" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false" multiValued="true"/>
 
-    <field name="primarytype" type="lowercasestring" indexed="true"
-           stored="true" multiValued="false" required="false"/>
-    <field name="secondarytype" type="lowercasestring" indexed="true"
-           stored="true" multiValued="true" required="false"/>
-    <field name="type" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <!-- Holds data for reponse writer -->
+  <field name="_store" type="storefield" indexed="false" stored="true"/>
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+       or Solr won't start. _version_ and update log are required for SolrCloud. -->
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
 
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
-  <copyField source="release" dest="name" />
+  <copyField source="name" dest="release" />
+  <copyField source="name" dest="releaseaccent" />
   <copyField source="mbid" dest="reid" />
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
+
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>release</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>
+<!--
+AMAZON_ID		    ("asin",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+NUM_DISCIDS_MEDIUM  ("discidsmedium",   MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
+QUALITY             ("quality",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+TYPE		        ("type",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
+-->

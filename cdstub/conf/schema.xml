@@ -1,37 +1,34 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="cdstub" version="1.2">
-  &fieldtypes;
-  <fields>
+
+<schema name="cdstub" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+
+  <!--Searchable Fields
+  artist, title, barcode, comment, tracks, discid
+  -->
+
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
     <!-- id needs to be indexed because it's the unique key -->
-    <field name="id" type="int" indexed="true" stored="true"
-           multiValued="false" required="true"/>
 
-    <field name="artist" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="barcode" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="comment" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="false"/>
-    <field name="discid" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="title" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="tracks" type="int" indexed="true" stored="true"
-           multiValued="false" required="false"/>
+    <field name="added" type="date" indexed="true" stored="true"/>
+    <field name="artist" type="text" indexed="true" stored="true"/>
+    <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="true" omitNorms="true"/>
+    <field name="comment" type="text" indexed="true" stored="true"/>
+    <field name="discid" type="string" indexed="true" stored="true" required="true"/>
+    <field name="id" type="int" indexed="true" stored="true" required="true"/>
+    <field name="title" type="title" indexed="true" stored="true" required="true"/>
+    <field name="tracks" type="int" indexed="true" stored="true"/>
 
-    <field name="tag" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
+    <!-- Holds data for reponse writer -->
+    <field name="_store" type="storefield" indexed="false" stored="true"/>
+
+    <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+       or Solr won't start. _version_ and update log are required for SolrCloud. -->
     <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>
   <!-- field for the QueryParser to use when an explicit fieldname is absent -->
   <defaultSearchField>title</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>
