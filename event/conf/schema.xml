@@ -10,10 +10,10 @@
   <xi:include href="common/fieldtypes.xml" />
 
   <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
-  <field name="aid" type="mbid" indexed="true" stored="false"/>
+  <field name="aid" type="mbid" indexed="true" stored="false" multiValued="true"/>
   <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true"/>
-  <field name="arid" type="mbid" indexed="true" stored="false"/>
-  <field name="artist" type="text" indexed="true" stored="false"/>
+  <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true"/>
+  <field name="artist" type="text" indexed="true" stored="false" multiValued="true"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="end" type="date" indexed="true" stored="false"/>
@@ -22,8 +22,8 @@
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
-  <field name="pid" type="mbid" indexed="true" stored="false"/>
-  <field name="place" type="text" indexed="true" stored="false"/>
+  <field name="pid" type="mbid" indexed="true" stored="false" multiValued="true"/>
+  <field name="place" type="text" indexed="true" stored="false" multiValued="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
