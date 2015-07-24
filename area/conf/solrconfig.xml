@@ -20,6 +20,15 @@
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
   <xi:include href="common/requestHandler-select.xml" />
+  <!--requestHandler name="/select" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <int name="rows">10</int>
+    </lst>
+    <lst name="append">
+      <str name="bq">type:country^2</str>
+    </lst>
+  </requestHandler-->
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />
@@ -39,4 +48,3 @@
 
 
 </config>
-
