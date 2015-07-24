@@ -6,7 +6,7 @@
   arid, artist, artistname, creditname, comment, country, date, dur, format,
   isrc, number, position, primarytype, qdur, recording,
   recordingaccent, reid, release, rgid, rid, secondarytype, status, tid,
-  tnum, tracks, tracksrelease, tag, TODO SCHEMA type, video
+  tnum, tracks, tracksrelease, tag, type, video
   -->
 
   <!-- link to fieldType definitions for all cores-->
@@ -28,7 +28,7 @@
          omitNorms="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="number" type="int" indexed="true" stored="false" multiValued="true" />
+  <field name="number" type="string" indexed="true" stored="false" multiValued="true" />
   <field name="name" type="string" indexed="true" stored="true" required="true"/>
   <field name="position" type="int" indexed="true" stored="false" multiValued="true"/>
   <field name="primarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
