@@ -49,6 +49,7 @@
   <copyField source="mbid" dest="arid" />
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
+  <copyField source="sortname" dest="names" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>

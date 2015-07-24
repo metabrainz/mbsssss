@@ -3,11 +3,10 @@
 <schema name="release" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
   <!--Searchable Fields
-  arid, artist, artistname, TODO (sir) SCHEMA asin, barcode, catno, comment, country,
+  arid, artist, artistname, asin, barcode, catno, comment, country,
   creditname, date, discids, TODO (sir) discidsmedium, format, laid, label, lang,
-  mediums, primarytype, TODO (sir) SCHEMA quality, reid, release,
-  releaseaccent, rgid, script, secondarytype, status, tag, tracks,
-  tracksmedium, TODO (sir) SCHEMA type
+  mediums, primarytype, quality, reid, release, releaseaccent, rgid, script, secondarytype,
+  status, tag, tracks, tracksmedium, type
   -->
 
   <!-- link to fieldType definitions for all cores-->
@@ -62,6 +61,8 @@
   <copyField source="name" dest="release" />
   <copyField source="name" dest="releaseaccent" />
   <copyField source="mbid" dest="reid" />
+  <copyField source="primarytype" dest="type" />
+  <copyField source="secondarytype" dest="type" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>

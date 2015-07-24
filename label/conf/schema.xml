@@ -29,7 +29,7 @@
        "label" and "labelaccent"-->
   <field name="name" type="string" indexed="true" stored="true"/>
   <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <field name="sortname" type="text" indexed="true" stored="false" />
+  <field name="sortname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
 
@@ -44,6 +44,7 @@
   <copyField source="mbid" dest="laid" />
   <copyField source="label" dest="names" />
   <copyField source="alias" dest="names" />
+  <copyField source="sortname" dest="names" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
