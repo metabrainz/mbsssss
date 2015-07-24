@@ -6,7 +6,7 @@
   arid, artist, artistname, asin, barcode, catno, comment, country,
   creditname, date, discids, TODO (sir) discidsmedium, format, laid, label, lang,
   mediums, primarytype, quality, reid, release, releaseaccent, rgid, script, secondarytype,
-  status, tag, tracks, tracksmedium, TODO (sir) SCHEMA type
+  status, tag, tracks, tracksmedium, type
   -->
 
   <!-- link to fieldType definitions for all cores-->
