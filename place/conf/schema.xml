@@ -35,6 +35,8 @@
   <copyField source="mbid" dest="pid"/>
   <copyField source="place" dest="names"/>
   <copyField source="alias" dest="names"/>
+  <copyField source="address" dest="names"/>
+  <copyField source="area" dest="names"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
