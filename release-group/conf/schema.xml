@@ -42,6 +42,8 @@
   <copyField source="mbid" dest="rgid"/>
   <copyField source="name" dest="releasegroup"/>
   <copyField source="name" dest="releasegroupaccent"/>
+  <copyField source="primarytype" dest="type" />
+  <copyField source="secondarytype" dest="type" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
