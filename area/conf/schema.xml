@@ -24,7 +24,7 @@
   <field name="iso3" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true"/>
-  <field name="names" type="string_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- The sort name should be in the appropriate form for the alias locale since different
     languages sort names differently.  Thus sortname is multiValued. -->
   <field name="sortname" type="text" indexed="true" stored="false" multiValued="true"/>
