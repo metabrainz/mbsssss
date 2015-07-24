@@ -14,7 +14,7 @@
   <field name="description" type="text" indexed="true" stored="false"/>
   <field name="iid" type="mbid" indexed="true" stored="false"/>
   <field name="instrument" type="text" indexed="true" stored="true"/>
-  <field name="keywords" type="string_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="keywords" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
