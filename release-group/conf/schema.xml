@@ -5,7 +5,7 @@
   <!--Searchable Fields
   arid, artist, artistname, comment, creditname, primarytype, rgid,
   releasegroup, releasegroupaccent, releases, release, reid, secondarytype,
-  status, tag, TODO SCHEMA type
+  status, tag, type
   -->
 
   <!-- link to fieldType definitions for all cores-->
