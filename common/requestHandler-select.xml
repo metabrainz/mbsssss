@@ -1,7 +1,10 @@
 <requestHandler name="/select" class="solr.SearchHandler" default="true" >
   <lst name="defaults">
+    <!-- changes made here may also need to be made in cores with custom requestHandlers -->
+    <!-- these are: area... -->
     <str name="echoParams">explicit</str>
     <int name="rows">10</int>
     <str name="fl">score</str>
+    <str name="defType">edismax</str>
   </lst>
 </requestHandler>
