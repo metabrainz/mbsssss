@@ -19,17 +19,16 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <xi:include href="common/requestHandler-select.xml" />
-  <!--requestHandler name="/select" class="solr.SearchHandler" >
+  <!--xi:include href="common/requestHandler-select.xml" /-->
+  <requestHandler name="/select" class="solr.SearchHandler" >
     <lst name="defaults">
       <str name="echoParams">explicit</str>
       <int name="rows">10</int>
       <str name="fl">score</str>
-    </lst>
-    <lst name="append">
+      <str name="defType">edismax</str>
       <str name="bq">type:country^2</str>
     </lst>
-  </requestHandler-->
+  </requestHandler>
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />
