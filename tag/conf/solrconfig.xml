@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
- This is a config file adapted from the example config files of the multicore example of the solr tarball and is not ready for prime-time use.
 
- The file `example/solr/collection1/conf/solrconfig.xml` has a way more
- complete explanation of everything that can be changed in this file - it is
- also >1800 lines long...
--->
 <config xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="common/luceneMatchVersion.xml" />
   <xi:include href="common/directoryFactory.xml" />
