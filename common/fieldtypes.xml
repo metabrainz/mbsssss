@@ -23,7 +23,7 @@ LowercaseFilter.java                  =>      ICUFoldingFilterFactory
                                               -The ICUFoldingFilterFactory combines the behavior of ASCIIFoldingFilter,
                                               LowerCaseFilter and ICUNormalizer2Filter all in an efficient single-pass
                                               through the string.
-                                              solr.ICUFOldingFilterFactory: wiki.apache.org/solr/AnalyzersTokenizersTokenFilters#solr.ICUFoldingFilterFactory
+                                              org.apache.lucene.analysis.icu.ICUFoldingFilterFactory: wiki.apache.org/solr/AnalyzersTokenizersTokenFilters#org.apache.lucene.analysis.icu.ICUFoldingFilterFactory
                                               Unicode Foldings: www.unicode.org/reports/tr30/tr30-4.html
                                               Unicode Normalization: www.unicode.org/reports/tr15/
                                               Need to check:
@@ -114,6 +114,32 @@ Instrument                            =>      Check
       </analyzer>
     </fieldType>
 
+    <fieldType name="text_mult_alias_similarity"
+               class="solr.TextField" positionIncrementGap="1">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+      </analyzer>
+      <similarity class="org.musicbrainz.search.analysis.AliasSimilarity"/>
+    </fieldType>
+
     <fieldType name="title" class="solr.TextField" positionIncrementGap="100">
       <analyzer>
         <charFilter class="solr.PatternReplaceCharFilterFactory"
@@ -165,6 +191,34 @@ Instrument                            =>      Check
         <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
         <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
+    </fieldType>
+
+    <fieldType name="title_mult_release_similarity" class="solr.TextField"
+               positionIncrementGap="1">
+      <analyzer>
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                    pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <!--filter class="solr.StopFilterFactory" ignoreCase="true" words="common/stopwords.txt" /-->
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+      </analyzer>
+      <similarity class="org.musicbrainz.search.analysis.ReleaseSimilarity"/>
     </fieldType>
 
 

@@ -10,7 +10,12 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
-  <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
+  <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
+    cores, and since all avaliable field types are linked to each core (for simplicity) we need to
+    enable per-field similarity in all cores -->
+  <similarity class="solr.SchemaSimilarityFactory"/>
+
+  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="true" multiValued="true"/>
   <field name="area" type="text_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
   <field name="code" type="strip_leading_zeroes_mult" indexed="true" stored="false"

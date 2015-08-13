@@ -9,6 +9,11 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
+  <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
+    cores, and since all avaliable field types are linked to each core (for simplicity) we need to
+    enable per-field similarity in all cores -->
+  <similarity class="solr.SchemaSimilarityFactory"/>
+
   <!-- id needs to be indexed because it's the unique key -->
   <field name="id" type="int" indexed="true" stored="true" required="true"/>
   <field name="tag" type="text" indexed="true" stored="true"/>

@@ -11,6 +11,11 @@
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
+  <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
+    cores, and since all avaliable field types are linked to each core (for simplicity) we need to
+    enable per-field similarity in all cores -->
+  <similarity class="solr.SchemaSimilarityFactory"/>
+
   <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true"/>
   <field name="artist" type="text_mult" indexed="true" stored="false"/>
   <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
@@ -22,7 +27,7 @@
   <field name="primarytype" type="lowercase" indexed="true" stored="true"/>
   <!-- releases in this release group -->
   <field name="reid" type="mbid" indexed="true" stored="true" multiValued="true"/>
-  <field name="release" type="title_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="release" type="title_mult_release_similarity" indexed="true" stored="true" multiValued="true"/>
   <field name="releasegroup" type="title" indexed="true" stored="true" required="true"/>
   <field name="releasegroupaccent" type="title_keep_accents" indexed="true" stored="false"/>
   <!-- some release groups don't contain releases -->
