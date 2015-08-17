@@ -19,7 +19,6 @@
       <str name="echoParams">explicit</str>
       <int name="rows">10</int>
       <str name="fl">score</str>
-      <str name="defType">edismax</str>
       <str name="bq">mbid:24f1766e-9635-4d58-a4d4-9413f9f98a4c^2</str> <!-- Bach -->
       <str name="bq">mbid:1f9df192-a621-4f54-8850-2c5373b7eac9^2</str> <!-- Beethoven -->
       <str name="bq">mbid:c70d12a2-24fe-4f83-a6e6-57d84f8efb51^2</str> <!-- Brahms -->

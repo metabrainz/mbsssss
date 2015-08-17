@@ -5,6 +5,5 @@
     <str name="echoParams">explicit</str>
     <int name="rows">10</int>
     <str name="fl">score</str>
-    <str name="defType">edismax</str>
   </lst>
 </requestHandler>
