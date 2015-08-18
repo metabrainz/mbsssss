@@ -24,7 +24,7 @@
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="name" type="string" indexed="false" stored="true"/>
-  <field name="names" type="string_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
   <field name="wid" type="mbid" indexed="true" stored="false"/>
