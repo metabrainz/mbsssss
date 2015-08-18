@@ -108,10 +108,10 @@
 # Certain Hebrew chars converted to western cases so matches both
 
 # u0f53 HEBREW PUNCTUATION GERESH
-"׳" => "'" 
+"׳" => "'"
 
 # u05be HEBREW PUNCTUATION MAQAF
-"\u05be" => "-" 
+"\u05be" => "-"
 
 # u05f4 HEBREW PUNCTUATION GERSHAYIM
-"״" => "\"" 
+"״" => "\""
