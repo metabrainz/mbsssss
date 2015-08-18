@@ -26,6 +26,7 @@
   <field name="event" type="text" indexed="true" stored="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <field name="name" type="string" indexed="true" stored="true"/>
   <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="pid" type="mbid" indexed="true" stored="false" multiValued="true"/>
   <field name="place" type="text" indexed="true" stored="false" multiValued="true"/>
@@ -42,8 +43,10 @@
 
 
   <copyField source="mbid" dest="eid" />
+  <copyField source="name" dest="event" />
   <copyField source="alias" dest="names" />
   <copyField source="artist" dest="names" />
+  <copyField source="name" dest="names" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
