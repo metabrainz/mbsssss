@@ -24,6 +24,8 @@
          multiValued="true" required="true"/>
   <field name="asin" type="lowercase" indexed="true" stored="false" multiValued="true"/>
   <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="false"/>
+  <!-- a "catch all" field used as the default search field -->
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="catno" type="strip_spaces_and_separators" indexed="true" stored="false"
          multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
@@ -68,12 +70,12 @@
   <copyField source="mbid" dest="reid" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
+  <copyField source="release" dest="catch" />
+
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
 
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>release</defaultSearchField>
 
 </schema>
 <!--

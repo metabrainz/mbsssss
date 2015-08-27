@@ -14,6 +14,7 @@
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
   <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/requestHandler-edismax.xml" />
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />
