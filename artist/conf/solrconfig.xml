@@ -33,7 +33,7 @@
       <str name="bq">mbid:eefd7c1e-abcf-4ccc-ba60-0fd435c9061f^2</str> <!-- Wagner -->
     </lst>
    </requestHandler>
-   <requestHandler name="/browse" class="solr.SearchHandler" >
+   <requestHandler name="/edismax" class="solr.SearchHandler" >
      <lst name="defaults">
        <str name="echoParams">explicit</str>
        <str name="fl">score</str>
