@@ -13,12 +13,11 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <!-- xi:include href="common/requestHandler-select.xml" / -->
   <requestHandler name="/select" class="solr.SearchHandler" >
     <lst name="defaults">
       <str name="echoParams">explicit</str>
-      <int name="rows">10</int>
       <str name="fl">score</str>
+      <str name="df">catch</str>
       <str name="bq">mbid:24f1766e-9635-4d58-a4d4-9413f9f98a4c^2</str> <!-- Bach -->
       <str name="bq">mbid:1f9df192-a621-4f54-8850-2c5373b7eac9^2</str> <!-- Beethoven -->
       <str name="bq">mbid:c70d12a2-24fe-4f83-a6e6-57d84f8efb51^2</str> <!-- Brahms -->
@@ -34,6 +33,28 @@
       <str name="bq">mbid:eefd7c1e-abcf-4ccc-ba60-0fd435c9061f^2</str> <!-- Wagner -->
     </lst>
    </requestHandler>
+   <requestHandler name="/browse" class="solr.SearchHandler" >
+     <lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="fl">score</str>
+       <str name="defType">edismax</str>
+       <str name="qf">
+         area alias artist^1.2 beginarea comment country ipi^2 isni^2 mbid^2 ngram sortname tag type
+       </str>
+       <!-- creates a minimum match threshold of 2 from the above fields; dropping this to 1 allows
+         a ridiculous amount of false matches from the ngram field (basically if an ngram is a
+         match, another field needs a match as well to be in the results); this doesn't seem to
+         affect exact matches in the ipi, isni or mbid fields (they are still matches even being
+         found in a single field)-->
+       <str name="mm">2</str>
+       <!-- boost searches containing phrase matches in these fields -->
+       <str name="pf">
+         artist^1.5 alias^1.5 sortname^1.2 comment^1.2
+       </str>
+       <!-- boosts results for artists with more releases -->
+       <str name="bf">product(releases,5)</str>
+      </lst>
+    </requestHandler>
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />
