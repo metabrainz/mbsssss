@@ -36,7 +36,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
     </fieldType>
 
@@ -62,7 +62,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
     </fieldType>
 
@@ -86,7 +86,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
       <similarity class="org.musicbrainz.search.analysis.AliasSimilarity"/>
     </fieldType>
@@ -112,7 +112,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
     </fieldType>
 
@@ -138,7 +138,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
     </fieldType>
 
@@ -164,7 +164,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
       </analyzer>
       <similarity class="org.musicbrainz.search.analysis.ReleaseSimilarity"/>
     </fieldType>
@@ -190,7 +190,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
     </fieldType>
 
@@ -215,7 +215,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
                 id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
         <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
                 id="Traditional-Simplified"/>
-                <filter class="solr.LowerCaseFilterFactory" />
+        <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
     </fieldType>
 
@@ -238,6 +238,50 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
       </analyzer>
     </fieldType>
 
+    <fieldType name="ngram"
+               class="solr.TextField" positionIncrementGap="100">
+      <analyzer type="query">
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+      </analyzer>
+      <analyzer type="index">
+        <charFilter class="solr.MappingCharFilterFactory"
+                    mapping="common/mapping-MBCharEquivToChar.txt"/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory"
+                    generateWordParts="1"
+                    generateNumberParts="0"
+                    catenateWords="0"
+                    catenateNumbers="6"
+                    catenateAll="0"
+                    splitOnCaseChange="0"
+                    preserveOriginal="0"
+                    splitOnNumerics="0"
+                    stemEnglishPossessive="0"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="[ー[:Script=Katakana:]]Katakana-Hiragana"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+                id="Traditional-Simplified"/>
+        <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory"/>
+        <filter class="solr.NGramFilterFactory" minGramSize="3" maxGramSize="10"/>
+      </analyzer>
+    </fieldType>
     <!-- for use with string fields where there can be multiple values -->
     <fieldtype name="string_mult" class="solr.StrField" sortMissingLast="false"
                positionIncrementGap="1"/>
@@ -269,10 +313,26 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
       autoGeneratePhraseQueries="true">
       <analyzer>
         <tokenizer class="solr.KeywordTokenizerFactory"/>
-        <!-- might consider making more of these = 1 -->
         <filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0"
           catenateWords="0" catenateNumbers="0" catenateAll="1"/>
         <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <!-- Strips leading zeroes from a string (multiple values); also insert dashes, spaces, etc. in
+      the wrong place and still match -->
+    <!-- USED FOR: Artist.(isni|ipi) -->
+    <fieldType name="strip_leading_zeroes_concat_mult" class="solr.TextField"
+               positionIncrementGap="1">
+      <analyzer>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                    pattern="([\s]+)" replacement=""/>
+        <charFilter class="solr.PatternReplaceCharFilterFactory"
+                    pattern="(^[0]+)" replacement=""/>
+        <tokenizer class="solr.ClassicTokenizerFactory"/>
+        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="0" generateNumberParts="0"
+          catenateWords="0" catenateNumbers="0" catenateAll="1"/>
+        <filter class="solr.LowerCaseFilterFactory" />
       </analyzer>
     </fieldType>
 
