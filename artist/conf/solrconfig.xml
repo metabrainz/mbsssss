@@ -52,7 +52,11 @@
          artist^1.5 alias^1.5 sortname^1.2 comment^1.2
        </str>
        <!-- boosts results for artists with more releases -->
-       <str name="bf">product(releases,5)</str>
+       <str name="bf">sqrt(releases)</str>
+       <!-- Various Artitsts, [language instruction] and [unknown] get a negative boost -->
+       <str name="bq">mbid:89ad4ac3-39f7-470e-963a-56509c546377^-2.5</str>
+       <str name="bq">mbid:125ec42a-7229-4250-afc5-e057484327fe^-2.5</str>
+       <str name="bq">mbid:80a8851f-444c-4539-892b-ad2a49292aa9^-2.5</str>
       </lst>
     </requestHandler>
   <xi:include href="common/requestHandler-get.xml" />
