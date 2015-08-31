@@ -51,7 +51,6 @@
   <copyField source="artist" dest="catch" />
   <copyField source="sortname" dest="catch" />
   <copyField source="artist" dest="ngram" />
-  <copyField source="alias" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
