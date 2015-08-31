@@ -32,7 +32,7 @@
     multiValued="true"/>
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
-  <field name="releases" type="int" indexed="true" stored="false"/>
+  <field name="ref_count" type="int" indexed="true" stored="false"/>
   <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
