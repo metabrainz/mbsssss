@@ -34,29 +34,25 @@
     </lst>
    </requestHandler>
    <requestHandler name="/edismax" class="solr.SearchHandler" >
-     <lst name="defaults">
-       <str name="echoParams">explicit</str>
-       <str name="fl">score</str>
-       <str name="defType">edismax</str>
-       <str name="qf">
-         area alias artist^1.5 beginarea comment country ipi^2 isni^2 mbid^2 ngram sortname tag type
-       </str>
-       <!-- creates a minimum match threshold of 2 from the above fields; dropping this to 1 allows
-         a ridiculous amount of false matches from the ngram field (basically if an ngram is a
-         match, another field needs a match as well to be in the results); this doesn't seem to
-         affect exact matches in the ipi, isni or mbid fields (they are still matches even being
-         found in a single field)-->
-       <str name="mm">2</str>
-       <!-- boost searches containing phrase matches in these fields -->
-       <str name="pf">
-         artist^1.5 alias sortname^1.2 comment^1.2
-       </str>
-       <!-- boosts results for artists with more releases -->
-       <str name="bf">pow(ref_count,0.66)</str>
-       <!-- Various Artitsts, [language instruction] and [unknown] get a negative boost -->
-       <str name="bq">mbid:89ad4ac3-39f7-470e-963a-56509c546377^-100</str>
-       <str name="bq">mbid:125ec42a-7229-4250-afc5-e057484327fe^-100</str>
-       <str name="bq">mbid:80a8851f-444c-4539-892b-ad2a49292aa9^-100</str>
+      <lst name="defaults">
+        <str name="echoParams">explicit</str>
+        <str name="fl">score</str>
+        <str name="defType">edismax</str>
+        <str name="qf">
+          area alias artist^1.5 beginarea comment country ipi^2 isni^2 mbid^2 ngram sortname tag type
+        </str>
+        <!-- creates a minimum match threshold of 2 from the above fields; dropping this to 1 allows
+          a ridiculous amount of false matches from the ngram field (basically if an ngram is a
+          match, another field needs a match as well to be in the results); this doesn't seem to
+          affect exact matches in the ipi, isni or mbid fields (they are still matches even being
+          found in a single field)-->
+        <str name="mm">2</str>
+        <!-- boost searches containing phrase matches in these fields -->
+        <str name="pf">
+          artist^1.5 alias sortname^1.2 comment^1.2
+        </str>
+        <!-- boosts results for artists with more releases -->
+        <str name="bf">pow(ref_count,0.66)</str>
       </lst>
     </requestHandler>
   <xi:include href="common/requestHandler-get.xml" />
