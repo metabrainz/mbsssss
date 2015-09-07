@@ -2,10 +2,6 @@
 
 <schema name="work" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!--Searchable Fields
-  alias, arid, artist, comment, iswc, language, tag, type, wid, work, workaccent
-  -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -17,6 +13,9 @@
   <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="arid" type="mbid" indexed="true" stored="true" multiValued="true"/>
   <field name="artist" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <!-- catch is a catch-all field used as the default search field used when no field is specified
+    in the "Indexed search with advanced query syntax" search field. -->
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="true" />
   <field name="iswc" type="lowercase_mult" indexed="true" stored="true" multiValued="true"
          omitNorms="true"/>
@@ -24,7 +23,7 @@
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="name" type="string" indexed="false" stored="true"/>
-  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
   <field name="wid" type="mbid" indexed="true" stored="false"/>
@@ -37,14 +36,13 @@
 
   <copyField source="name" dest="work"/>
   <copyField source="name" dest="workaccent"/>
-  <copyField source="alias" dest="names"/>
-  <copyField source="work" dest="names"/>
+  <copyField source="alias" dest="catch"/>
+  <copyField source="work" dest="catch"/>
   <copyField source="mbid" dest="wid"/>
+  <copyField source="alias" dest="ngram"/>
+  <copyField source="work" dest="ngram"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>names</defaultSearchField>
 
 </schema>
