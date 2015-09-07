@@ -14,7 +14,33 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <xi:include href="common/requestHandler-select.xml" />
+  <requestHandler name="/select" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <str name="fl">score</str>
+      <str name="df">catch</str>
+    </lst>
+   </requestHandler>
+   <requestHandler name="/edismax" class="solr.SearchHandler" >
+     <lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="fl">score</str>
+       <str name="defType">edismax</str>
+       <str name="qf">
+         text type name entity
+       </str>
+       <!-- creates a minimum match threshold of 2 from the above fields; dropping this to 1 allows
+         a ridiculous amount of false matches from the ngram field (basically if an ngram is a
+         match, another field needs a match as well to be in the results); this doesn't seem to
+         affect exact matches in the ipi, isni or mbid fields (they are still matches even being
+         found in a single field)-->
+       <str name="mm">2</str>
+       <!-- boost searches containing phrase matches in these fields -->
+       <str name="pf">
+          text name
+       </str>
+      </lst>
+    </requestHandler>
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />
