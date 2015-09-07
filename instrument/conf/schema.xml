@@ -2,10 +2,6 @@
 
 <schema name="instrument" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!--Searchable Fields
-  alias, comment, description, iid, instrument, tag, type
-  -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -15,13 +11,16 @@
   <similarity class="solr.SchemaSimilarityFactory"/>
 
   <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true"/>
+  <!-- catch is a catch-all field used as the default search field used when no field is specified
+    in the "Indexed search with advanced query syntax" search field. -->
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="description" type="text" indexed="true" stored="false"/>
   <field name="iid" type="mbid" indexed="true" stored="false"/>
   <field name="instrument" type="text" indexed="true" stored="true"/>
-  <field name="keywords" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
 
@@ -35,15 +34,14 @@
   <field name="_version_" type="long" indexed="true" stored="true"/>
 
 
-  <copyField source="instrument" dest="keywords"/>
-  <copyField source="alias" dest="keywords"/>
-  <copyField source="description" dest="keywords"/>
+  <copyField source="instrument" dest="catch"/>
+  <copyField source="alias" dest="catch"/>
+  <copyField source="description" dest="catch"/>
   <copyField source="mbid" dest="iid" />
+  <copyField source="instrument" dest="ngram"/>
+  <copyField source="alias" dest="ngram"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>keywords</defaultSearchField>
 
 </schema>
