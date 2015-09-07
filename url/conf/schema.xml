@@ -14,6 +14,9 @@
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory"/>
 
+  <!-- catch is a catch-all field used as the default search field used when no field is specified
+    in the "Indexed search with advanced query syntax" search field. -->
+  <field name="catch" type="string_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="relationtype" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
@@ -21,7 +24,6 @@
   <field name="targettype" type="lowercase" indexed="true" stored="true"/>
   <field name="uid" type="mbid" indexed="true" stored="false"/>
   <field name="url" type="string" indexed="true" stored="true"/>
-  <field name="urls" type="string_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- queries for paths match documents at that path, or in ancestor paths -->
   <field name="url_ancestor" type="ancestor_path" indexed="true" stored="false"/>
   <!-- queries for paths match documents at that path, or in descendent paths -->
@@ -39,14 +41,11 @@
   <copyField source="mbid" dest="uid"/>
   <copyField source="url" dest="url_ancestor"/>
   <copyField source="url" dest="url_descendent"/>
-  <copyField source="url" dest="urls"/>
-  <copyField source="url_ancestor" dest="urls"/>
-  <copyField source="url_descendent" dest="urls"/>
+  <copyField source="url" dest="catch"/>
+  <copyField source="url_ancestor" dest="catch"/>
+  <copyField source="url_descendent" dest="catch"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>urls</defaultSearchField>
 
 </schema>
