@@ -10,7 +10,7 @@
   <xi:include href="common/fieldtypes.xml" />
 
   <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
-    cores, and since all avaliable field types are linked to each core (for simplicity) we need to 
+    cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory"/>
 
@@ -21,6 +21,7 @@
     <field name="discid" type="string" indexed="true" stored="true" required="true"/>
     <!-- id needs to be indexed because it's the unique key -->
     <field name="id" type="int" indexed="true" stored="true" required="true"/>
+    <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
     <field name="title" type="title" indexed="true" stored="true" required="true"/>
     <field name="tracks" type="int" indexed="true" stored="true"/>
 
@@ -31,9 +32,10 @@
        or Solr won't start. _version_ and update log are required for SolrCloud. -->
     <field name="_version_" type="long" indexed="true" stored="true"/>
 
+    <copyField source="title" dest="ngram"/>
+    <copyField source="artist" dest="ngram"/>
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>title</defaultSearchField>
 
 </schema>
