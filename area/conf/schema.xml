@@ -2,10 +2,6 @@
 
 <schema name="area" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!--Searchable Fields
-  aid, alias, area, begin, comment, end, ended, iso, iso1, iso2, iso3, type
-  -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -18,6 +14,9 @@
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="area" type="text" indexed="true" stored="true" required="true"/>
   <field name="begin" type="date" indexed="true" stored="false"/>
+  <!-- catch is a catch-all field used as the default search field used when no field is specified
+    in the "Indexed search with advanced query syntax" search field. -->
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="end" type="date" indexed="true" stored="false"/>
   <field name="ended" type="bool" indexed="true" stored="false"/>
@@ -29,7 +28,7 @@
   <field name="iso3" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true"/>
-  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <!-- The sort name should be in the appropriate form for the alias locale since different
     languages sort names differently.  Thus sortname is multiValued. -->
   <field name="sortname" type="text" indexed="true" stored="false" multiValued="true"/>
@@ -47,12 +46,13 @@
   <copyField source="iso1" dest="iso"/>
   <copyField source="iso2" dest="iso"/>
   <copyField source="iso3" dest="iso"/>
-  <copyField source="area" dest="names"/>
-  <copyField source="alias" dest="names"/>
+  <copyField source="area" dest="catch"/>
+  <copyField source="alias" dest="catch"/>
+  <copyField source="sortname" dest="catch"/>
+  <copyField source="area" dest="ngram"/>
+  <copyField source="sortname" dest="ngram"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-    <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>names</defaultSearchField>
 
 </schema>
