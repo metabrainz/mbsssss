@@ -2,13 +2,6 @@
 
 <schema name="release" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!--Searchable Fields
-  arid, artist, artistname, asin, barcode, catno, comment, country,
-  creditname, date, discids, TODO (sir) discidsmedium, format, laid, label, lang,
-  mediums, primarytype, quality, reid, release, releaseaccent, rgid, script, secondarytype,
-  status, tag, tracks, tracksmedium, type
-  -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -44,6 +37,7 @@
   <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
        "release" and "releaseaccent"-->
   <field name="name" type="string" indexed="false" stored="true" multiValued="true" />
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <field name="primarytype" type="lowercase" indexed="true" stored="false"/>
   <field name="quality" type="lowercase" indexed="true" stored="false"/>
   <field name="reid" type="mbid" indexed="true" stored="true"/>
@@ -71,16 +65,9 @@
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
   <copyField source="release" dest="catch" />
-
+  <copyField source="release" dest="ngram" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
 
-
 </schema>
-<!--
-AMAZON_ID		    ("asin",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-NUM_DISCIDS_MEDIUM  ("discidsmedium",   MusicBrainzFieldTypes.TEXT_NOT_STORED_NOT_ANALYZED_NO_NORMS, new KeywordAnalyzer()),
-QUALITY             ("quality",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
-TYPE		        ("type",		    MusicBrainzFieldTypes.TEXT_NOT_STORED_ANALYZED_NO_NORMS, new CaseInsensitiveKeywordAnalyzer()),
--->
