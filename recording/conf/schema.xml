@@ -2,13 +2,6 @@
 
 <schema name="recording" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!--Searchable Fields
-  arid, artist, artistname, creditname, comment, country, date, dur, format,
-  isrc, number, position, primarytype, qdur, recording,
-  recordingaccent, reid, release, rgid, rid, secondarytype, status, tid,
-  tnum, tracks, tracksrelease, tag, type, video
-  -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -35,6 +28,7 @@
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="number" type="string" indexed="true" stored="false" multiValued="true" />
   <field name="name" type="string" indexed="true" stored="true" required="true"/>
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <field name="position" type="int" indexed="true" stored="false" multiValued="true"/>
   <field name="primarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
   <field name="qdur" type="long" indexed="true" stored="false" />
@@ -67,11 +61,9 @@
   <copyField source="secondarytype" dest="type" />
   <copyField source="name" dest="recording" />
   <copyField source="name" dest="recordingaccent" />
+  <copyField source="name" dest="ngram" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-
-    <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>recording</defaultSearchField>
 
 </schema>
