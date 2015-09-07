@@ -2,10 +2,6 @@
 
 <schema name="annotation" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <!--Searchable Fields
-        text, type, name, entity
-    -->
-
     <!-- link to fieldType definitions for all cores-->
     <xi:include href="common/fieldtypes.xml" />
     <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
@@ -20,6 +16,14 @@
     <field name="text" type="text" indexed="true" stored="true"/>
     <field name="type" type="string" indexed="true" stored="true"/>
 
+    <!-- catch is a catch-all field used as the default search field used when no field is specified
+      in the "Indexed search with advanced query syntax" search field. -->
+    <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
+
+    <copyField source="text" dest="catch"/>
+    <copyField source="name" dest="catch"/>
+    <copyField source="type" dest="catch"/>
+
     <!-- Holds data for reponse writer -->
     <field name="_store" type="storefield" indexed="false" stored="true"/>
 
@@ -31,6 +35,5 @@
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>text</defaultSearchField>
+
 </schema>
