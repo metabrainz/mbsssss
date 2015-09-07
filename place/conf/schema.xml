@@ -2,10 +2,6 @@
 
 <schema name="place" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!--Searchable Fields
-  pid, address, alias, area, begin, comment, end, ended, lat, long, place, type
-  -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
@@ -18,6 +14,9 @@
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="area" type="text" indexed="true" stored="false" multiValued="true" />
   <field name="begin" type="date" indexed="true" stored="true"/>
+  <!-- catch is a catch-all field used as the default search field used when no field is specified
+    in the "Indexed search with advanced query syntax" search field. -->
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="end" type="date" indexed="true" stored="true"/>
   <field name="ended" type="bool" indexed="true" stored="false"/>
@@ -25,7 +24,7 @@
   <field name="long" type="float" indexed="true" stored="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="names" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <field name="place" type="text" indexed="true" stored="true" required="true"/>
   <field name="pid" type="mbid" indexed="true" stored="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
@@ -38,14 +37,14 @@
   <field name="_version_" type="long" indexed="true" stored="true"/>
 
   <copyField source="mbid" dest="pid"/>
-  <copyField source="place" dest="names"/>
-  <copyField source="alias" dest="names"/>
-  <copyField source="address" dest="names"/>
-  <copyField source="area" dest="names"/>
+  <copyField source="place" dest="catch"/>
+  <copyField source="alias" dest="catch"/>
+  <copyField source="address" dest="catch"/>
+  <copyField source="area" dest="catch"/>
+  <copyField source="place" dest="ngram"/>
+  <copyField source="alias" dest="ngram"/>
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>names</defaultSearchField>
 
 </schema>
