@@ -25,7 +25,7 @@
   <field name="end" type="date" indexed="true" stored="false"/>
   <field name="endarea" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="ended" type="bool" indexed="true" stored="false"/>
-  <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="gender" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
   <field name="ipi" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false"
     multiValued="true"/>
   <field name="isni" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false"
