@@ -13,7 +13,28 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <xi:include href="common/requestHandler-select.xml" />
+  <requestHandler name="/select" class="solr.SearchHandler" >
+    <lst name="defaults">
+      <str name="echoParams">explicit</str>
+      <str name="fl">score</str>
+      <str name="df">catch</str>
+    </lst>
+   </requestHandler>
+   <requestHandler name="/edismax" class="solr.SearchHandler" >
+     <lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="fl">score</str>
+       <str name="defType">edismax</str>
+       <str name="qf">
+         arid artistname asin barcode catno comment country creditname format laid label lang
+         ngram primarytype reid release releaseaccent rgid secondarytype tag type
+       </str>
+       <!-- boost searches containing phrase matches in these fields -->
+       <str name="pf">
+         artistname comment creditname label release tag type
+       </str>
+      </lst>
+    </requestHandler>
   <xi:include href="common/requestHandler-edismax.xml" />
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
