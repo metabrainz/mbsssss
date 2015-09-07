@@ -2,10 +2,6 @@
 
 <schema name="cdstub" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-  <!--Searchable Fields
-  artist, title, barcode, comment, tracks, discid
-  -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
 
