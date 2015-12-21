@@ -17,18 +17,6 @@ to install
 and place the resulting file called solrwriter-0.0.1-SNAPSHOT-jar-with-dependencies.jar into the `mbsssss/lib` folder, which is configured as the Solr server's **sharedLib**
 folder.
 
-## Adding the AliasSimilarity and ReleaseSimilarity Classes
-
-If for some reason you're not already there, you will need to navigate to the `mbsssss/lib` folder in a terminal and build another JAR
-file:
-
-    mvn package
-
-This will create a file called
-**mb-similarities-0.0.1-SNAPSHOT.jar** in the `mbsssss/lib/target` folder.
-
-Place this file into the `mbsssss/lib` directory as well.
-
 ## Running a Solr server with these cores
 
 If you haven't already, download Solr from its
