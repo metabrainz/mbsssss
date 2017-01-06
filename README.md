@@ -9,15 +9,17 @@ Note that this repository uses the
 [core discovery](https://cwiki.apache.org/confluence/display/solr/Solr+Cores+and+solr.xml)
 mechanism of Solr 5. It will not work with all versions of Solr 4.
 
-## Running a Solr server with these cores
+## Adding the MusicBrainz Query Response Writer 
 
 To run a Solr server with the cores definied in this repository, you first need
 to install
-[the MusicBrainz QueryResponseWriter](https://github.com/mineo/mb-solrquerywriter)
-into the `lib` folder, which is configured as the Solr servers **sharedLib**
+[the MusicBrainz QueryResponseWriter](https://github.com/jeffweeksio/mb-solrquerywriter)
+and place the resulting file called solrwriter-0.0.1-SNAPSHOT-jar-with-dependencies.jar into the `mbsssss/lib` folder, which is configured as the Solr server's **sharedLib**
 folder.
 
-Then download Solr from its
+## Running a Solr server with these cores
+
+If you haven't already, download Solr from its
 [website](https://lucene.apache.org/solr/mirrors-solr-latest-redir.html) and
 extract the archive.
 

@@ -1,61 +1,58 @@
 <?xml version="1.0"?>
-<!DOCTYPE doc [
-<!ENTITY fieldtypes SYSTEM "fieldtypes.xml">
-]>
-<schema name="label" version="1.2">
-  &fieldtypes;
-  <fields>
-    <!-- mbid needs to be indexed because it's the unique key -->
-    <field name="mbid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="laid" type="mbid" indexed="true" stored="true"
-           multiValued="false" required="true"/>
 
-    <!-- search on all names, but provide the primary name and aliases separately in the response -->
-    <field name="label" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false" required="true"/>
-    <field name="names" type="lowercasestring" indexed="true" stored="false"
-           multiValued="true" required="false"/>
-    <field name="alias" type="lowercasestring" indexed="true" stored="true"
-           multiValued="true"/>
+<schema name="label" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
 
-    <field name="area" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="country" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
 
-    <!-- dates -->
-    <field name="begin" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="end" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
-    <!-- `true` or `false` -->
-    <field name="ended" type="lowercasestring" indexed="true" stored="true"
-           multiValued="false"/>
+  <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
+    cores, and since all avaliable field types are linked to each core (for simplicity) we need to
+    enable per-field similarity in all cores -->
+  <similarity class="solr.SchemaSimilarityFactory"/>
 
-    <field name="comment" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="code" type="string" indexed="true" stored="true"
-           multiValued="true" required="false"/>
-    <field name="ipi" type="string" indexed="true" stored="true"
-           multiValued="true"/>
-    <field name="tag" type="string" indexed="true" stored="true"
-           multiValued="true"/>
+  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="true" multiValued="true"/>
+  <field name="area" type="text_mult" indexed="true" stored="true" multiValued="true"/>
+  <field name="begin" type="date" indexed="true" stored="false"/>
+  <!-- catch is a catch-all field used as the default search field used when no field is specified
+    in the "Indexed search with advanced query syntax" search field. -->
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="code" type="strip_leading_zeroes_mult" indexed="true" stored="false"
+         multiValued="true" />
+  <field name="comment" type="text" indexed="true" stored="false"/>
+  <field name="country" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="end" type="date" indexed="true" stored="false"/>
+  <field name="ended" type="bool" indexed="true" stored="true"/>
+  <field name="ipi" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="label" type="text" indexed="true" stored="true"/>
+  <field name="labelaccent" type="keep_accents" indexed="true" stored="false"/>
+  <field name="laid" type="mbid" indexed="true" stored="true" required="true"/>
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
+       "label" and "labelaccent"-->
+  <field name="name" type="string" indexed="true" stored="true"/>
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
+  <field name="sortname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
 
-    <field name="_store" type="storefield" indexed="false" stored="true"
-           multiValued="false" required="false"/>
+  <!-- Holds data for reponse writer -->
+  <field name="_store" type="storefield" indexed="false" stored="true"/>
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+     or Solr won't start. _version_ and update log are required for SolrCloud. -->
+  <field name="_version_" type="long" indexed="true" stored="true"/>
 
-    <field name="type" type="string" indexed="true" stored="true"
-           multiValued="false"/>
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-  </fields>
-  <copyField source="alias" dest="names" />
-  <copyField source="label" dest="names" />
+  <copyField source="name" dest="label" />
+  <copyField source="name" dest="labelaccent"/>
   <copyField source="mbid" dest="laid" />
+  <copyField source="label" dest="catch" />
+  <copyField source="alias" dest="catch" />
+  <copyField source="sortname" dest="catch" />
+  <copyField source="label" dest="ngram" />
+  <copyField source="sortname" dest="ngram" />
+
+
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>names</defaultSearchField>
-  <!-- SolrQueryParser configuration: defaultOperator="AND|OR" -->
-  <solrQueryParser defaultOperator="OR"/>
+
 </schema>

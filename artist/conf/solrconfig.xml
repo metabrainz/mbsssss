@@ -1,67 +1,69 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!--
- This is a config file adapted from the example config files of the multicore example of the solr tarball and is not ready for prime-time use.
 
- The file `example/solr/collection1/conf/solrconfig.xml` has a way more
- complete explanation of everything that can be changed in this file - it is
- also >1800 lines long...
--->
-<config>
-  <luceneMatchVersion>5.0</luceneMatchVersion>
-  <!-- we could use org.apache.solr.core.RAMDirectoryFactory to store the index in RAM -->
-  <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}"/>
-
-  <dataDir>${solr.artist.data.dir:}</dataDir>
-
-  <schemaFactory class="ClassicIndexSchemaFactory"/>
-
+<config xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="common/luceneMatchVersion.xml" />
+  <xi:include href="common/directoryFactory.xml" />
+  <xi:include href="common/dataDir.xml" />
+  <xi:include href="common/schemaFactory.xml" />
   <updateHandler class="solr.DirectUpdateHandler2">
     <updateLog>
       <str name="dir">${solr.artist.data.dir:}</str>
     </updateLog>
     <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
-    <autoCommit>
-        <maxTime>60000</maxTime>
-        <!-- maybe change this to false in production -->
-        <openSearcher>false</openSearcher>
-    </autoCommit>
-    <autoSoftCommit>
-        <maxTime>1000</maxTime>
-    </autoSoftCommit>
+    <xi:include href="common/autoCommit.xml" />
+    <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-
-  <!-- realtime get handler, guaranteed to return the latest stored fields
-    of any document, without the need to commit or open a new searcher. The current
-    implementation relies on the updateLog feature being enabled. -->
-  <requestHandler name="/get" class="solr.RealTimeGetHandler">
+  <requestHandler name="/select" class="solr.SearchHandler" >
     <lst name="defaults">
-      <str name="omitHeader">true</str>
+      <str name="echoParams">explicit</str>
+      <str name="fl">score</str>
+      <str name="df">catch</str>
+      <!--str name="bq">mbid:24f1766e-9635-4d58-a4d4-9413f9f98a4c^2</str--> <!-- Bach -->
+      <!--str name="bq">mbid:1f9df192-a621-4f54-8850-2c5373b7eac9^2</str--> <!-- Beethoven -->
+      <!--str name="bq">mbid:c70d12a2-24fe-4f83-a6e6-57d84f8efb51^2</str--> <!-- Brahms -->
+      <!--str name="bq">mbid:4e60a56a-514a-4a19-a3cc-49927c96b3cb^2</str--> <!-- Elgar -->
+      <!--str name="bq">mbid:27870d47-bb98-42d1-bf2b-c7e972e6befc^2</str--> <!-- Handel -->
+      <!--str name="bq">mbid:c130b0fb-5dce-449d-9f40-1437f889f7fe^2</str--> <!-- Haydn, Joseph -->
+      <!--str name="bq">mbid:b972f589-fb0e-474e-b64a-803b0364fa75^2</str--> <!-- Mozart -->
+      <!--str name="bq">mbid:f91e3a88-24ee-4563-8963-fab73d2765ed^2</str--> <!-- Schubert -->
+      <!--str name="bq">mbid:8255db36-4902-4cf6-8612-0f2b4288bc9a^2</str--> <!-- Strauss, Johann -->
+      <!--str name="bq">mbid:4cb43d82-824e-4034-b03d-1a98f36f6e16^2</str--> <!-- Strauss, Richard -->
+      <!--str name="bq">mbid:f1bedf1f-4445-4651-9c35-f4a3f3860a13^2</str--> <!-- Verdi -->
+      <!--str name="bq">mbid:ad79836d-9849-44df-8789-180bbc823f3c^2</str--> <!-- Vivaldi -->
+      <!--str name="bq">mbid:eefd7c1e-abcf-4ccc-ba60-0fd435c9061f^2</str--> <!-- Wagner -->
     </lst>
-  </requestHandler>
-
-  <requestHandler name="/replication" class="solr.ReplicationHandler" startup="lazy" />
-
-  <requestDispatcher handleSelect="true" >
-    <requestParsers enableRemoteStreaming="false" multipartUploadLimitInKB="2048" formdataUploadLimitInKB="2048" />
-  </requestDispatcher>
-
-  <requestHandler name="standard" class="solr.StandardRequestHandler" default="true" />
-  <requestHandler name="/analysis/field" startup="lazy" class="solr.FieldAnalysisRequestHandler" />
-  <requestHandler name="/update" class="solr.UpdateRequestHandler"  />
-
-  <requestHandler name="/admin/ping" class="solr.PingRequestHandler">
-    <lst name="invariants">
-      <str name="q">solrpingquery</str>
-    </lst>
-    <lst name="defaults">
-      <str name="echoParams">all</str>
-    </lst>
-  </requestHandler>
-
+   </requestHandler>
+   <requestHandler name="/edismax" class="solr.SearchHandler" >
+      <lst name="defaults">
+        <str name="echoParams">explicit</str>
+        <str name="fl">score</str>
+        <str name="defType">edismax</str>
+        <str name="qf">
+          area alias artist^1.5 beginarea comment country ipi isni mbid ngram sortname tag type
+        </str>
+        <!-- creates a minimum match threshold of 2 from the above fields; dropping this to 1 allows
+          a ridiculous amount of false matches from the ngram field (basically if an ngram is a
+          match, another field needs a match as well to be in the results); this doesn't seem to
+          affect exact matches in the ipi, isni or mbid fields (they are still matches even being
+          found in a single field)-->
+        <str name="mm">2</str>
+        <!-- boost searches containing phrase matches in these fields -->
+        <str name="pf">
+          artist^1.5 alias sortname^1.2 comment^1.2
+        </str>
+        <!-- boosts results for artists with more releases -->
+        <str name="bf">pow(ref_count,0.66)</str>
+      </lst>
+    </requestHandler>
+  <xi:include href="common/requestHandler-get.xml" />
+  <xi:include href="common/requestHandler-replication.xml" />
+  <xi:include href="common/requestDispatcher.xml" />
+  <xi:include href="common/requestHandler-standard.xml" />
+  <xi:include href="common/requestHandler-field.xml" />
+  <xi:include href="common/requestHandler-update.xml" />
+  <xi:include href="common/requestHandler-ping.xml" />
   <!-- config for the admin interface -->
-  <admin>
-    <defaultQuery>solr</defaultQuery>
-  </admin>
+  <xi:include href="common/admin.xml" />
 
   <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
       <str name="entitytype">artist</str>
@@ -72,4 +74,3 @@
 
 
 </config>
-

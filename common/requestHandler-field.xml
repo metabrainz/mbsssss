@@ -1,0 +1,1 @@
+<requestHandler name="/analysis/field" startup="lazy" class="solr.FieldAnalysisRequestHandler" />
