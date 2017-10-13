@@ -65,7 +65,7 @@
   <!-- config for the admin interface -->
   <xi:include href="common/admin.xml" />
 
-  <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
+  <queryResponseWriter name="mbxml" default="true" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
       <str name="entitytype">artist</str>
   </queryResponseWriter>
   <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
