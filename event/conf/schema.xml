@@ -21,6 +21,7 @@
   <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="end" type="date" indexed="true" stored="false"/>
+  <field name="ended" type="bool" indexed="true" stored="false"/>
   <field name="eid" type="mbid" indexed="true" stored="false"/>
   <field name="event" type="text" indexed="true" stored="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
