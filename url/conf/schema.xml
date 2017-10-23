@@ -19,9 +19,9 @@
   <field name="catch" type="string_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="relationtype" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
-  <field name="targetid" type="string" indexed="true" stored="true"/>
-  <field name="targettype" type="lowercase" indexed="true" stored="true"/>
+  <field name="relationtype" type="lowercase" indexed="true" stored="true" omitNorms="true" multiValued="true"/>
+  <field name="targetid" type="string" indexed="true" stored="true" multiValued="true"/>
+  <field name="targettype" type="lowercase" indexed="true" stored="true" multiValued="true"/>
   <field name="uid" type="mbid" indexed="true" stored="false"/>
   <field name="url" type="string" indexed="true" stored="true"/>
   <!-- queries for paths match documents at that path, or in ancestor paths -->
