@@ -1,1 +1,1 @@
-<dataDir>${solr.solr.home}/data/${solr.core.name}</dataDir>
+<dataDir>${solr.solr.home}/data/${solr.core.name:}</dataDir>
