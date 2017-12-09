@@ -19,7 +19,7 @@
   <field name="comment" type="text" indexed="true" stored="true" />
   <field name="iswc" type="lowercase_mult" indexed="true" stored="true" multiValued="true"
          omitNorms="true"/>
-  <field name="lang" type="lowercase" indexed="true" stored="true" />
+  <field name="lang" type="lowercase" indexed="true" stored="true" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
   <field name="name" type="string" indexed="false" stored="true"/>
