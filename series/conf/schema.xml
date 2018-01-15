@@ -13,7 +13,7 @@
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- catch is a catch-all field used as the default search field used when no field is specified
     in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="string_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="comment" type="text" indexed="true" stored="false"/>
   <field name="orderingattribute" type="lowercase" indexed="true" stored="false"/>
   <!-- id needs to be indexed because it's the unique key -->

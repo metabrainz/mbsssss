@@ -45,10 +45,10 @@
   <copyField source="name" dest="label" />
   <copyField source="name" dest="labelaccent"/>
   <copyField source="mbid" dest="laid" />
-  <copyField source="label" dest="catch" />
+  <copyField source="name" dest="catch" />
   <copyField source="alias" dest="catch" />
   <copyField source="sortname" dest="catch" />
-  <copyField source="label" dest="ngram" />
+  <copyField source="name" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
 
 
