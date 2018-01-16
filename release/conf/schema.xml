@@ -64,8 +64,8 @@
   <copyField source="mbid" dest="reid" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
-  <copyField source="release" dest="catch" />
-  <copyField source="release" dest="ngram" />
+  <copyField source="name" dest="catch" />
+  <copyField source="name" dest="ngram" />
 
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
