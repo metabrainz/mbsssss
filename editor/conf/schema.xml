@@ -12,7 +12,7 @@
 
   <field name="bio" type="text" indexed="true" stored="true"/>
   <field name="editor" type="text" indexed="true" stored="true" required="true"/>
-  <field name="id" type="int" indexed="true" stored="true" required="true"/>
+  <field name="id" type="string" indexed="true" stored="true" required="true"/>
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
 
   <!-- Holds data for reponse writer -->

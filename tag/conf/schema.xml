@@ -14,7 +14,7 @@
     in the "Indexed search with advanced query syntax" search field. -->
   <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- id needs to be indexed because it's the unique key -->
-  <field name="id" type="int" indexed="true" stored="true" required="true"/>
+  <field name="id" type="string" indexed="true" stored="true" required="true"/>
   <field name="tag" type="text" indexed="true" stored="true"/>
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
 

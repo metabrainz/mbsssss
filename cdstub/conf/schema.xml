@@ -16,7 +16,7 @@
     <field name="comment" type="text" indexed="true" stored="true"/>
     <field name="discid" type="string" indexed="true" stored="true" required="true"/>
     <!-- id needs to be indexed because it's the unique key -->
-    <field name="id" type="int" indexed="true" stored="true" required="true"/>
+    <field name="id" type="string" indexed="true" stored="true" required="true"/>
     <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
     <field name="title" type="title" indexed="true" stored="true" required="true"/>
     <field name="tracks" type="int" indexed="true" stored="true"/>
