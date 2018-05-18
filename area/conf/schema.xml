@@ -29,6 +29,7 @@
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true"/>
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
+  <field name="ref_count" type="int" indexed="true" stored="false"/>
   <!-- The sort name should be in the appropriate form for the alias locale since different
     languages sort names differently.  Thus sortname is multiValued. -->
   <field name="sortname" type="text" indexed="true" stored="false" multiValued="true"/>
