@@ -52,7 +52,7 @@
           artist^1.5 alias sortname^1.2 comment^1.2
         </str>
         <!-- boosts results for artists with more releases -->
-        <str name="bf">log(sum(ref_count, 1))</str>
+        <str name="bf">log(sum(ref_count,1))</str>
       </lst>
     </requestHandler>
   <xi:include href="common/requestHandler-get.xml" />
