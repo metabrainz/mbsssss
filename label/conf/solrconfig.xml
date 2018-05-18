@@ -33,12 +33,13 @@
        <str name="fl">score</str>
        <str name="defType">edismax</str>
        <str name="qf">
-         alias area code comment country ipi label labelaccent laid ngram sortname type tag
+        alias^1.25 area^0.5 code comment country^0.75 ipi label^2 labelaccent^1.5 laid ngram sortname^1.5 type tag
        </str>
        <!-- boost searches containing phrase matches in these fields -->
        <str name="pf">
-          alias area comment label labelaccent sortname tag
+          alias area comment label^1.5 labelaccent sortname tag
        </str>
+       <str name="bf">log(sum(release_count,1))^2</str>
       </lst>
     </requestHandler>
   <xi:include href="common/requestHandler-get.xml" />
