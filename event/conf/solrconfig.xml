@@ -26,7 +26,7 @@
        <str name="fl">score</str>
        <str name="defType">edismax</str>
        <str name="qf">
-         alias aid area arid artist begin comment end eid event ngram pid place tag type
+         alias aid area arid artist^0.5 begin comment end eid event^2 ngram pid place^0.5 tag type
        </str>
        <!-- boost searches containing phrase matches in these fields -->
        <str name="pf">
