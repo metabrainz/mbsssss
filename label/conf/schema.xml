@@ -32,6 +32,7 @@
        "label" and "labelaccent"-->
   <field name="name" type="string" indexed="true" stored="true"/>
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
+  <field name="release_count" type="int" indexed="true" stored="false"/>
   <field name="sortname" type="text_mult" indexed="true" stored="false" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
