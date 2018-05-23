@@ -26,11 +26,11 @@
        <str name="fl">score</str>
        <str name="defType">edismax</str>
        <str name="qf">
-         address alias area comment ngram pid place type
+         address^0.25 alias area^0.9 comment^0.5 ngram pid place^2 type
        </str>
        <!-- boost searches containing phrase matches in these fields -->
        <str name="pf">
-          address alias area comment place
+          address alias area comment place^2
        </str>
       </lst>
     </requestHandler>
