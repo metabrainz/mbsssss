@@ -19,6 +19,7 @@
   <field name="catch" type="string_mult" indexed="true" stored="false" multiValued="true"/>
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <field name="relationtype" type="lowercase" indexed="true" stored="true" omitNorms="true" multiValued="true"/>
   <field name="targetid" type="string" indexed="true" stored="true" multiValued="true"/>
   <field name="targettype" type="lowercase" indexed="true" stored="true" multiValued="true"/>
@@ -42,6 +43,7 @@
   <copyField source="url" dest="url_ancestor"/>
   <copyField source="url" dest="url_descendent"/>
   <copyField source="url" dest="catch"/>
+  <copyField source="url" dest="ngram"/>
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
 
