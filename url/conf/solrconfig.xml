@@ -26,7 +26,7 @@
        <str name="fl">score</str>
        <str name="defType">edismax</str>
        <str name="qf">
-           mbid uid url url_ancestor url_descendent
+           mbid uid url url_ancestor url_descendent ngram
        </str>
       </lst>
     </requestHandler>
