@@ -1,0 +1,5 @@
+<requestHandler name="/advanced" class="solr.SearchHandler" >
+  <lst name="defaults">
+    <str name="defType">edismax</str>
+  </lst>
+</requestHandler>
