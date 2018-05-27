@@ -1,8 +1,0 @@
-<initParams path="/select,/advanced" >
-  <lst name="defaults">
-    <str name="echoParams">explicit</str>
-    <str name="fl">*, score</str>
-    <str name="q.alt">*:*</str>
-    <str name="wt">mbjson</str>
-  </lst>
-</initParams>

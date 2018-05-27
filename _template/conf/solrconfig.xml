@@ -13,7 +13,15 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
+  <initParams path="/select,/advanced,/basic" >
+    <lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="fl">score</str>
+    </lst>
+  </initParams>
   <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/requestHandler-advanced.xml" />
+  <xi:include href="common/requestHandler-basic.xml" />
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />
