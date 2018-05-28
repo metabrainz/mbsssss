@@ -13,18 +13,10 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <requestHandler name="/select" class="solr.SearchHandler" >
+  <initParams path="/select,/advanced,/basic" >
     <lst name="defaults">
-      <str name="echoParams">explicit</str>
-      <str name="fl">score</str>
-      <str name="df">releasegroup</str>
-    </lst>
-   </requestHandler>
-   <requestHandler name="/edismax" class="solr.SearchHandler" >
-     <lst name="defaults">
        <str name="echoParams">explicit</str>
        <str name="fl">score</str>
-       <str name="defType">edismax</str>
        <str name="qf">
          arid artistname comment creditname ngram rgid releasegroup releasegroupaccent release
          reid tag type
@@ -33,8 +25,11 @@
        <str name="pf">
          artistname comment creditname releasegroup release tag
        </str>
-      </lst>
-    </requestHandler>
+    </lst>
+  </initParams>
+  <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/requestHandler-advanced.xml" />
+  <xi:include href="common/requestHandler-basic.xml" />
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />

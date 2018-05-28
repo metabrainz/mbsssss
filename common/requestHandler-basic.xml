@@ -1,0 +1,6 @@
+<requestHandler name="/basic" class="solr.SearchHandler" default="true">
+  <lst name="defaults">
+    <str name="defType">dismax</str>
+    <str name="pf"></str>
+  </lst>
+</requestHandler>

@@ -13,25 +13,10 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-    <!-- xi:include href="common/requestHandler-select.xml" / -->
-  <requestHandler name="/select" class="solr.SearchHandler" >
+  <initParams path="/select,/advanced,/basic" >
     <lst name="defaults">
-      <str name="echoParams">explicit</str>
-      <str name="fl">score</str>
-      <str name="df">catch</str>
-      <!--str name="bq">mbid:29d7c88f-5200-4418-a683-5c94ea032e38^2</str--> <!-- Bertelsmann Music Group -->
-      <!--str name="bq">mbid:c029628b-6633-439e-bcee-ed02e8a338f7^2</str--> <!-- EMI Records -->
-      <!--str name="bq">mbid:f9ada3ae-3081-44df-8581-ca27a3462b68^2</str--> <!-- Sony BMG Music Entertainment -->
-      <!--str name="bq">mbid:9e6b4d7f-4958-4db7-8504-d89e315836af^2</str--> <!-- Sony Music Entertainment -->
-      <!--str name="bq">mbid:13a464dc-b9fd-4d16-a4f4-d4316f6a46c7^2</str--> <!-- Universal Music -->
-      <!--str name="bq">mbid:590538e9-b183-4163-ab5a-171fb021ed12^2</str--> <!-- Universal Records -->
-    </lst>
-   </requestHandler>
-   <requestHandler name="/edismax" class="solr.SearchHandler" >
-     <lst name="defaults">
        <str name="echoParams">explicit</str>
        <str name="fl">score</str>
-       <str name="defType">edismax</str>
        <str name="qf">
         alias^1.25 area^0.5 code comment country^0.75 ipi label^2 labelaccent^1.5 laid ngram sortname^1.5 type tag
        </str>
@@ -40,8 +25,11 @@
           alias area comment label^1.5 labelaccent sortname tag
        </str>
        <str name="bf">log(sum(release_count,1))^2</str>
-      </lst>
-    </requestHandler>
+    </lst>
+  </initParams>
+  <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/requestHandler-advanced.xml" />
+  <xi:include href="common/requestHandler-basic.xml" />
   <xi:include href="common/requestHandler-get.xml" />
   <xi:include href="common/requestHandler-replication.xml" />
   <xi:include href="common/requestDispatcher.xml" />
