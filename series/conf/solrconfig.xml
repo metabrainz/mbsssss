@@ -18,11 +18,11 @@
        <str name="echoParams">explicit</str>
        <str name="fl">score</str>
        <str name="qf">
-         alias comment ngram series sid tag type
+         alias^1.5 comment ngram series^2 sid tag type
        </str>
        <!-- boost searches containing phrase matches in these fields -->
        <str name="pf">
-          alias comment series tag
+          alias^1.5 comment series^2 tag
        </str>
     </lst>
   </initParams>
