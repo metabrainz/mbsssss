@@ -18,12 +18,12 @@
        <str name="echoParams">explicit</str>
        <str name="fl">score</str>
        <str name="qf">
-         arid artistname comment creditname ngram rgid releasegroup releasegroupaccent release
+         arid artistname^1.2 comment creditname^1.2 ngram rgid releasegroup^2 releasegroupaccent^2 release^1.5
          reid tag type
        </str>
        <!-- boost searches containing phrase matches in these fields -->
        <str name="pf">
-         artistname comment creditname releasegroup release tag
+        artistname comment^0.5 creditname releasegroup^2 release^2 tag^0.5
        </str>
     </lst>
   </initParams>
