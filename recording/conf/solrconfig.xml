@@ -18,13 +18,14 @@
        <str name="echoParams">explicit</str>
        <str name="fl">score</str>
        <str name="qf">
-         arid artist artistname creditname comment country format isrc ngram primarytype recording
-         recordingaccent reid release rgid rid secondarytype status tid tag type
+         arid artist artistname^1.75 creditname comment country format isrc ngram primarytype recording^2
+         recordingaccent^2.2 reid release rgid rid secondarytype status tid tag type
        </str>
        <!-- boost searches containing phrase matches in these fields -->
        <str name="pf">
-         artistname creditname comment recording release tag
+         artistname^1.5 creditname comment^0.8 recording^2 recordingaccent^2.5 release tag^0.5
        </str>
+       <str name="ps">5</str>
     </lst>
   </initParams>
   <xi:include href="common/requestHandler-select.xml" />
