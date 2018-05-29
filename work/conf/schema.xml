@@ -25,6 +25,7 @@
   <field name="name" type="string" indexed="false" stored="true"/>
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
   <field name="recording" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="recording_count" type="int" indexed="true" stored="false"/>
   <field name="rid" type="mbid" indexed="true" stored="true" multiValued="true"/>
   <field name="tag" type="text_mult" indexed="true" stored="true" multiValued="true"/>
   <field name="type" type="lowercase" indexed="true" stored="true" omitNorms="true"/>
