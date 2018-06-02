@@ -9,7 +9,7 @@ Note that this repository uses the
 [core discovery](https://cwiki.apache.org/confluence/display/solr/Solr+Cores+and+solr.xml)
 mechanism of Solr 5. It will not work with all versions of Solr 4.
 
-## Adding the MusicBrainz Query Response Writer 
+## Adding the MusicBrainz Query Response Writer
 
 To run a Solr server with the cores definied in this repository, you first need
 to install
@@ -36,7 +36,7 @@ repository with the following command:
 Defining a new core requires following these steps:
 
 1. Create a config directory for it, based on the template directory
-   (`cp -r _template $corename`)
+   (`cp -r _template $corename && mv $corename/_conf $corename/conf`)
 2. Create an empty `core.properties` file in the cores directory
    (`touch $corename/core.properties`).
 3. Symlink the `fieldtypes.xml` file from the `common` folder into the new
