@@ -1,5 +1,5 @@
-<requestHandler name="/basic" class="solr.SearchHandler" default="true">
-  <lst name="defaults">
+<requestHandler name="/basic" class="solr.SearchHandler">
+  <lst name="invariants">
     <str name="defType">dismax</str>
     <str name="pf"></str>
   </lst>
