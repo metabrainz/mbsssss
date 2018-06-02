@@ -16,7 +16,7 @@
   <initParams path="/select,/advanced,/basic" >
     <lst name="defaults">
        <str name="echoParams">explicit</str>
-       <str name="fl">score</str>
+       <str name="fl">score,_store</str>
        <str name="qf">
          address^0.25 alias area^0.9 comment^0.5 ngram pid place^2 type
        </str>
