@@ -16,7 +16,7 @@
   <initParams path="/select,/advanced,/basic" >
     <lst name="defaults">
        <str name="echoParams">explicit</str>
-       <str name="fl">score</str>
+       <str name="fl">score,_store</str>
        <str name="qf">
          arid artist artistname^1.75 creditname comment country format isrc ngram primarytype recording^2
          recordingaccent^2.2 reid release rgid rid secondarytype status tid tag type
