@@ -2,6 +2,7 @@
 
 <config xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="common/luceneMatchVersion.xml" />
+  <xi:include href="common/sharedCacheHandler.xml" />
   <xi:include href="common/directoryFactory.xml" />
   <xi:include href="common/dataDir.xml" />
   <xi:include href="common/schemaFactory.xml" />
