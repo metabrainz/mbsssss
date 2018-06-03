@@ -1,6 +1,7 @@
 <requestHandler name="/basic" class="solr.SearchHandler">
   <lst name="invariants">
     <str name="defType">dismax</str>
+    <str name="timeAllowed">3000</str>
     <str name="pf"></str>
   </lst>
 </requestHandler>
