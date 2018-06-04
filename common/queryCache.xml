@@ -1,0 +1,8 @@
+<query>
+<queryResultCache class="solr.LRUCache"
+                  size="32768"
+                  initialSize="32768"
+                  autowarmCount="128"
+                  maxRamMB="1000"/>
+
+</query>
