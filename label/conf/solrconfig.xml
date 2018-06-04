@@ -6,6 +6,7 @@
   <xi:include href="common/directoryFactory.xml" />
   <xi:include href="common/dataDir.xml" />
   <xi:include href="common/schemaFactory.xml" />
+  <xi:include href="common/queryCache.xml" />
   <updateHandler class="solr.DirectUpdateHandler2">
     <updateLog>
       <str name="dir">${solr.label.data.dir:}</str>
