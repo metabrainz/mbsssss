@@ -1,1 +1,52 @@
-../../_template/_conf/solrconfig.xml
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<config xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="common/luceneMatchVersion.xml" />
+  <xi:include href="common/sharedCacheHandler.xml" />
+  <xi:include href="common/directoryFactory.xml" />
+  <xi:include href="common/dataDir.xml" />
+  <xi:include href="common/schemaFactory.xml" />
+  <xi:include href="common/queryCache.xml" />
+  <updateHandler class="solr.DirectUpdateHandler2">
+    <updateLog>
+      <str name="dir">${solr.label.data.dir:}</str>
+    </updateLog>
+    <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
+    <xi:include href="common/autoCommit.xml" />
+    <xi:include href="common/autoSoftCommit.xml" />
+  </updateHandler>
+  <initParams path="/select,/advanced,/basic" >
+    <lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="fl">score,_store</str>
+       <str name="qf">
+        alias^1.25 area^0.5 code comment country^0.75 ipi label^2 labelaccent^1.5 laid ngram sortname^1.5 type tag
+       </str>
+       <!-- boost searches containing phrase matches in these fields -->
+       <str name="pf">
+          alias area comment label^1.5 labelaccent sortname tag
+       </str>
+       <str name="bf">log(sum(release_count,1))^2</str>
+    </lst>
+  </initParams>
+  <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/requestHandler-advanced.xml" />
+  <xi:include href="common/requestHandler-basic.xml" />
+  <xi:include href="common/requestHandler-get.xml" />
+  <xi:include href="common/requestHandler-replication.xml" />
+  <xi:include href="common/requestDispatcher.xml" />
+  <xi:include href="common/requestHandler-standard.xml" />
+  <xi:include href="common/requestHandler-field.xml" />
+  <xi:include href="common/requestHandler-update.xml" />
+  <xi:include href="common/requestHandler-ping.xml" />
+  <!-- config for the admin interface -->
+  <xi:include href="common/admin.xml" />
+
+  <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
+        <str name="entitytype">label</str>
+  </queryResponseWriter>
+  <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
+        <str name="entitytype">label</str>
+  </queryResponseWriter>
+
+</config>
