@@ -8,7 +8,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   <fieldtype name="string" class="solr.StrField" sortMissingLast="false"/>
   <fieldType name="long" class="solr.LongPointField" positionIncrementGap="0"/>
   <fieldType name="mbid" class="solr.UUIDField" omitNorms="true" />
-  <fieldType name="storefield" class="solr.StrField"/>
+  <fieldType name="storefield" class="solr.StrField" docValues="true" docValuesFormat="Memory"/>
   <fieldType name="bool" class="solr.BoolField"/>
   <fieldType name="date" class="solr.DateRangeField" sortMissingLast="false"/>
   <fieldType name="int" class="solr.IntPointField" sortMissingLast="false"/>
