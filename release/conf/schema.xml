@@ -53,7 +53,7 @@
   <field name="type" type="lowercase" indexed="true" stored="false" multiValued="true"/>
 
   <!-- Holds data for reponse writer -->
-  <field name="_store" type="storefieldmv" indexed="false" stored="true"/>
+  <field name="_store" type="storefield" indexed="false" stored="true"/>
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
        or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true"/>
