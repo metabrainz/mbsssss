@@ -31,6 +31,7 @@
     </lst>
   </initParams>
   <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/updateProcessor.xml" />
   <xi:include href="common/requestHandler-advanced.xml" />
   <xi:include href="common/requestHandler-basic.xml" />
   <xi:include href="common/requestHandler-get.xml" />

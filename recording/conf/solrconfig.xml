@@ -31,15 +31,8 @@
        <str name="ps">5</str>
     </lst>
   </initParams>
-  <updateRequestProcessorChain name="ignore-commit-from-client" default="true">
-    <processor class="solr.IgnoreCommitOptimizeUpdateProcessorFactory">
-      <int name="statusCode">200</int>
-    </processor>
-    <processor class="solr.LogUpdateProcessorFactory" />
-    <processor class="solr.DistributedUpdateProcessorFactory" />
-    <processor class="solr.RunUpdateProcessorFactory" />
-  </updateRequestProcessorChain>
   <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/updateProcessor.xml" />
   <xi:include href="common/requestHandler-advanced.xml" />
   <xi:include href="common/requestHandler-basic.xml" />
   <xi:include href="common/requestHandler-get.xml" />
