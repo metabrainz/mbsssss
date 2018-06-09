@@ -1,0 +1,8 @@
+<updateRequestProcessorChain name="ignore-commit-from-client" default="true">
+  <processor class="solr.IgnoreCommitOptimizeUpdateProcessorFactory">
+    <int name="statusCode">200</int>
+  </processor>
+  <processor class="solr.LogUpdateProcessorFactory" />
+  <processor class="solr.DistributedUpdateProcessorFactory" />
+  <processor class="solr.RunUpdateProcessorFactory" />
+</updateRequestProcessorChain>
