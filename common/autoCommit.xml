@@ -1,5 +1,5 @@
-    <autoCommit>
-        <maxTime>60000</maxTime>
-        <!-- maybe change this to false in production -->
-        <openSearcher>false</openSearcher>
-    </autoCommit>
+<autoCommit>
+    <maxTime>${solr.autoCommit.maxTime:60000}</maxTime>
+    <!-- maybe change this to false in production -->
+    <openSearcher>false</openSearcher>
+</autoCommit>
