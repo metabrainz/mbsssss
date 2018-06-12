@@ -21,8 +21,7 @@
        <str name="echoParams">explicit</str>
        <str name="fl">score,_store</str>
        <str name="qf">
-         arid artist artistname^1.75 creditname comment country format isrc ngram primarytype recording^2
-         recordingaccent^2.2 reid release rgid rid secondarytype status tid tag type
+         artist artistname^1.75 creditname comment ngram recording^2 recordingaccent^2.2 release status tag
        </str>
        <!-- boost searches containing phrase matches in these fields -->
        <str name="pf">

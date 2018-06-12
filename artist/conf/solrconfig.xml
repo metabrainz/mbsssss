@@ -21,7 +21,7 @@
       <str name="echoParams">explicit</str>
       <str name="fl">score,_store</str>
       <str name="qf">
-        area alias artist^2 beginarea comment country ipi isni mbid ngram sortname^2 tag type
+       alias artist^2 comment ngram sortname^2
       </str>
       <!-- creates a minimum match threshold of 2 from the above fields; dropping this to 1 allows
         a ridiculous amount of false matches from the ngram field (basically if an ngram is a
