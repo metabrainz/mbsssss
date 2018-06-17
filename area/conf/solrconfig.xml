@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="common/luceneMatchVersion.xml" />
   <xi:include href="common/sharedCacheHandler.xml" />
@@ -16,19 +15,15 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <initParams path="/select,/advanced,/basic" >
+  <initParams path="/select,/advanced,/basic">
     <lst name="defaults">
-       <str name="echoParams">explicit</str>
-       <str name="fl">score,_store</str>
-       <str name="qf">
-         aid alias^2 area^2 begin comment end iso iso1 iso2 iso3 ngram type
-       </str>
-       <!-- boost searches containing phrase matches in these fields -->
-       <str name="pf">
-          alias area comment
-       </str>
-       <str name="bq">type:country^2</str>
-       <str name="bf">log(sum(ref_count,1))^4</str>
+      <str name="echoParams">explicit</str>
+      <str name="fl">score,_store</str>
+      <str name="qf">aid alias^2 area^2 begin comment end iso iso1 iso2 iso3 ngram type</str>
+      <!-- boost searches containing phrase matches in these fields -->
+      <str name="pf">alias area comment</str>
+      <str name="bq">type:country^2</str>
+      <str name="bf">log(sum(ref_count,1))^4</str>
     </lst>
   </initParams>
   <xi:include href="common/requestHandler-select.xml" />
@@ -44,13 +39,10 @@
   <xi:include href="common/requestHandler-ping.xml" />
   <!-- config for the admin interface -->
   <xi:include href="common/admin.xml" />
-
   <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
-      <str name="entitytype">area</str>
+    <str name="entitytype">area</str>
   </queryResponseWriter>
   <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
-      <str name="entitytype">area</str>
+    <str name="entitytype">area</str>
   </queryResponseWriter>
-
-
 </config>

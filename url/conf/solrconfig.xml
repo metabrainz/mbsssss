@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="common/luceneMatchVersion.xml" />
   <xi:include href="common/sharedCacheHandler.xml" />
@@ -16,13 +15,11 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <initParams path="/select,/advanced,/basic" >
+  <initParams path="/select,/advanced,/basic">
     <lst name="defaults">
-       <str name="echoParams">explicit</str>
-       <str name="fl">score,_store</str>
-       <str name="qf">
-           mbid uid url url_ancestor url_descendent ngram
-       </str>
+      <str name="echoParams">explicit</str>
+      <str name="fl">score,_store</str>
+      <str name="qf">mbid uid url url_ancestor url_descendent ngram</str>
     </lst>
   </initParams>
   <xi:include href="common/requestHandler-select.xml" />
@@ -38,12 +35,10 @@
   <xi:include href="common/requestHandler-ping.xml" />
   <!-- config for the admin interface -->
   <xi:include href="common/admin.xml" />
-
   <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
-      <str name="entitytype">url</str>
+    <str name="entitytype">url</str>
   </queryResponseWriter>
   <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
-      <str name="entitytype">url</str>
+    <str name="entitytype">url</str>
   </queryResponseWriter>
-
 </config>

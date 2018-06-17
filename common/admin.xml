@@ -1,4 +1,4 @@
-  <!-- config for the admin interface -->
-  <admin>
-    <defaultQuery>solr</defaultQuery>
-  </admin>
+<!-- config for the admin interface -->
+<admin>
+  <defaultQuery>solr</defaultQuery>
+</admin>

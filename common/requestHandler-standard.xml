@@ -1,1 +1,1 @@
-<requestHandler name="standard" class="solr.SearchHandler"/>
+<requestHandler name="standard" class="solr.SearchHandler" />

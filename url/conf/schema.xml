@@ -1,50 +1,39 @@
 <?xml version="1.0"?>
-
 <schema name="url" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-
   <!--Searchable Fields
   mbid, relationtype, targetid, targettype, uid, url, urls, url_ancestor, url_descendent
   -->
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-
   <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
-  <similarity class="solr.SchemaSimilarityFactory"/>
-
+  <similarity class="solr.SchemaSimilarityFactory" />
   <!-- catch is a catch-all field used as the default search field used when no field is specified
     in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="string_mult" indexed="true" stored="false" multiValued="true"/>
+  <field name="catch" type="string_mult" indexed="true" stored="false" multiValued="true" />
   <!-- mbid needs to be indexed because it's the unique key -->
-  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
-  <field name="relationtype" type="lowercase" indexed="true" stored="true" omitNorms="true" multiValued="true"/>
-  <field name="targetid" type="string" indexed="true" stored="true" multiValued="true"/>
-  <field name="targettype" type="lowercase" indexed="true" stored="true" multiValued="true"/>
-  <field name="uid" type="mbid" indexed="true" stored="false"/>
-  <field name="url" type="string" indexed="true" stored="true"/>
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
+  <field name="relationtype" type="lowercase" indexed="true" stored="true" omitNorms="true" multiValued="true" />
+  <field name="targetid" type="string" indexed="true" stored="true" multiValued="true" />
+  <field name="targettype" type="lowercase" indexed="true" stored="true" multiValued="true" />
+  <field name="uid" type="mbid" indexed="true" stored="false" />
+  <field name="url" type="string" indexed="true" stored="true" />
   <!-- queries for paths match documents at that path, or in ancestor paths -->
-  <field name="url_ancestor" type="ancestor_path" indexed="true" stored="false"/>
+  <field name="url_ancestor" type="ancestor_path" indexed="true" stored="false" />
   <!-- queries for paths match documents at that path, or in descendent paths -->
-  <field name="url_descendent" type="descendent_path" indexed="true" stored="false"/>
-
-
+  <field name="url_descendent" type="descendent_path" indexed="true" stored="false" />
   <!-- Holds data for reponse writer -->
-  <field name="_store" type="storefield" indexed="false" stored="true"
-         multiValued="false" required="false"/>
-
+  <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false" />
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
      or Solr won't start. _version_ and update log are required for SolrCloud. -->
-  <field name="_version_" type="long" indexed="true" stored="true"/>
-
-  <copyField source="mbid" dest="uid"/>
-  <copyField source="url" dest="url_ancestor"/>
-  <copyField source="url" dest="url_descendent"/>
-  <copyField source="url" dest="catch"/>
-  <copyField source="url" dest="ngram"/>
+  <field name="_version_" type="long" indexed="true" stored="true" />
+  <copyField source="mbid" dest="uid" />
+  <copyField source="url" dest="url_ancestor" />
+  <copyField source="url" dest="url_descendent" />
+  <copyField source="url" dest="catch" />
+  <copyField source="url" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-
 </schema>
