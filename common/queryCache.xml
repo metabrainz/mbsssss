@@ -1,11 +1,4 @@
 <query>
-    <queryResultCache class="solr.LRUCache"
-                      size="32768"
-                      initialSize="32768"
-                      autowarmCount="128"
-                      maxRamMB="1000"/>
-    <documentCache class="solr.LRUCache"
-                   size="8192"
-                   initialSize="8192"
-                   autowarmCount="128"/>
+  <queryResultCache class="solr.LRUCache" size="32768" initialSize="32768" autowarmCount="128" maxRamMB="1000" />
+  <documentCache class="solr.LRUCache" size="8192" initialSize="8192" autowarmCount="128" />
 </query>

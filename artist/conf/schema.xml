@@ -1,50 +1,39 @@
 <?xml version="1.0"?>
-
 <schema name="artist" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
-
   <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
-  <similarity class="solr.SchemaSimilarityFactory"/>
-
-  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="true"
-    multiValued="true"/>
-  <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true"/>
-  <field name="arid" type="mbid" indexed="true" stored="false"/>
-  <field name="artist" type="text" indexed="true" stored="true"/>
-  <field name="artistaccent" type="keep_accents" indexed="true" stored="false"/>
-  <field name="begin" type="date" indexed="true" stored="false"/>
-  <field name="beginarea" type="text_mult" indexed="true" stored="false" multiValued="true"/>
+  <similarity class="solr.SchemaSimilarityFactory" />
+  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="true" multiValued="true" />
+  <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="arid" type="mbid" indexed="true" stored="false" />
+  <field name="artist" type="text" indexed="true" stored="true" />
+  <field name="artistaccent" type="keep_accents" indexed="true" stored="false" />
+  <field name="begin" type="date" indexed="true" stored="false" />
+  <field name="beginarea" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <!-- a "catch all" field used as the default search field -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true"/>
-  <field name="comment" type="text" indexed="true" stored="false"/>
-  <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
-  <field name="end" type="date" indexed="true" stored="false"/>
-  <field name="endarea" type="text_mult" indexed="true" stored="false" multiValued="true"/>
-  <field name="ended" type="bool" indexed="true" stored="false"/>
-  <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
-  <field name="ipi" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false"
-    multiValued="true"/>
-  <field name="isni" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false"
-    multiValued="true"/>
-  <field name="mbid" type="mbid" indexed="true" stored="true" required="true"/>
-  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true"/>
-  <field name="ref_count" type="int" indexed="true" stored="false"/>
-  <field name="sortname" type="text" indexed="true" stored="false" required="true"/>
-  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true"/>
-  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true"/>
-
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="comment" type="text" indexed="true" stored="false" />
+  <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true" />
+  <field name="end" type="date" indexed="true" stored="false" />
+  <field name="endarea" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="ended" type="bool" indexed="true" stored="false" />
+  <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true" />
+  <field name="ipi" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="isni" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
+  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
+  <field name="ref_count" type="int" indexed="true" stored="false" />
+  <field name="sortname" type="text" indexed="true" stored="false" required="true" />
+  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
   <!-- Holds data for reponse writer -->
-  <field name="_store" type="storefield" indexed="false" stored="true"
-         multiValued="false" required="false"/>
-
+  <field name="_store" type="storefield" indexed="false" stored="true" multiValued="false" required="false" />
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
      or Solr won't start. _version_ and update log are required for SolrCloud. -->
-  <field name="_version_" type="long" indexed="true" stored="true"/>
-
+  <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="artist" dest="artistaccent" />
   <copyField source="mbid" dest="arid" />
   <copyField source="alias" dest="catch" />
@@ -52,8 +41,6 @@
   <copyField source="sortname" dest="catch" />
   <copyField source="artist" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
-
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-
 </schema>

@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
+<?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="common/luceneMatchVersion.xml" />
   <xi:include href="common/sharedCacheHandler.xml" />
@@ -16,18 +15,15 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <initParams path="/select,/advanced,/basic" >
+  <initParams path="/select,/advanced,/basic">
     <lst name="defaults">
-       <str name="echoParams">explicit</str>
-       <str name="fl">score,_store</str>
-       <str name="qf">
-        alias^1.25 area^0.5 code comment country^0.75 ipi label^2 labelaccent^1.5 laid ngram sortname^1.5 type tag
-       </str>
-       <!-- boost searches containing phrase matches in these fields -->
-       <str name="pf">
-          alias area comment label^1.5 labelaccent sortname tag
-       </str>
-       <str name="bf">log(sum(release_count,1))^2</str>
+      <str name="echoParams">explicit</str>
+      <str name="fl">score,_store</str>
+      <str name="qf">alias^1.25 area^0.5 code comment country^0.75 ipi label^2 labelaccent^1.5 laid ngram sortname^1.5
+      type tag</str>
+      <!-- boost searches containing phrase matches in these fields -->
+      <str name="pf">alias area comment label^1.5 labelaccent sortname tag</str>
+      <str name="bf">log(sum(release_count,1))^2</str>
     </lst>
   </initParams>
   <xi:include href="common/requestHandler-select.xml" />
@@ -43,12 +39,10 @@
   <xi:include href="common/requestHandler-ping.xml" />
   <!-- config for the admin interface -->
   <xi:include href="common/admin.xml" />
-
   <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
-        <str name="entitytype">label</str>
+    <str name="entitytype">label</str>
   </queryResponseWriter>
   <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
-        <str name="entitytype">label</str>
+    <str name="entitytype">label</str>
   </queryResponseWriter>
-
 </config>

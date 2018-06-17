@@ -1,6 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-
+<?xml version="1.0" encoding="utf-8"?>
 <config xmlns:xi="http://www.w3.org/2001/XInclude">
   <xi:include href="common/luceneMatchVersion.xml" />
   <xi:include href="common/sharedCacheHandler.xml" />
@@ -17,13 +15,11 @@
     <xi:include href="common/autoCommit.xml" />
     <xi:include href="common/autoSoftCommit.xml" />
   </updateHandler>
-  <initParams path="/select,/advanced,/basic" >
+  <initParams path="/select,/advanced,/basic">
     <lst name="defaults">
       <str name="echoParams">explicit</str>
       <str name="fl">score,_store</str>
-      <str name="qf">
-       text type name entity
-      </str>
+      <str name="qf">text type name entity</str>
       <!-- creates a minimum match threshold of 2 from the above fields; dropping this to 1 allows
        a ridiculous amount of false matches from the ngram field (basically if an ngram is a
        match, another field needs a match as well to be in the results); this doesn't seem to
@@ -31,9 +27,7 @@
        found in a single field)-->
       <str name="mm">2</str>
       <!-- boost searches containing phrase matches in these fields -->
-      <str name="pf">
-        text name
-      </str>
+      <str name="pf">text name</str>
     </lst>
   </initParams>
   <xi:include href="common/requestHandler-select.xml" />
@@ -49,12 +43,10 @@
   <xi:include href="common/requestHandler-ping.xml" />
   <!-- config for the admin interface -->
   <xi:include href="common/admin.xml" />
-
   <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
-      <str name="entitytype">annotation</str>
+    <str name="entitytype">annotation</str>
   </queryResponseWriter>
   <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
-      <str name="entitytype">annotation</str>
+    <str name="entitytype">annotation</str>
   </queryResponseWriter>
-
 </config>

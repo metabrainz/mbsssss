@@ -1,2 +1,2 @@
-  <!-- we could use org.apache.solr.core.RAMDirectoryFactory to store the index in RAM -->
-  <directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}"/>
+<!-- we could use org.apache.solr.core.RAMDirectoryFactory to store the index in RAM -->
+<directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}" />

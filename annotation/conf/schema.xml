@@ -1,39 +1,29 @@
 <?xml version="1.0"?>
-
 <schema name="annotation" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
-
-    <!-- link to fieldType definitions for all cores-->
-    <xi:include href="common/fieldtypes.xml" />
-    <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
+  <!-- link to fieldType definitions for all cores-->
+  <xi:include href="common/fieldtypes.xml" />
+  <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
       cores, and since all avaliable field types are linked to each core (for simplicity) we need to
       enable per-field similarity in all cores -->
-    <similarity class="solr.SchemaSimilarityFactory"/>
-
-    <field name="entity" type="mbid" indexed="true" stored="true"/>
-    <!-- id needs to be indexed because it's the unique key -->
-    <field name="id" type="string" indexed="true" stored="true" required="true"/>
-    <field name="name" type="text" indexed="true" stored="true"/>
-    <field name="text" type="text" indexed="true" stored="true"/>
-    <field name="type" type="string" indexed="true" stored="true"/>
-
-    <!-- catch is a catch-all field used as the default search field used when no field is specified
+  <similarity class="solr.SchemaSimilarityFactory" />
+  <field name="entity" type="mbid" indexed="true" stored="true" />
+  <!-- id needs to be indexed because it's the unique key -->
+  <field name="id" type="string" indexed="true" stored="true" required="true" />
+  <field name="name" type="text" indexed="true" stored="true" />
+  <field name="text" type="text" indexed="true" stored="true" />
+  <field name="type" type="string" indexed="true" stored="true" />
+  <!-- catch is a catch-all field used as the default search field used when no field is specified
       in the "Indexed search with advanced query syntax" search field. -->
-    <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
-
-    <copyField source="text" dest="catch"/>
-    <copyField source="name" dest="catch"/>
-    <copyField source="type" dest="catch"/>
-
-    <!-- Holds data for reponse writer -->
-    <field name="_store" type="storefield" indexed="false" stored="true"/>
-
-    <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <copyField source="text" dest="catch" />
+  <copyField source="name" dest="catch" />
+  <copyField source="type" dest="catch" />
+  <!-- Holds data for reponse writer -->
+  <field name="_store" type="storefield" indexed="false" stored="true" />
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
       or Solr won't start. _version_ and update log are required for SolrCloud
     -->
-    <field name="_version_" type="long" indexed="true" stored="true"/>
-
-
+  <field name="_version_" type="long" indexed="true" stored="true" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>
-
 </schema>
