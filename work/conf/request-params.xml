@@ -1,0 +1,13 @@
+<lst name="defaults">
+       <str name="echoParams">explicit</str>
+       <str name="fl">score,_store</str>
+       <str name="qf">
+         alias^1.2 artist comment language ngram tag work^1.5 workaccent^2
+       </str>
+       
+       <str name="pf">
+          alias^1.2 artist comment tag work^1.5 workaccent^2
+       </str>
+       <str name="bf">log(sum(recording_count,1))</str>
+    </lst>
+  

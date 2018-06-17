@@ -1,0 +1,6 @@
+<lst name="defaults">
+  <str name="echoParams">explicit</str>
+  <str name="fl">score,_store</str>
+  <str name="qf">alias aid area arid artist^0.5 begin comment end eid event^2 ngram pid place^0.5 tag type</str>
+  <str name="pf">alias area artist comment event place tag</str>
+</lst>
