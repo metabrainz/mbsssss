@@ -1,0 +1,6 @@
+<lst name="defaults">
+  <str name="echoParams">explicit</str>
+  <str name="fl">score,_store</str>
+  <str name="qf">editor id bio ngram</str>
+  <str name="pf">bio</str>
+</lst>

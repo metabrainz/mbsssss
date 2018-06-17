@@ -1,0 +1,7 @@
+<lst name="defaults">
+  <str name="echoParams">explicit</str>
+  <str name="fl">score,_store</str>
+  <str name="bq">type:Family^-1</str>
+  <str name="qf">alias^1.2 comment description^0.5 iid instrument^2 ngram tag type</str>
+  <str name="pf">alias comment description instrument^2 tag</str>
+</lst>

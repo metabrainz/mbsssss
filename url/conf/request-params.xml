@@ -1,0 +1,5 @@
+<lst name="defaults">
+  <str name="echoParams">explicit</str>
+  <str name="fl">score,_store</str>
+  <str name="qf">mbid uid url url_ancestor url_descendent ngram</str>
+</lst>

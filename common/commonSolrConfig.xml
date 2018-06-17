@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="common/luceneMatchVersion.xml" />
+  <xi:include href="common/sharedCacheHandler.xml" />
+  <xi:include href="common/directoryFactory.xml" />
+  <xi:include href="common/dataDir.xml" />
+  <xi:include href="common/schemaFactory.xml" />
+  <codecFactory name="CodecFactory" class="solr.SchemaCodecFactory" />
+  <xi:include href="common/queryCache.xml" />
+  <updateHandler class="solr.DirectUpdateHandler2">
+    <updateLog>
+      <str name="dir">${solr.solr.home}/data/${solr.core.name:}</str>
+    </updateLog>
+    <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
+    <xi:include href="common/autoCommit.xml" />
+    <xi:include href="common/autoSoftCommit.xml" />
+  </updateHandler>
+  <initParams path="/select,/advanced,/basic">
+    <xi:include href="request-params.xml" />
+  </initParams>
+  <xi:include href="common/requestHandler-select.xml" />
+  <xi:include href="common/updateProcessor.xml" />
+  <xi:include href="common/requestHandler-advanced.xml" />
+  <xi:include href="common/requestHandler-basic.xml" />
+  <xi:include href="common/requestHandler-get.xml" />
+  <xi:include href="common/requestHandler-replication.xml" />
+  <xi:include href="common/requestDispatcher.xml" />
+  <xi:include href="common/requestHandler-standard.xml" />
+  <xi:include href="common/requestHandler-field.xml" />
+  <xi:include href="common/requestHandler-update.xml" />
+  <xi:include href="common/requestHandler-ping.xml" />
+  <!-- config for the admin interface -->
+  <xi:include href="common/admin.xml" />
+  <queryResponseWriter name="mbxml" class="org.musicbrainz.search.solrwriter.MBXMLWriter">
+    <xi:include href="entity-name.xml" />
+  </queryResponseWriter>
+  <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
+    <xi:include href="entity-name.xml" />
+  </queryResponseWriter>
+</config>
