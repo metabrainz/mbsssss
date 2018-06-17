@@ -60,3 +60,15 @@ prints that markup to standard output. You can either redirect it to a file:
 or copy it directly to the clipboard:
 
 > python searchfields.py | xclip
+
+## Linting files
+
+To insure that the XML files are properly indented, use tidy.
+
+If you are on Ubuntu, simply install tidy via
+
+> sudo apt-get install tidy
+
+To use it, run
+
+> tidy -xml -im -w 120 **xml
