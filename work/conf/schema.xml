@@ -9,9 +9,6 @@
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="artist" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <!-- catch is a catch-all field used as the default search field used when no field is specified
-    in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="iswc" type="lowercase_mult" indexed="true" stored="false" multiValued="true" omitNorms="true" />
   <field name="lang" type="lowercase" indexed="true" stored="false" multiValued="true" />
@@ -31,8 +28,6 @@
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="name" dest="work" />
   <copyField source="name" dest="workaccent" />
-  <copyField source="alias" dest="catch" />
-  <copyField source="work" dest="catch" />
   <copyField source="mbid" dest="wid" />
   <copyField source="alias" dest="ngram" />
   <copyField source="work" dest="ngram" />

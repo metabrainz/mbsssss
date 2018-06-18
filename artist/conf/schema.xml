@@ -13,8 +13,6 @@
   <field name="artistaccent" type="keep_accents" indexed="true" stored="false" />
   <field name="begin" type="date" indexed="true" stored="false" />
   <field name="beginarea" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <!-- a "catch all" field used as the default search field -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true" />
   <field name="end" type="date" indexed="true" stored="false" />
@@ -36,9 +34,6 @@
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="artist" dest="artistaccent" />
   <copyField source="mbid" dest="arid" />
-  <copyField source="alias" dest="catch" />
-  <copyField source="artist" dest="catch" />
-  <copyField source="sortname" dest="catch" />
   <copyField source="artist" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->

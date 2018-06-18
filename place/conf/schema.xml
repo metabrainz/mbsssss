@@ -10,9 +10,6 @@
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="area" type="text" indexed="true" stored="false" multiValued="true" />
   <field name="begin" type="date" indexed="true" stored="false" />
-  <!-- catch is a catch-all field used as the default search field used when no field is specified
-    in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="end" type="date" indexed="true" stored="false" />
   <field name="ended" type="bool" indexed="true" stored="false" />
@@ -30,10 +27,6 @@
      or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="mbid" dest="pid" />
-  <copyField source="place" dest="catch" />
-  <copyField source="alias" dest="catch" />
-  <copyField source="address" dest="catch" />
-  <copyField source="area" dest="catch" />
   <copyField source="place" dest="ngram" />
   <copyField source="alias" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->

@@ -12,9 +12,6 @@
   <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="artist" type="text" indexed="true" stored="false" multiValued="true" />
   <field name="begin" type="date" indexed="true" stored="false" />
-  <!-- catch is a catch-all field used as the default search field used when no field is specified
-    in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="end" type="date" indexed="true" stored="false" />
   <field name="ended" type="bool" indexed="true" stored="false" />
@@ -35,9 +32,6 @@
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="mbid" dest="eid" />
   <copyField source="name" dest="event" />
-  <copyField source="alias" dest="catch" />
-  <copyField source="artist" dest="catch" />
-  <copyField source="name" dest="catch" />
   <copyField source="name" dest="ngram" />
   <copyField source="artist" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->

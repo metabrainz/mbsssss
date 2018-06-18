@@ -12,12 +12,6 @@
   <field name="name" type="text" indexed="true" stored="false" />
   <field name="text" type="text" indexed="true" stored="false" />
   <field name="type" type="string" indexed="true" stored="false" />
-  <!-- catch is a catch-all field used as the default search field used when no field is specified
-      in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <copyField source="text" dest="catch" />
-  <copyField source="name" dest="catch" />
-  <copyField source="type" dest="catch" />
   <!-- Holds data for reponse writer -->
   <field name="_store" type="storefield" indexed="false" stored="true" />
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
