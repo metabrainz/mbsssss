@@ -19,12 +19,12 @@
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="number" type="string" indexed="true" stored="false" multiValued="true" />
-  <field name="name" type="string" indexed="true" stored="true" required="true" />
+  <field name="name" type="string" indexed="true" stored="false" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="position" type="int" indexed="true" stored="false" multiValued="true" />
   <field name="primarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
   <field name="qdur" type="long" indexed="true" stored="false" />
-  <field name="recording" type="text" indexed="true" stored="true" multiValued="true" />
+  <field name="recording" type="text" indexed="true" stored="false" multiValued="true" />
   <field name="recordingaccent" type="keep_accents" indexed="true" stored="false" />
   <field name="reid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="release" type="title_mult_release_similarity" indexed="true" stored="false" multiValued="true" />
@@ -34,7 +34,7 @@
   <field name="status" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="tid" type="mbid" indexed="true" stored="false" multiValued="true" />
-  <field name="tnum" type="int" indexed="true" stored="true" multiValued="true" />
+  <field name="tnum" type="int" indexed="true" stored="false" multiValued="true" />
   <field name="tracks" type="int" indexed="true" stored="false" multiValued="true" />
   <field name="tracksrelease" type="int" indexed="true" stored="false" multiValued="true" />
   <field name="type" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />

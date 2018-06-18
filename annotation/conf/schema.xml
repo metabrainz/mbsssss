@@ -6,12 +6,12 @@
       cores, and since all avaliable field types are linked to each core (for simplicity) we need to
       enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
-  <field name="entity" type="mbid" indexed="true" stored="true" />
+  <field name="entity" type="mbid" indexed="true" stored="false" />
   <!-- id needs to be indexed because it's the unique key -->
   <field name="id" type="string" indexed="true" stored="true" required="true" />
-  <field name="name" type="text" indexed="true" stored="true" />
-  <field name="text" type="text" indexed="true" stored="true" />
-  <field name="type" type="string" indexed="true" stored="true" />
+  <field name="name" type="text" indexed="true" stored="false" />
+  <field name="text" type="text" indexed="true" stored="false" />
+  <field name="type" type="string" indexed="true" stored="false" />
   <!-- catch is a catch-all field used as the default search field used when no field is specified
       in the "Indexed search with advanced query syntax" search field. -->
   <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />

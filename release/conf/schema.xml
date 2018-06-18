@@ -29,12 +29,12 @@
   <field name="mediums" type="int" indexed="true" stored="false" />
   <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
        "release" and "releaseaccent"-->
-  <field name="name" type="string" indexed="false" stored="true" multiValued="true" />
+  <field name="name" type="string" indexed="false" stored="false" multiValued="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="primarytype" type="lowercase" indexed="true" stored="false" />
   <field name="quality" type="lowercase" indexed="true" stored="false" />
-  <field name="reid" type="mbid" indexed="true" stored="true" />
-  <field name="release" type="title" indexed="true" stored="true" required="true" />
+  <field name="reid" type="mbid" indexed="true" stored="false" />
+  <field name="release" type="title" indexed="true" stored="false" required="true" />
   <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false" />
   <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="script" type="lowercase" indexed="true" stored="false" />

@@ -15,8 +15,8 @@
   <!-- id needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
-  <field name="series" type="text" indexed="true" stored="true" required="true" />
-  <field name="sid" type="mbid" indexed="true" stored="true" />
+  <field name="series" type="text" indexed="true" stored="false" required="true" />
+  <field name="sid" type="mbid" indexed="true" stored="false" />
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
   <field name="_store" type="storefield" indexed="false" stored="true" />

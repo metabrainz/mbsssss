@@ -6,8 +6,8 @@
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
-  <field name="bio" type="text" indexed="true" stored="true" />
-  <field name="editor" type="text" indexed="true" stored="true" required="true" />
+  <field name="bio" type="text" indexed="true" stored="false" />
+  <field name="editor" type="text" indexed="true" stored="false" required="true" />
   <field name="id" type="string" indexed="true" stored="true" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <!-- Holds data for reponse writer -->

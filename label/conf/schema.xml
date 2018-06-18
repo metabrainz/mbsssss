@@ -6,8 +6,8 @@
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
-  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="true" multiValued="true" />
-  <field name="area" type="text_mult" indexed="true" stored="true" multiValued="true" />
+  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="false" multiValued="true" />
+  <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="begin" type="date" indexed="true" stored="false" />
   <!-- catch is a catch-all field used as the default search field used when no field is specified
     in the "Indexed search with advanced query syntax" search field. -->
@@ -16,16 +16,16 @@
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="country" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="end" type="date" indexed="true" stored="false" />
-  <field name="ended" type="bool" indexed="true" stored="true" />
-  <field name="ipi" type="string" indexed="true" stored="true" multiValued="true" />
-  <field name="label" type="text" indexed="true" stored="true" />
+  <field name="ended" type="bool" indexed="true" stored="false" />
+  <field name="ipi" type="string" indexed="true" stored="false" multiValued="true" />
+  <field name="label" type="text" indexed="true" stored="false" />
   <field name="labelaccent" type="keep_accents" indexed="true" stored="false" />
-  <field name="laid" type="mbid" indexed="true" stored="true" required="true" />
+  <field name="laid" type="mbid" indexed="true" stored="false" required="true" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
        "label" and "labelaccent"-->
-  <field name="name" type="string" indexed="true" stored="true" />
+  <field name="name" type="string" indexed="true" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="release_count" type="int" indexed="true" stored="false" />
   <field name="sortname" type="text_mult" indexed="true" stored="false" multiValued="true" />
