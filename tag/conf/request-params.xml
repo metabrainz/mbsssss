@@ -1,6 +1,6 @@
 <lst name="defaults">
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
-  <str name="qf">tag ngram</str>
-  <str name="pf">tag</str>
+  <str name="qf">tag tagpunct ngram</str>
+  <str name="pf">tag tagpunct</str>
 </lst>
