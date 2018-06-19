@@ -43,19 +43,6 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
       <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory" />
     </analyzer>
   </fieldType>
-  <fieldType name="text_mult_alias_similarity" class="solr.TextField" positionIncrementGap="1">
-    <analyzer>
-      <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.ClassicTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="0"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="0" preserveOriginal="0"
-      splitOnNumerics="0" stemEnglishPossessive="0" />
-      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
-      id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
-      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
-      <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory" />
-    </analyzer>
-  </fieldType>
   <fieldType name="title" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
