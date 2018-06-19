@@ -26,6 +26,7 @@
   <field name="qdur" type="long" indexed="true" stored="false" />
   <field name="recording" type="text" indexed="true" stored="false" multiValued="true" />
   <field name="recordingaccent" type="keep_accents" indexed="true" stored="false" />
+  <field name="recordingpunct" type="keep_puncts" indexed="true" stored="false" />
   <field name="reid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="release" type="title_mult_release_similarity" indexed="true" stored="false" multiValued="true" />
   <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true" />
@@ -48,6 +49,7 @@
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
   <copyField source="recording" dest="recordingaccent" />
+  <copyField source="recording" dest="recordingpunct" />
   <copyField source="recording" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>

@@ -28,6 +28,16 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
       <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory" />
     </analyzer>
   </fieldType>
+  <fieldType name="keep_puncts" class="solr.TextField" positionIncrementGap="100">
+    <analyzer>
+      <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
+      <tokenizer class="solr.WhitespaceTokenizerFactory" />
+      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+      id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
+      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
+      <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory" />
+    </analyzer>
+  </fieldType>
   <!-- Like text, but used for fields with multiple values
          Replaces MusicbrainzWithPosGapAnalyzer.java -->
   <fieldType name="text_mult" class="solr.TextField" positionIncrementGap="1">
