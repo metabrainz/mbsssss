@@ -11,6 +11,7 @@
   <field name="description" type="text" indexed="true" stored="false" />
   <field name="iid" type="mbid" indexed="true" stored="false" />
   <field name="instrument" type="text" indexed="true" stored="false" />
+  <field name="instrumentaccent" type="keep_accents" indexed="true" stored="false" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
@@ -23,6 +24,7 @@
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="mbid" dest="iid" />
   <copyField source="instrument" dest="ngram" />
+  <copyField source="instrument" dest="instrumentaccent" />
   <copyField source="alias" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
