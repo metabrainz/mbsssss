@@ -26,12 +26,8 @@
   <field name="gender" type="lowercase" indexed="true" stored="false" omitNorms="true" />
   <field name="ipi" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
   <field name="isni" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
-  <!-- mbid needs to be indexed because it's the unique key -->
+  <!-- mbid needs to be stored because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
-  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
-       "artist" and "artistaccent"-->
-  <field name="name" type="string" indexed="true" stored="false" />
-  <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true" />
   <field name="sortname" type="text" indexed="true" stored="false" required="true" />
   <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true" />
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
@@ -40,13 +36,8 @@
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
      or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
-  <copyField source="name" dest="artist" />
-  <copyField source="name" dest="artistaccent" />
+  <copyField source="artist" dest="artistaccent" />
   <copyField source="mbid" dest="arid" />
-  <copyField source="alias" dest="names" />
-  <copyField source="artist" dest="names" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
-  <!-- field for the QueryParser to use when an explicit fieldname is absent -->
-  <defaultSearchField>names</defaultSearchField>
 </schema>

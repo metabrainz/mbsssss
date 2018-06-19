@@ -14,7 +14,6 @@
   <field name="lang" type="lowercase" indexed="true" stored="false" multiValued="true" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
-  <field name="name" type="string" indexed="false" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="recording" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="recording_count" type="int" indexed="true" stored="false" />
@@ -26,8 +25,7 @@
   <field name="workaccent" type="title_keep_accents" indexed="true" stored="false" required="true" />
   <field name="_store" type="storefield" indexed="false" stored="true" />
   <field name="_version_" type="long" indexed="true" stored="true" />
-  <copyField source="name" dest="work" />
-  <copyField source="name" dest="workaccent" />
+  <copyField source="work" dest="workaccent" />
   <copyField source="mbid" dest="wid" />
   <copyField source="alias" dest="ngram" />
   <copyField source="work" dest="ngram" />

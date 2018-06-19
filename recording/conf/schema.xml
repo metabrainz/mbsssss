@@ -20,7 +20,6 @@
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="number" type="string" indexed="true" stored="false" multiValued="true" />
-  <field name="name" type="string" indexed="true" stored="false" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="position" type="int" indexed="true" stored="false" multiValued="true" />
   <field name="primarytype" type="lowercase_mult" indexed="true" stored="false" multiValued="true" />
@@ -48,9 +47,8 @@
   <copyField source="mbid" dest="rid" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
-  <copyField source="name" dest="recording" />
-  <copyField source="name" dest="recordingaccent" />
-  <copyField source="name" dest="ngram" />
+  <copyField source="recording" dest="recordingaccent" />
+  <copyField source="recording" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
 </schema>
