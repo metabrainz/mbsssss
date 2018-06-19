@@ -6,6 +6,7 @@
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
+  <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="artist" type="text_mult" indexed="true" stored="false" multiValued="true" required="true" />
   <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true" required="true" />
