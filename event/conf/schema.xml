@@ -18,7 +18,6 @@
   <field name="eid" type="mbid" indexed="true" stored="false" />
   <field name="event" type="text" indexed="true" stored="false" />
   <field name="eventaccent" type="keep_accents" indexed="true" stored="false" />
-  <field name="eventpunct" type="keep_puncts" indexed="true" stored="false" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
@@ -34,7 +33,6 @@
   <copyField source="mbid" dest="eid" />
   <copyField source="event" dest="ngram" />
   <copyField source="event" dest="eventaccent" />
-  <copyField source="event" dest="eventpunct" />
   <copyField source="artist" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>

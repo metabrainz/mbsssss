@@ -1,7 +1,7 @@
 <lst name="defaults">
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
-  <str name="qf">text type name namepunct entity</str>
+  <str name="qf">text type name entity</str>
   <str name="mm">2</str>
-  <str name="pf">text name namepunct</str>
+  <str name="pf">text name</str>
 </lst>
