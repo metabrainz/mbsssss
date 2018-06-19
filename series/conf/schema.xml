@@ -7,22 +7,17 @@
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <!-- catch is a catch-all field used as the default search field used when no field is specified
-    in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="orderingattribute" type="lowercase" indexed="true" stored="false" />
   <!-- id needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
-  <field name="series" type="text" indexed="true" stored="true" required="true" />
-  <field name="sid" type="mbid" indexed="true" stored="true" />
+  <field name="series" type="text" indexed="true" stored="false" required="true" />
+  <field name="sid" type="mbid" indexed="true" stored="false" />
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
   <field name="_store" type="storefield" indexed="false" stored="true" />
   <field name="_version_" type="long" indexed="true" stored="true" />
-  <copyField source="alias" dest="catch" />
-  <copyField source="series" dest="catch" />
   <copyField source="mbid" dest="sid" />
   <copyField source="alias" dest="ngram" />
   <copyField source="series" dest="ngram" />

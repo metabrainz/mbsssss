@@ -6,15 +6,13 @@
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
-  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="true" multiValued="true" />
+  <field name="alias" type="text_mult_alias_similarity" indexed="true" stored="false" multiValued="true" />
   <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="arid" type="mbid" indexed="true" stored="false" />
-  <field name="artist" type="text" indexed="true" stored="true" />
+  <field name="artist" type="text" indexed="true" stored="false" />
   <field name="artistaccent" type="keep_accents" indexed="true" stored="false" />
   <field name="begin" type="date" indexed="true" stored="false" />
   <field name="beginarea" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <!-- a "catch all" field used as the default search field -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="country" type="lowercase" indexed="true" stored="false" omitNorms="true" />
   <field name="end" type="date" indexed="true" stored="false" />
@@ -36,9 +34,6 @@
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="artist" dest="artistaccent" />
   <copyField source="mbid" dest="arid" />
-  <copyField source="alias" dest="catch" />
-  <copyField source="artist" dest="catch" />
-  <copyField source="sortname" dest="catch" />
   <copyField source="artist" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->

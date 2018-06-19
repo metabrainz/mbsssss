@@ -11,10 +11,10 @@
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
   <!-- These are the fields from the "artist" core; edit as needed -->
-  <field name="alias" type="text_multi" indexed="true" stored="true" multiValued="true" />
+  <field name="alias" type="text_multi" indexed="true" stored="false" multiValued="true" />
   <field name="area" type="text_multi" indexed="true" stored="false" multiValued="true" />
   <field name="arid" type="mbid" indexed="true" stored="false" />
-  <field name="artist" type="text" indexed="true" stored="true" />
+  <field name="artist" type="text" indexed="true" stored="false" />
   <field name="artistaccent" type="keep_accents" indexed="true" stored="false" />
   <field name="begin" type="date" indexed="true" stored="false" />
   <field name="beginarea" type="text_multi" indexed="true" stored="false" multiValued="true" />
@@ -30,7 +30,7 @@
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
        "artist" and "artistaccent"-->
-  <field name="name" type="string" indexed="true" stored="true" />
+  <field name="name" type="string" indexed="true" stored="false" />
   <field name="names" type="text_multi" indexed="true" stored="false" multiValued="true" />
   <field name="sortname" type="text" indexed="true" stored="false" required="true" />
   <field name="tag" type="text_multi" indexed="true" stored="false" multiValued="true" />

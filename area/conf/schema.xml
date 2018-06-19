@@ -8,11 +8,8 @@
   <similarity class="solr.SchemaSimilarityFactory" />
   <field name="aid" type="mbid" indexed="true" stored="false" />
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <field name="area" type="text" indexed="true" stored="true" required="true" />
+  <field name="area" type="text" indexed="true" stored="false" required="true" />
   <field name="begin" type="date" indexed="true" stored="false" />
-  <!-- catch is a catch-all field used as the default search field used when no field is specified
-    in the "Indexed search with advanced query syntax" search field. -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="end" type="date" indexed="true" stored="false" />
   <field name="ended" type="bool" indexed="true" stored="false" />
@@ -28,7 +25,7 @@
     languages sort names differently.  Thus sortname is multiValued. -->
   <field name="sortname" type="text" indexed="true" stored="false" multiValued="true" />
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <field name="type" type="lowercase" indexed="true" stored="true" omitNorms="true" />
+  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
   <!-- Holds data for reponse writer -->
   <field name="_store" type="storefield" indexed="false" stored="true" />
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
@@ -38,9 +35,6 @@
   <copyField source="iso1" dest="iso" />
   <copyField source="iso2" dest="iso" />
   <copyField source="iso3" dest="iso" />
-  <copyField source="area" dest="catch" />
-  <copyField source="alias" dest="catch" />
-  <copyField source="sortname" dest="catch" />
   <copyField source="area" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->

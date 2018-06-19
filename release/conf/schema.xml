@@ -11,8 +11,6 @@
   <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true" required="true" />
   <field name="asin" type="lowercase" indexed="true" stored="false" multiValued="true" />
   <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="false" />
-  <!-- a "catch all" field used as the default search field -->
-  <field name="catch" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="catno" type="strip_spaces_and_separators" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="country" type="lowercase" indexed="true" stored="false" multiValued="true" />
@@ -29,12 +27,12 @@
   <field name="mediums" type="int" indexed="true" stored="false" />
   <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
        "release" and "releaseaccent"-->
-  <field name="name" type="string" indexed="false" stored="true" multiValued="true" />
+  <field name="name" type="string" indexed="false" stored="false" multiValued="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="primarytype" type="lowercase" indexed="true" stored="false" />
   <field name="quality" type="lowercase" indexed="true" stored="false" />
-  <field name="reid" type="mbid" indexed="true" stored="true" />
-  <field name="release" type="title" indexed="true" stored="true" required="true" />
+  <field name="reid" type="mbid" indexed="true" stored="false" />
+  <field name="release" type="title" indexed="true" stored="false" required="true" />
   <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false" />
   <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="script" type="lowercase" indexed="true" stored="false" />
@@ -54,7 +52,6 @@
   <copyField source="mbid" dest="reid" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
-  <copyField source="name" dest="catch" />
   <copyField source="name" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
