@@ -26,9 +26,6 @@
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="mediums" type="int" indexed="true" stored="false" />
-  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
-       "release" and "releaseaccent"-->
-  <field name="name" type="string" indexed="false" stored="false" multiValued="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="primarytype" type="lowercase" indexed="true" stored="false" />
   <field name="quality" type="lowercase" indexed="true" stored="false" />
@@ -48,12 +45,11 @@
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
        or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
-  <copyField source="name" dest="release" />
-  <copyField source="name" dest="releaseaccent" />
+  <copyField source="release" dest="releaseaccent" />
+  <copyField source="release" dest="ngram" />
   <copyField source="mbid" dest="reid" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
-  <copyField source="name" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
 </schema>

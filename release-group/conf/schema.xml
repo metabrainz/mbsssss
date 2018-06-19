@@ -14,7 +14,6 @@
   <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
-  <field name="name" type="string" indexed="false" stored="false" />
   <field name="primarytype" type="lowercase" indexed="true" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <!-- releases in this release group -->
@@ -32,11 +31,10 @@
   <field name="_store" type="storefield" indexed="false" stored="true" />
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="mbid" dest="rgid" />
-  <copyField source="name" dest="releasegroup" />
-  <copyField source="name" dest="releasegroupaccent" />
+  <copyField source="releasegroup" dest="releasegroupaccent" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
-  <copyField source="name" dest="ngram" />
+  <copyField source="releasegroup" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
 </schema>

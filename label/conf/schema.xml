@@ -20,9 +20,6 @@
   <field name="laid" type="mbid" indexed="true" stored="false" required="true" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
-  <!-- copies name exactly as it appears in the database, so it may be diverted into analysis for
-       "label" and "labelaccent"-->
-  <field name="name" type="string" indexed="true" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="release_count" type="int" indexed="true" stored="false" />
   <field name="sortname" type="text_mult" indexed="true" stored="false" multiValued="true" />
@@ -33,10 +30,9 @@
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
      or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
-  <copyField source="name" dest="label" />
-  <copyField source="name" dest="labelaccent" />
+  <copyField source="label" dest="labelaccent" />
   <copyField source="mbid" dest="laid" />
-  <copyField source="name" dest="ngram" />
+  <copyField source="label" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
