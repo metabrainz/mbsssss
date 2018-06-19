@@ -10,6 +10,7 @@
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="area" type="text" indexed="true" stored="false" required="true" />
   <field name="areaaccent" type="keep_accents" indexed="true" stored="false" required="true" />
+  <field name="areapunct" type="keep_puncts" indexed="true" stored="false" required="true" />
   <field name="begin" type="date" indexed="true" stored="false" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="end" type="date" indexed="true" stored="false" />
@@ -37,6 +38,7 @@
   <copyField source="iso2" dest="iso" />
   <copyField source="iso3" dest="iso" />
   <copyField source="area" dest="areaaccent" />
+  <copyField source="area" dest="areapunct" />
   <copyField source="area" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
   <!-- field to use to determine and enforce document uniqueness. -->

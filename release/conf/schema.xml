@@ -32,6 +32,7 @@
   <field name="reid" type="mbid" indexed="true" stored="false" />
   <field name="release" type="title" indexed="true" stored="false" required="true" />
   <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false" />
+  <field name="releasepunct" type="keep_puncts" indexed="true" stored="false" />
   <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="script" type="lowercase" indexed="true" stored="false" />
   <field name="secondarytype" type="lowercase" indexed="true" stored="false" multiValued="true" />
@@ -46,6 +47,7 @@
        or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="release" dest="releaseaccent" />
+  <copyField source="release" dest="releasepunct" />
   <copyField source="release" dest="ngram" />
   <copyField source="mbid" dest="reid" />
   <copyField source="primarytype" dest="type" />

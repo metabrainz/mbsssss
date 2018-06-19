@@ -17,6 +17,7 @@
   <field name="ipi" type="string" indexed="true" stored="false" multiValued="true" />
   <field name="label" type="text" indexed="true" stored="false" />
   <field name="labelaccent" type="keep_accents" indexed="true" stored="false" />
+  <field name="labelpunct" type="keep_puncts" indexed="true" stored="false" />
   <field name="laid" type="mbid" indexed="true" stored="false" required="true" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
@@ -31,6 +32,7 @@
      or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="label" dest="labelaccent" />
+  <copyField source="label" dest="labelpunct" />
   <copyField source="mbid" dest="laid" />
   <copyField source="label" dest="ngram" />
   <copyField source="sortname" dest="ngram" />
