@@ -14,7 +14,6 @@
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="series" type="text" indexed="true" stored="false" required="true" />
   <field name="seriesaccent" type="keep_accents" indexed="true" stored="false" required="true" />
-  <field name="seriespunct" type="keep_puncts" indexed="true" stored="false" required="true" />
   <field name="sid" type="mbid" indexed="true" stored="false" />
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
@@ -24,7 +23,6 @@
   <copyField source="alias" dest="ngram" />
   <copyField source="series" dest="ngram" />
   <copyField source="series" dest="seriesaccent" />
-  <copyField source="series" dest="seriespunct" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>
 </schema>

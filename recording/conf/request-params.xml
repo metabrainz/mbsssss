@@ -1,9 +1,8 @@
 <lst name="defaults">
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
-  <str name="qf">alias^1.2 artist artistname^1.75 creditname comment ngram recording^2 recordingaccent^2.2
-  recordingpunct release status tag</str>
-  <str name="pf">alias^1.2 artistname^1.5 creditname comment^0.8 recording^2 recordingaccent^2.5 recordingpunct release
-  tag^0.5</str>
+  <str name="qf">alias^1.2 artist artistname^1.75 creditname comment ngram recording^2 recordingaccent^2.2 release
+  status tag</str>
+  <str name="pf">alias^1.2 artistname^1.5 creditname comment^0.8 recording^2 recordingaccent^2.5 release tag^0.5</str>
   <str name="ps">5</str>
 </lst>

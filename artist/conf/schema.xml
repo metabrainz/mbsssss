@@ -11,7 +11,6 @@
   <field name="arid" type="mbid" indexed="true" stored="false" />
   <field name="artist" type="text" indexed="true" stored="false" />
   <field name="artistaccent" type="keep_accents" indexed="true" stored="false" />
-  <field name="artistpunct" type="keep_puncts" indexed="true" stored="false" />
   <field name="begin" type="date" indexed="true" stored="false" />
   <field name="beginarea" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
@@ -34,7 +33,6 @@
      or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="artist" dest="artistaccent" />
-  <copyField source="artist" dest="artistpunct" />
   <copyField source="mbid" dest="arid" />
   <copyField source="artist" dest="ngram" />
   <copyField source="sortname" dest="ngram" />

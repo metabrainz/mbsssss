@@ -10,7 +10,6 @@
   <!-- id needs to be indexed because it's the unique key -->
   <field name="id" type="string" indexed="true" stored="true" required="true" />
   <field name="name" type="text" indexed="true" stored="false" />
-  <field name="namepunct" type="keep_puncts" indexed="true" stored="false" />
   <field name="text" type="text" indexed="true" stored="false" />
   <field name="type" type="string" indexed="true" stored="false" />
   <!-- Holds data for reponse writer -->
@@ -19,7 +18,6 @@
       or Solr won't start. _version_ and update log are required for SolrCloud
     -->
   <field name="_version_" type="long" indexed="true" stored="true" />
-  <copyField source="name" dest="namepunct" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>
 </schema>
