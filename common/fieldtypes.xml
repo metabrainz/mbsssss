@@ -18,10 +18,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
@@ -33,10 +33,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   <fieldType name="text_mult" class="solr.TextField" positionIncrementGap="1">
     <analyzer>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
@@ -47,10 +47,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
     <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
@@ -61,10 +61,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
     <analyzer>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
@@ -75,10 +75,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
     <analyzer>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
@@ -88,28 +88,26 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   <fieldType name="keep_accents" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
-      <filter class="solr.LowerCaseFilterFactory" />
     </analyzer>
   </fieldType>
   <fieldType name="title_keep_accents" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
-      <filter class="solr.LowerCaseFilterFactory" />
     </analyzer>
   </fieldType>
   <!-- lowercases the entire field value, keeping it as a single token.  -->
@@ -130,10 +128,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   <fieldType name="ngram" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="query">
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
@@ -141,10 +139,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
     </analyzer>
     <analyzer type="index">
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
-      <tokenizer class="solr.WhitespaceTokenizerFactory" />
-      <filter class="solr.WordDelimiterGraphFilterFactory" generateWordParts="1" generateNumberParts="1"
-      catenateWords="0" catenateNumbers="6" catenateAll="0" splitOnCaseChange="1" preserveOriginal="1"
-      splitOnNumerics="1" stemEnglishPossessive="0" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory"/>
+      <filter class="solr.TrimFilterFactory"/>
+      <filter class="solr.LowerCaseFilterFactory"/>
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
       id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
       <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory" id="Traditional-Simplified" />
