@@ -13,9 +13,9 @@ mechanism of Solr 5. It will not work with all versions of Solr 4.
 
 To run a Solr server with the cores definied in this repository, you first need
 to install
-[the MusicBrainz QueryResponseWriter](https://github.com/metabrainz/mb-solrquerywriter)
+[the MusicBrainz QueryResponseWriter](https://github.com/metabrainz/mb-solr)
 and place the resulting file called
-solrwriter-0.0.1-SNAPSHOT-jar-with-dependencies.jar into the `mbsssss/lib`
+mb-solr-0.0.1-SNAPSHOT-jar-with-dependencies.jar into the `mbsssss/lib`
 folder, which is configured as the Solr server's **sharedLib** folder.
 
 ## Running a Solr server with these cores
