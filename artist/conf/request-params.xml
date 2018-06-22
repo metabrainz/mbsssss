@@ -1,7 +1,7 @@
 <lst name="defaults">
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
-  <str name="qf">alias artist^2 artistaccent comment ngram sortname^2</str>
+  <str name="qf">alias^1.5 artist^2 artistaccent comment ngram sortname^2</str>
   <str name="mm">2</str>
   <str name="pf">artist^1.5 artistaccent alias^1.2 sortname^1.2 comment^1.2</str>
   <str name="bf">log(sum(ref_count,1))^3</str>
