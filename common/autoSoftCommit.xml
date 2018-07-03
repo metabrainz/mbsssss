@@ -1,3 +1,3 @@
 <autoSoftCommit>
-  <maxTime>${solr.autoSoftCommit.maxTime:1000}</maxTime>
+  <maxTime>${solr.autoSoftCommit.maxTime:10000}</maxTime>
 </autoSoftCommit>
