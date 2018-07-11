@@ -6,7 +6,7 @@
   <xi:include href="common/dataDir.xml" />
   <xi:include href="common/schemaFactory.xml" />
   <codecFactory name="CodecFactory" class="solr.SchemaCodecFactory" />
-  <xi:include href="common/queryCache.xml" />
+  <xi:include href="queryCache.xml" />
   <updateHandler class="solr.DirectUpdateHandler2">
     <updateLog>
       <str name="dir">${solr.solr.home}/data/${solr.core.name:}</str>
