@@ -3,5 +3,6 @@
     <str name="defType">dismax</str>
     <str name="timeAllowed">3000</str>
     <str name="pf"></str>
+    <str name="tie">0.1</str>
   </lst>
 </requestHandler>
