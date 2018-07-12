@@ -1,8 +1,8 @@
 <lst name="defaults">
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
-  <str name="qf">aid alias^2 area^2 areaaccent begin comment end iso iso1 iso2 iso3 ngram type</str>
-  <str name="pf">alias area areaaccent comment</str>
+  <str name="qf">alias^1.75 area^2 areaaccent^2.5 comment iso iso1 iso2 iso3 ngram^0.5</str>
+  <str name="pf">alias^1.5 area^2 areaaccent^2.5 comment</str>
   <str name="bq">type:country^2</str>
   <str name="bf">log(sum(ref_count,1))^4</str>
 </lst>
