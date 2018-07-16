@@ -2,7 +2,7 @@
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
   <str name="tie">0.1</str>
-  <str name="qf">alias^1.75 artist^2 artistaccent^2.2 comment ngram^0.5 sortname^1.85</str>
-  <str name="pf">artist^2 artistaccent^2.2 alias^1.75 sortname^1.85 comment</str>
+  <str name="qf">alias^1.75 primary_alias^2 artist^2 artistaccent^2.2 comment ngram^0.5 sortname^1.85</str>
+  <str name="pf">primary_alias^2 artist^2 artistaccent^2.2 alias^1.75 sortname^1.85 comment</str>
   <str name="bf">log(sum(ref_count,200))^4</str>
 </lst>

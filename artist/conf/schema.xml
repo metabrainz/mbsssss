@@ -7,6 +7,7 @@
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="primary_alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="arid" type="mbid" indexed="true" stored="false" />
   <field name="artist" type="text" indexed="true" stored="false" />
