@@ -1,7 +1,7 @@
 <lst name="defaults">
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
-  <str name="qf">alias^1.25 area^0.5 code comment country^0.75 ipi label^2 labelaccent^1.5 laid ngram sortname^1.5 type
+  <str name="qf">alias^1.25 area^0.5 code comment country^0.75 ipi isni label^2 labelaccent^1.5 laid ngram sortname^1.5 type
   tag</str>
   <str name="pf">alias area comment label^1.5 labelaccent sortname tag</str>
   <str name="bf">log(sum(release_count,1))^2</str>
