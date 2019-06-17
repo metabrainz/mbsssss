@@ -14,7 +14,8 @@
   <field name="country" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="end" type="date" indexed="true" stored="false" />
   <field name="ended" type="bool" indexed="true" stored="false" />
-  <field name="ipi" type="string" indexed="true" stored="false" multiValued="true" />
+  <field name="ipi" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="isni" type="strip_leading_zeroes_concat_mult" indexed="true" stored="false" multiValued="true" />
   <field name="label" type="text" indexed="true" stored="false" />
   <field name="labelaccent" type="keep_accents" indexed="true" stored="false" />
   <field name="laid" type="mbid" indexed="true" stored="false" required="true" />

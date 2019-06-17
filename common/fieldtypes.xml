@@ -198,7 +198,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <!-- Strips leading zeroes from a string (multiple values); also insert dashes, spaces, etc. in
       the wrong place and still match -->
-  <!-- USED FOR: Artist.(isni|ipi) -->
+  <!-- USED FOR: (Artist|Label).(isni|ipi) -->
   <fieldType name="strip_leading_zeroes_concat_mult" class="solr.TextField" positionIncrementGap="1">
     <analyzer>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([\s]+)" replacement="" />
