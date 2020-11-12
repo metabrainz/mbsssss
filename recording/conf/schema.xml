@@ -15,6 +15,7 @@
   <field name="country" type="lowercase_mult" indexed="true" stored="false" multiValued="true" omitNorms="true" />
   <field name="date" type="date" indexed="true" stored="false" />
   <field name="dur" type="long" indexed="true" stored="false" />
+  <field name="firstreleasedate" type="date" indexed="true" stored="false" />
   <field name="format" type="lowercase_mult" indexed="true" stored="false" multiValued="true" omitNorms="true" />
   <field name="isrc" type="lowercase_mult" indexed="true" stored="false" multiValued="true" omitNorms="true" />
   <!-- mbid needs to be indexed because it's the unique key -->
