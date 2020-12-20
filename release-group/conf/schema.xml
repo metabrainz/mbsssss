@@ -12,6 +12,7 @@
   <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="firstreleasedate" type="date" indexed="true" stored="false" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="primarytype" type="lowercase" indexed="true" stored="false" />
