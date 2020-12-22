@@ -19,7 +19,7 @@
   <field name="date" type="date" indexed="true" stored="false" multiValued="true" />
   <field name="discids" type="int" indexed="true" stored="false" />
   <field name="discidsmedium" type="int" indexed="true" stored="false" />
-  <field name="format" type="lowercase" indexed="true" stored="false" multiValued="true" />
+  <field name="format" type="strip_spaces_and_separators" indexed="true" stored="false" multiValued="true" />
   <field name="laid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="label" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="lang" type="lowercase" indexed="true" stored="false" />
