@@ -27,6 +27,7 @@
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="mediums" type="int" indexed="true" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
+  <field name="packaging" type="strip_spaces_and_separators" indexed="true" stored="false" />
   <field name="primarytype" type="lowercase" indexed="true" stored="false" />
   <field name="quality" type="lowercase" indexed="true" stored="false" />
   <field name="reid" type="mbid" indexed="true" stored="false" />
