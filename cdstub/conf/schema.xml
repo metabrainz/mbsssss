@@ -8,7 +8,7 @@
   <similarity class="solr.SchemaSimilarityFactory" />
   <field name="added" type="date" indexed="true" stored="false" />
   <field name="artist" type="text" indexed="true" stored="false" />
-  <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="false" omitNorms="true" />
+  <field name="barcode" type="strip_spaces_and_leading_zeroes" indexed="true" stored="false" omitNorms="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="discid" type="string" indexed="true" stored="false" required="true" />
   <!-- id needs to be indexed because it's the unique key -->
