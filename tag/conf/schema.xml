@@ -11,10 +11,12 @@
        (see "uf" in request-params.xml) and is not returned. -->
   <field name="id" type="string" indexed="true" stored="true" required="true" />
   <field name="tag" type="text" indexed="true" stored="false" />
+  <field name="exactName" type="lowercase" indexed="true" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="_store" type="storefield" indexed="false" stored="true" />
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="tag" dest="ngram" />
+  <copyField source="tag" dest="exactName"/>
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>id</uniqueKey>
 </schema>
