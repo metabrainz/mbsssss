@@ -2,4 +2,5 @@
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
   <str name="qf">mbid uid url url_ancestor url_descendent ngram</str>
+  <str name="sort">score desc, mbid asc</str>
 </lst>

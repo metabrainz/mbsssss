@@ -4,4 +4,5 @@
   <str name="qf">text type name entity</str>
   <str name="mm">2</str>
   <str name="pf">text name</str>
+  <str name="sort">score desc, id asc</str>
 </lst>
