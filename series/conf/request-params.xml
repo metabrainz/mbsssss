@@ -3,4 +3,5 @@
   <str name="fl">score,_store</str>
   <str name="qf">alias^1.5 comment ngram series^2 seriesaccent sid tag type</str>
   <str name="pf">alias^1.5 comment series^2 seriesaccent tag</str>
+  <str name="sort">score desc, mbid asc</str>
 </lst>
