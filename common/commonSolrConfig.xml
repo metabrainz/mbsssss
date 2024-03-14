@@ -9,7 +9,7 @@
   <xi:include href="queryCache.xml" />
   <updateHandler class="solr.DirectUpdateHandler2">
     <updateLog>
-      <str name="dir">${solr.solr.home}/data/${solr.core.name:}</str>
+      <str name="dir">${solr.data.home}/${solr.core.name:}</str>
     </updateLog>
     <!-- https://cwiki.apache.org/confluence/display/solr/Near+Real+Time+Searching -->
     <xi:include href="common/autoCommit.xml" />
