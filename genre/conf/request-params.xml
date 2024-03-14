@@ -1,0 +1,6 @@
+<lst name="defaults">
+  <str name="echoParams">explicit</str>
+  <str name="fl">score,_store</str>
+  <str name="qf">alias^1.75 genre^2 genreaccent^2.5 comment ngram^0.5</str>
+  <str name="pf">alias^1.5 genre^2 genreaccent^2.5 comment</str>
+</lst>
