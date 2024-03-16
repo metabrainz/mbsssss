@@ -171,8 +171,9 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   <!-- for use with string fields where there can be multiple values -->
   <fieldtype name="string_mult" class="solr.StrField" sortMissingLast="false" positionIncrementGap="1" />
   <!-- Strips leading zeroes from a string -->
-  <fieldType name="strip_leading_zeroes" class="solr.TextField" positionIncrementGap="100">
+  <fieldType name="strip_spaces_and_leading_zeroes" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
+      <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([\s]+)" replacement="" />
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="(^[0]+)" replacement="" />
       <tokenizer class="solr.KeywordTokenizerFactory" />
       <filter class="solr.LowerCaseFilterFactory" />

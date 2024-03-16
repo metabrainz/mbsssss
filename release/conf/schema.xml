@@ -11,7 +11,7 @@
   <field name="artist" type="text_mult" indexed="true" stored="false" multiValued="true" required="true" />
   <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true" required="true" />
   <field name="asin" type="lowercase" indexed="true" stored="false" multiValued="true" />
-  <field name="barcode" type="strip_leading_zeroes" indexed="true" stored="false" />
+  <field name="barcode" type="strip_spaces_and_leading_zeroes" indexed="true" stored="false" />
   <field name="catno" type="strip_spaces_and_separators" indexed="true" stored="false" multiValued="true" />
   <field name="comment" type="text" indexed="true" stored="false" />
   <field name="country" type="lowercase" indexed="true" stored="false" multiValued="true" />
