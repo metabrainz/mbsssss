@@ -1,2 +1,4 @@
-<!-- we could use org.apache.solr.core.RAMDirectoryFactory to store the index in RAM -->
-<directoryFactory name="DirectoryFactory" class="${solr.directoryFactory:solr.StandardDirectoryFactory}" />
+<!-- https://solr.apache.org/guide/solr/latest/configuration-guide/index-location-format.html#specifying-the-directoryfactory-for-your-index -->
+<directoryFactory
+    name="DirectoryFactory"
+    class="${solr.directoryFactory:solr.NRTCachingDirectoryFactory}" />
