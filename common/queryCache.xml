@@ -1,4 +1,21 @@
 <query>
-  <queryResultCache class="solr.CaffeineCache" size="32768" initialSize="8192" autowarmCount="512" maxRamMB="200" />
-  <documentCache class="solr.CaffeineCache" size="32768" initialSize="8192" autowarmCount="4096" />
+  <!-- https://solr.apache.org/guide/solr/latest/configuration-guide/caches-warming.html#caches -->
+  <queryResultCache
+    class="${mb.queryResultCache.class:solr.CaffeineCache}"
+    size="${mb.queryResultCache.size:32768}"
+    initialSize="${mb.queryResultCache.initialSize:8192}"
+    autowarmCount="${mb.queryResultCache.autoWarmCount:512}"
+    maxRamMB="${mb.queryResultCache.maxRamMB:200}"
+    maxIdleTime="${mb.queryResultCache.MaxIdleTime:0}"
+    async="${mb.queryResultCache.async:true}"
+    enabled="${mb.queryResultCache.enabled:true}" />
+  <documentCache
+    class="${mb.documentCache.class:solr.CaffeineCache}"
+    size="${mb.documentCache.size:32768}"
+    initialSize="${mb.documentCache.initialSize:8192}"
+    autowarmCount="${mb.documentCache.autoWarmCount:4096}"
+    maxRamMB="${mb.documentCache.maxRamMB:-1}"
+    maxIdleTime="${mb.documentCache.MaxIdleTime:0}"
+    async="${mb.documentCache.async:true}"
+    enabled="${mb.documentCache.enabled:true}" />
 </query>
