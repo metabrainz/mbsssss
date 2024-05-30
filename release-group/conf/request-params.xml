@@ -5,4 +5,5 @@
   release^1.3 tag</str>
   <str name="pf">alias^1.2 artistname comment^0.5 creditname releasegroup^1.5 releasegroupaccent^2 release^1.3
   tag^0.5</str>
+  <str name="sort">score desc, mbid asc</str>
 </lst>

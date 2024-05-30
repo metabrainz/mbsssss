@@ -5,4 +5,5 @@
   <str name="pf">alias^1.5 area^2 areaaccent^2.5 comment</str>
   <str name="bq">type:country^2</str>
   <str name="bf">log(sum(ref_count,1))^4</str>
+  <str name="sort">score desc, mbid asc</str>
 </lst>

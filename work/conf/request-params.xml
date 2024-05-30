@@ -4,4 +4,5 @@
   <str name="qf">alias^1.2 artist comment lang ngram tag work^1.5 workaccent^2</str>
   <str name="pf">alias^1.2 artist comment tag work^1.5 workaccent^2</str>
   <str name="bf">log(sum(recording_count,1))</str>
+  <str name="sort">score desc, mbid asc</str>
 </lst>
