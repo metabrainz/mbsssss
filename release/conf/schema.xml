@@ -25,6 +25,7 @@
   <field name="lang" type="lowercase" indexed="true" stored="false" />
   <!-- mbid needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
+  <field name="mediumid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="mediums" type="int" indexed="true" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="packaging" type="strip_spaces_and_separators" indexed="true" stored="false" />
