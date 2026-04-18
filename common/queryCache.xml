@@ -4,7 +4,7 @@
     class="${mb.queryResultCache.class:solr.CaffeineCache}"
     size="${mb.queryResultCache.size:32768}"
     initialSize="${mb.queryResultCache.initialSize:8192}"
-    autowarmCount="${mb.queryResultCache.autoWarmCount:512}"
+    autowarmCount="${mb.queryResultCache.autoWarmCount:64}"
     maxRamMB="${mb.queryResultCache.maxRamMB:200}"
     maxIdleTime="${mb.queryResultCache.MaxIdleTime:0}"
     async="${mb.queryResultCache.async:true}"
