@@ -17,6 +17,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
          An attempt at replicating the steps in MusicBrainzAnalyzer.java -->
   <fieldType name="text" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
       <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory" />
@@ -34,6 +35,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
          Replaces MusicbrainzWithPosGapAnalyzer.java -->
   <fieldType name="text_mult" class="solr.TextField" positionIncrementGap="1">
     <analyzer>
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
       <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory" />
@@ -49,6 +51,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <fieldType name="title" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
@@ -65,6 +68,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <fieldType name="title_mult" class="solr.TextField" positionIncrementGap="1">
     <analyzer>
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
@@ -81,6 +85,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <fieldType name="title_mult_release_similarity" class="solr.TextField" positionIncrementGap="1">
     <analyzer>
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
@@ -97,6 +102,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <fieldType name="keep_accents" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
       <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory" />
@@ -111,6 +117,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <fieldType name="title_keep_accents" class="solr.TextField" positionIncrementGap="100">
     <analyzer>
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.PatternReplaceCharFilterFactory" pattern="([N|n][O|o]\.)\s+(\d+)" replacement="$1$2" />
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
@@ -141,6 +148,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <fieldType name="ngram" class="solr.TextField" positionIncrementGap="100">
     <analyzer type="query">
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
       <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory" />
@@ -154,6 +162,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
       <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory" />
     </analyzer>
     <analyzer type="index">
+      <charFilter class="org.apache.lucene.analysis.icu.ICUNormalizer2CharFilterFactory"/>
       <charFilter class="solr.MappingCharFilterFactory" mapping="common/mapping-MBCharEquivToChar.txt" />
       <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
       <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory" />
