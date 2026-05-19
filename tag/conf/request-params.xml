@@ -1,6 +1,6 @@
 <lst name="defaults">
   <str name="echoParams">explicit</str>
   <str name="fl">score,_store</str>
-  <str name="qf">tag ngram</str>
+  <str name="qf">exactName^10 tag ngram</str>
   <str name="pf">tag</str>
 </lst>
