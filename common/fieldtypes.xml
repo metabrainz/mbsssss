@@ -2,15 +2,15 @@
 Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
 -->
 <types>
-  <fieldtype name="string" class="solr.StrField" sortMissingLast="false" />
-  <fieldType name="long" class="solr.LongPointField" positionIncrementGap="0" />
-  <fieldType name="mbid" class="solr.UUIDField" omitNorms="true" />
-  <fieldType name="storefield" class="solr.StrField" />
+  <fieldtype name="string" class="solr.StrField" sortMissingLast="false" docValues="true" />
+  <fieldType name="long" class="solr.LongPointField" positionIncrementGap="0" docValues="true" />
+  <fieldType name="mbid" class="solr.UUIDField" omitNorms="true" docValues="true" />
+  <fieldType name="storefield" class="solr.StrField" docValues="false" />
   <fieldType name="storefieldmv" class="solr.StrField" docValues="true" />
-  <fieldType name="bool" class="solr.BoolField" />
+  <fieldType name="bool" class="solr.BoolField" docValues="true" />
   <fieldType name="date" class="solr.DateRangeField" sortMissingLast="false" />
-  <fieldType name="int" class="solr.IntPointField" sortMissingLast="false" />
-  <fieldType name="float" class="solr.FloatPointField" />
+  <fieldType name="int" class="solr.IntPointField" sortMissingLast="false" docValues="true" />
+  <fieldType name="float" class="solr.FloatPointField" docValues="true" />
   <!-- A general text field that has reasonable, generic
          cross-language defaults
 
