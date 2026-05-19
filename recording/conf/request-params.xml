@@ -5,4 +5,5 @@
   status tag</str>
   <str name="pf">alias^1.2 artistname^1.5 creditname comment^0.8 recording^2 recordingaccent^2.5 release tag^0.5</str>
   <str name="ps">5</str>
+  <str name="sort">score desc, mbid asc</str>
 </lst>

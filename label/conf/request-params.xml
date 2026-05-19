@@ -5,4 +5,5 @@
   tag</str>
   <str name="pf">alias area comment label^1.5 labelaccent sortname tag</str>
   <str name="bf">log(sum(release_count,1))^2</str>
+  <str name="sort">score desc, mbid asc</str>
 </lst>
