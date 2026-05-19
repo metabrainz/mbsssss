@@ -16,7 +16,7 @@
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
   <field name="recording" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <field name="recording_count" type="int" indexed="true" stored="false" />
+  <field name="recording_count" type="int_dv" indexed="true" stored="false" />
   <field name="rid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
