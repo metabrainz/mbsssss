@@ -28,7 +28,6 @@
     <field name="alias_begindate" type="string" indexed="false" stored="true" multiValued="true" />
     <field name="alias_enddate" type="string" indexed="false" stored="true" multiValued="true" />
     <field name="alias_type_name" type="string" indexed="false" stored="true" multiValued="true" />
-    <field name="alias_type_id" type="int" indexed="false" stored="true" multiValued="true" />
     <field name="alias_type_gid" type="mbid" indexed="false" stored="true" multiValued="true" />
 
     <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true" />
