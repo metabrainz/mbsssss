@@ -18,17 +18,9 @@
     <field name="ref_count" type="int_dv" indexed="true" stored="false" />
     <field name="sortname" type="text" indexed="true" stored="true" required="true" />
 
-    <field name="alias" type="text_mult" indexed="true" stored="true" multiValued="true" />
+    <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
     <field name="primary_alias" type="text_mult" indexed="true" stored="true" multiValued="true" />
-    <field name="alias_sortname" type="text_mult" indexed="false" stored="true"
-        multiValued="true" />
-    <field name="alias_locale" type="string" indexed="false" stored="true" multiValued="true" />
-    <field name="alias_primary_for_locale" type="string" indexed="false" stored="true"
-        multiValued="true" />
-    <field name="alias_begindate" type="string" indexed="false" stored="true" multiValued="true" />
-    <field name="alias_enddate" type="string" indexed="false" stored="true" multiValued="true" />
-    <field name="alias_type_name" type="string" indexed="false" stored="true" multiValued="true" />
-    <field name="alias_type_gid" type="mbid" indexed="false" stored="true" multiValued="true" />
+    <field name="alias_json" type="storefield" indexed="false" stored="true" multiValued="true" />
 
     <field name="area" type="text_mult" indexed="true" stored="false" multiValued="true" />
     <field name="area_name" type="string" indexed="false" stored="true" />
