@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- This is a template for new cores. -->
-<schema name="[new_entity]" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+<schema name="[new_entity]" version="1.7" xmlns:xi="http://www.w3.org/2001/XInclude">
   <!--Searchable Fields
   include comma seperated list of searchable fields for reference
   -->
