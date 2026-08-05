@@ -168,6 +168,46 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
       <filter class="solr.NGramFilterFactory" minGramSize="3" maxGramSize="10" />
     </analyzer>
   </fieldType>
+
+  <fieldType name="edge-ngram" class="solr.TextField" positionIncrementGap="100" omitNorms="true"
+  omitTermFreqAndPositions="true">
+    <analyzer type="query">
+      <charFilter class="solr.MappingCharFilterFactory"
+        mapping="common/mapping-MBCharEquivToChar.txt" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzWordDelimiterGraphFilterFactory"
+        generateWordParts="1"
+        generateNumberParts="0" catenateWords="0" catenateNumbers="0" catenateAll="0"
+        splitOnCaseChange="0"
+        preserveOriginal="0" splitOnNumerics="0" stemEnglishPossessive="0" />
+      <filter class="solr.LowerCaseFilterFactory" />
+      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+        id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
+      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+        id="Traditional-Simplified" />
+      <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory" />
+    </analyzer>
+    <analyzer type="index">
+      <charFilter class="solr.MappingCharFilterFactory"
+        mapping="common/mapping-MBCharEquivToChar.txt" />
+      <tokenizer class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzTokenizerFilterFactory" />
+      <filter class="org.musicbrainz.search.analysis.MusicbrainzWordDelimiterGraphFilterFactory"
+        generateWordParts="1"
+        generateNumberParts="0" catenateWords="0" catenateNumbers="0" catenateAll="0"
+        splitOnCaseChange="0"
+        preserveOriginal="0" splitOnNumerics="0" stemEnglishPossessive="0" />
+      <filter class="solr.LowerCaseFilterFactory" />
+      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+        id="[ー[:Script=Katakana:]]Katakana-Hiragana" />
+      <filter class="org.apache.lucene.analysis.icu.ICUTransformFilterFactory"
+        id="Traditional-Simplified" />
+      <filter class="org.apache.lucene.analysis.icu.ICUFoldingFilterFactory" />
+      <filter class="solr.EdgeNGramFilterFactory" minGramSize="3" maxGramSize="10" />
+    </analyzer>
+  </fieldType>
+
   <!-- for use with string fields where there can be multiple values -->
   <fieldtype name="string_mult" class="solr.StrField" sortMissingLast="false" positionIncrementGap="1" />
   <!-- Strips leading zeroes from a string -->
