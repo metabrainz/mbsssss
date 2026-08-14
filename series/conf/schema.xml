@@ -1,26 +1,35 @@
 <?xml version="1.0"?>
-<schema name="series" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+<schema name="series" version="1.7" xmlns:xi="http://www.w3.org/2001/XInclude">
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
   <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
+  <field name="series" type="text" indexed="true" stored="true" required="true" />
+  <field name="seriesaccent" type="keep_accents" indexed="true" stored="false" required="true" />
+
+  <field name="type" type="lowercase" indexed="true" stored="true" omitNorms="true" />
+  <field name="type_gid" type="mbid" indexed="false" stored="true" />
+
   <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <field name="comment" type="text" indexed="true" stored="false" />
+  <field name="alias_json" type="storefield" indexed="false" stored="true" multiValued="true" />
+
+  <field name="comment" type="text" indexed="true" stored="true" />
+
+  <field name="tag" type="text_mult" indexed="true" stored="true" multiValued="true" />
+  <field name="tag_count" type="int" indexed="false" stored="true" multiValued="true" />
+
   <!-- id needs to be indexed because it's the unique key -->
   <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
-  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
-  <field name="series" type="text" indexed="true" stored="false" required="true" />
-  <field name="seriesaccent" type="keep_accents" indexed="true" stored="false" required="true" />
+  <field name="edge-ngram" type="edge-ngram" indexed="true" stored="false" multiValued="true" />
   <field name="sid" type="mbid" indexed="true" stored="false" />
-  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <field name="type" type="lowercase" indexed="true" stored="false" omitNorms="true" />
-  <field name="_store" type="storefield" indexed="false" stored="true" />
+  <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
+     or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="mbid" dest="sid" />
-  <copyField source="alias" dest="ngram" />
-  <copyField source="series" dest="ngram" />
+  <copyField source="alias" dest="edge-ngram" />
+  <copyField source="series" dest="edge-ngram" />
   <copyField source="series" dest="seriesaccent" />
   <!-- field to use to determine and enforce document uniqueness. -->
   <uniqueKey>mbid</uniqueKey>

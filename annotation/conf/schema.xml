@@ -1,19 +1,17 @@
 <?xml version="1.0"?>
-<schema name="annotation" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+<schema name="annotation" version="1.7" xmlns:xi="http://www.w3.org/2001/XInclude">
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
   <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
       cores, and since all avaliable field types are linked to each core (for simplicity) we need to
       enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
-  <field name="entity" type="mbid" indexed="true" stored="false" />
+  <field name="entity" type="mbid" indexed="true" stored="true" />
   <!-- id needs to be indexed because it's the unique key -->
   <field name="id" type="string" indexed="true" stored="true" required="true" />
-  <field name="name" type="text" indexed="true" stored="false" />
-  <field name="text" type="text" indexed="true" stored="false" />
-  <field name="type" type="string" indexed="true" stored="false" />
-  <!-- Holds data for reponse writer -->
-  <field name="_store" type="storefield" indexed="false" stored="true" />
+  <field name="name" type="text" indexed="true" stored="true" />
+  <field name="text" type="text" indexed="true" stored="true" />
+  <field name="type" type="string" indexed="true" stored="true" />
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
       or Solr won't start. _version_ and update log are required for SolrCloud
     -->
