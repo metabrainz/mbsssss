@@ -1,54 +1,76 @@
 <?xml version="1.0"?>
-<schema name="release" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+<schema name="release" version="1.7" xmlns:xi="http://www.w3.org/2001/XInclude">
   <!-- link to fieldType definitions for all cores-->
   <xi:include href="common/fieldtypes.xml" />
   <!-- To use the custom similarities (ReleaseSimilarity and AliasSimilarity) found in several
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
-  <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="release" type="title" indexed="true" stored="true" required="true" />
+  <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false" />
+  <field name="comment" type="text" indexed="true" stored="true" />
+
   <field name="arid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="artist" type="text_mult" indexed="true" stored="false" multiValued="true" required="true" />
   <field name="artistname" type="text_mult" indexed="true" stored="false" multiValued="true" required="true" />
-  <field name="asin" type="lowercase" indexed="true" stored="false" multiValued="true" />
-  <field name="barcode" type="strip_spaces_and_leading_zeroes" indexed="true" stored="false" />
-  <field name="catno" type="strip_spaces_and_separators" indexed="true" stored="false" multiValued="true" />
-  <field name="comment" type="text" indexed="true" stored="false" />
-  <field name="country" type="lowercase" indexed="true" stored="false" multiValued="true" />
   <field name="creditname" type="text_mult" indexed="true" stored="false" multiValued="true" />
+  <field name="artist_credit_json" type="storefield" indexed="false" stored="true" />
+
+  <field name="alias" type="text_mult" indexed="true" stored="false" multiValued="true" />
+
+  <field name="asin" type="lowercase" indexed="true" stored="true" multiValued="true" />
+  <field name="barcode" type="strip_spaces_and_leading_zeroes" indexed="true" stored="true" />
+  <field name="barcode_none" type="bool" indexed="false" stored="true" />
+
+  <field name="packaging" type="strip_spaces_and_separators" indexed="true" stored="true" />
+  <field name="packaging_gid" type="mbid" indexed="false" stored="true" />
+  <field name="status" type="lowercase" indexed="true" stored="true" />
+  <field name="status_gid" type="mbid" indexed="false" stored="true" />
+  <field name="lang" type="lowercase" indexed="true" stored="true" />
+  <field name="script" type="lowercase" indexed="true" stored="true" />
+  <field name="quality" type="lowercase" indexed="true" stored="false" />
+
+  <field name="country" type="lowercase" indexed="true" stored="false" multiValued="true" />
   <field name="date" type="date" indexed="true" stored="false" multiValued="true" />
-  <field name="discids" type="int" indexed="true" stored="false" />
-  <field name="discidsmedium" type="int" indexed="true" stored="false" />
-  <field name="format" type="strip_spaces_and_separators" indexed="true" stored="false" multiValued="true" />
+  <field name="release_event_json" type="storefield" indexed="false" stored="true" multiValued="true" />
+
+  <field name="catno" type="strip_spaces_and_separators" indexed="true" stored="false" multiValued="true" />
   <field name="laid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="label" type="text_mult" indexed="true" stored="false" multiValued="true" />
-  <field name="lang" type="lowercase" indexed="true" stored="false" />
-  <!-- mbid needs to be indexed because it's the unique key -->
-  <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
+  <field name="label_info_json" type="storefield" indexed="false" stored="true" multiValued="true" />
+
+  <field name="format" type="strip_spaces_and_separators" indexed="true" stored="false" multiValued="true" />
   <field name="mediumid" type="mbid" indexed="true" stored="false" multiValued="true" />
   <field name="mediums" type="int" indexed="true" stored="false" />
-  <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
-  <field name="packaging" type="strip_spaces_and_separators" indexed="true" stored="false" />
-  <field name="primarytype" type="lowercase" indexed="true" stored="false" />
-  <field name="quality" type="lowercase" indexed="true" stored="false" />
-  <field name="reid" type="mbid" indexed="true" stored="false" />
-  <field name="release" type="title" indexed="true" stored="false" required="true" />
-  <field name="releaseaccent" type="title_keep_accents" indexed="true" stored="false" />
-  <field name="rgid" type="mbid" indexed="true" stored="false" multiValued="true" />
-  <field name="script" type="lowercase" indexed="true" stored="false" />
-  <field name="secondarytype" type="lowercase" indexed="true" stored="false" multiValued="true" />
-  <field name="status" type="lowercase" indexed="true" stored="false" />
-  <field name="tag" type="text_mult" indexed="true" stored="false" multiValued="true" />
   <field name="tracks" type="int" indexed="true" stored="false" />
   <field name="tracksmedium" type="int" indexed="true" stored="false" multiValued="true" />
+  <field name="discids" type="int" indexed="true" stored="false" />
+  <field name="discidsmedium" type="int" indexed="true" stored="false" />
+  <field name="medium_json" type="storefield" indexed="false" stored="true" multiValued="true" />
+
+  <field name="rgid" type="mbid" indexed="true" stored="true" multiValued="true" />
+  <field name="rg_name" type="string" indexed="false" stored="true" />
+  <field name="rg_comment" type="string" indexed="false" stored="true" />
+  <field name="primarytype" type="lowercase" indexed="true" stored="true" />
+  <field name="primarytype_gid" type="mbid" indexed="false" stored="true" />
+  <field name="secondarytype" type="lowercase" indexed="true" stored="true" multiValued="true" />
+  <field name="secondarytype_gid" type="mbid" indexed="false" stored="true" multiValued="true" />
+  <field name="calc_type" type="string" indexed="false" stored="true" />
+  <field name="calc_type_gid" type="mbid" indexed="false" stored="true" />
+
+  <field name="tag" type="text_mult" indexed="true" stored="true" multiValued="true" />
+  <field name="tag_count" type="int" indexed="false" stored="true" multiValued="true" />
+
+  <!-- mbid needs to be indexed because it's the unique key -->
+  <field name="mbid" type="mbid" indexed="true" stored="true" required="true" />
+  <field name="edge-ngram" type="edge-ngram" indexed="true" stored="false" multiValued="true" />
+  <field name="reid" type="mbid" indexed="true" stored="false" />
   <field name="type" type="lowercase" indexed="true" stored="false" multiValued="true" />
-  <!-- Holds data for reponse writer -->
-  <field name="_store" type="storefield" indexed="false" stored="true" />
   <!-- If you remove this field, you must _also_ disable the update log in solrconfig.xml
        or Solr won't start. _version_ and update log are required for SolrCloud. -->
   <field name="_version_" type="long" indexed="true" stored="true" />
   <copyField source="release" dest="releaseaccent" />
-  <copyField source="release" dest="ngram" />
+  <copyField source="release" dest="edge-ngram" />
   <copyField source="mbid" dest="reid" />
   <copyField source="primarytype" dest="type" />
   <copyField source="secondarytype" dest="type" />
