@@ -13,7 +13,7 @@
 
   <field name="comment" type="text" indexed="true" stored="true" />
 
-  <field name="gender_name" type="lowercase" indexed="true" stored="true" omitNorms="true"
+  <field name="gender" type="lowercase" indexed="true" stored="true" omitNorms="true"
     omitTermFreqAndPositions="true" />
   <field name="gender_gid" type="mbid" indexed="false" stored="true" />
 
