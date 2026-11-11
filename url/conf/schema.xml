@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<schema name="url" version="1.5" xmlns:xi="http://www.w3.org/2001/XInclude">
+<schema name="url" version="1.7" xmlns:xi="http://www.w3.org/2001/XInclude">
   <!--Searchable Fields
   mbid, relationtype, targetid, targettype, uid, url, urls, url_ancestor, url_descendent
   -->
