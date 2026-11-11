@@ -37,4 +37,7 @@
   <queryResponseWriter name="mbjson" class="org.musicbrainz.search.solrwriter.MBJSONWriter">
     <xi:include href="entity-name.xml" />
   </queryResponseWriter>
+  <queryResponseWriter name="flatxml" class="org.musicbrainz.search.solrwriter.MBFlatXMLWriter">
+    <xi:include href="entity-name.xml" />
+  </queryResponseWriter>
 </config>
