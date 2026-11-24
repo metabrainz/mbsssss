@@ -5,7 +5,9 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   <fieldtype name="string" class="solr.StrField" sortMissingLast="false" />
   <fieldType name="long" class="solr.LongPointField" positionIncrementGap="0" />
   <fieldType name="mbid" class="solr.UUIDField" omitNorms="true" />
-  <fieldType name="storefield" class="solr.StrField" />
+  <!-- Holds whole MMD documents, often larger than the 32766 bytes allowed
+       for a docValues value, so docValues must stay off (default since 1.7). -->
+  <fieldType name="storefield" class="solr.StrField" docValues="false" />
   <fieldType name="storefieldmv" class="solr.StrField" docValues="true" />
   <fieldType name="bool" class="solr.BoolField" />
   <fieldType name="date" class="solr.DateRangeField" sortMissingLast="false" />
