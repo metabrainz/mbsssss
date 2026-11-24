@@ -226,7 +226,10 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
   </fieldType>
   <!--
       Example of using PathHierarchyTokenizerFactory at query time, so
-      queries for paths match documents at that path, or in ancestor paths
+      queries for paths match documents at that path, or in ancestor paths.
+      Since Lucene 10, the tokenizer emits each path prefix at its own position;
+      SamePositionFilterFactory puts them back at the same position so that
+      they are searched as alternatives rather than as a phrase.
     -->
   <fieldType name="ancestor_path" class="solr.TextField">
     <analyzer type="index">
@@ -234,6 +237,7 @@ Copyright (c) 2014, 2015 Wieland Hoffmann, Jeff Weeks
     </analyzer>
     <analyzer type="query">
       <tokenizer class="solr.PathHierarchyTokenizerFactory" delimiter="/" />
+      <filter class="org.musicbrainz.search.analysis.SamePositionFilterFactory" />
     </analyzer>
   </fieldType>
 </types>
