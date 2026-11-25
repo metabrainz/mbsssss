@@ -3,4 +3,7 @@
   <str name="fl">score,_store</str>
   <str name="qf">tag ngram</str>
   <str name="pf">tag</str>
+  <!-- Fields that can be explicitly searched with the edismax parser;
+       id and _version_ are internal. -->
+  <str name="uf">* -id -_version_</str>
 </lst>

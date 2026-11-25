@@ -6,7 +6,9 @@
     cores, and since all avaliable field types are linked to each core (for simplicity) we need to
     enable per-field similarity in all cores -->
   <similarity class="solr.SchemaSimilarityFactory" />
-  <!-- id needs to be indexed because it's the unique key -->
+  <!-- id is the internal database row id sent by the indexer, used to
+       identify and delete documents. It is not a public search field
+       (see "uf" in request-params.xml) and is not returned. -->
   <field name="id" type="string" indexed="true" stored="true" required="true" />
   <field name="tag" type="text" indexed="true" stored="false" />
   <field name="ngram" type="ngram" indexed="true" stored="false" multiValued="true" />
